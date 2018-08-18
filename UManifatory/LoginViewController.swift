@@ -1,0 +1,50 @@
+//
+//  LoginViewController.swift
+//  UManifatory
+//
+//  Created by CO7VF2D1G1HW on 8/18/18.
+//  Copyright © 2018 CO7VF2D1G1HW. All rights reserved.
+//
+
+import UIKit
+
+class LoginViewController: BaseViewController {
+    @IBOutlet weak var txtUserName: UITextField!
+    
+    @IBOutlet weak var txtPassword: UITextField!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func login(_ sender: Any) {
+        let phone = self.txtUserName.text
+        let password = self.txtPassword.text
+        WebApi.login(phone: phone!, password: password!) { (user) in
+            guard let _ = user else {
+                return
+            }
+            StoreUtil.saveUser(user: user!)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

@@ -17,7 +17,6 @@
 import Foundation
 import UIKit
 import QRCode
-import DataCompression
 import Alamofire
 import ObjectMapper
 class StoreUtil {

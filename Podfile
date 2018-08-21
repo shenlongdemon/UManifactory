@@ -7,12 +7,12 @@ target 'UManifatory' do
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireObjectMapper', '~> 5.0'
   pod 'QRCode'
-  pod 'DataCompression'
   pod 'QRCodeReader.swift', '~> 8.1.1'
   pod 'DropDown'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'ImageSlideshow', '~> 1.6.1'
+  pod 'ImagePicker'
   # Pods for UManifatory
 
 end

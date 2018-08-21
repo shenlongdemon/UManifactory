@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
 		3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA7212464C90016BE5F /* AppDelegate.swift */; };
 		3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA9212464C90016BE5F /* ViewController.swift */; };
 		3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF76FAB212464C90016BE5F /* Main.storyboard */; };
@@ -41,7 +42,7 @@
 		3BF7700221281FC20016BE5F /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7700121281FC20016BE5F /* CollectionCell.swift */; };
 		3BF77005212860370016BE5F /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF77003212860370016BE5F /* TaskCollectionViewCell.swift */; };
 		3BF77006212860370016BE5F /* TaskCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF77004212860370016BE5F /* TaskCollectionViewCell.xib */; };
-		3BF770082128672E0016BE5F /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF770072128672E0016BE5F /* TaskViewController.swift */; };
+		3BF770082128672E0016BE5F /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF770072128672E0016BE5F /* ActivityViewController.swift */; };
 		3BF7700A21286FD80016BE5F /* AssignWotkerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7700921286FD80016BE5F /* AssignWotkerViewController.swift */; };
 		3BF7700D212883130016BE5F /* WorkerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7700B212883130016BE5F /* WorkerCollectionViewCell.swift */; };
 		3BF7700E212883130016BE5F /* WorkerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7700C212883130016BE5F /* WorkerCollectionViewCell.xib */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		000F523E35BACC9E0D654859 /* Pods_UManifatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UManifatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		3BF76FA4212464C90016BE5F /* UManifatory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UManifatory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF76FA7212464C90016BE5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BF76FA9212464C90016BE5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 		3BF7700121281FC20016BE5F /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		3BF77003212860370016BE5F /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BF77004212860370016BE5F /* TaskCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCollectionViewCell.xib; sourceTree = "<group>"; };
-		3BF770072128672E0016BE5F /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		3BF770072128672E0016BE5F /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3BF7700921286FD80016BE5F /* AssignWotkerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignWotkerViewController.swift; sourceTree = "<group>"; };
 		3BF7700B212883130016BE5F /* WorkerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BF7700C212883130016BE5F /* WorkerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -161,7 +163,8 @@
 				3BF76FBD212465F20016BE5F /* MainViewController.swift */,
 				3BF76FE72124786B0016BE5F /* MaterialViewController.swift */,
 				3BF76FE921247A3B0016BE5F /* MyMaterialsViewController.swift */,
-				3BF770072128672E0016BE5F /* TaskViewController.swift */,
+				3BF770072128672E0016BE5F /* ActivityViewController.swift */,
+				3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -343,9 +346,9 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-UManifatory/Pods-UManifatory-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/DataCompression/DataCompression.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
@@ -356,9 +359,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DataCompression.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
@@ -379,7 +382,7 @@
 			files = (
 				3BF76FE82124786B0016BE5F /* MaterialViewController.swift in Sources */,
 				3BF76FC0212466350016BE5F /* BaseViewController.swift in Sources */,
-				3BF770082128672E0016BE5F /* TaskViewController.swift in Sources */,
+				3BF770082128672E0016BE5F /* ActivityViewController.swift in Sources */,
 				3BF76FD021246FCC0016BE5F /* BLEDevice.swift in Sources */,
 				3BF77005212860370016BE5F /* TaskCollectionViewCell.swift in Sources */,
 				3BF76FB0212464C90016BE5F /* UManifatory.xcdatamodeld in Sources */,
@@ -408,6 +411,7 @@
 				3BF7700D212883130016BE5F /* WorkerCollectionViewCell.swift in Sources */,
 				3BF76FE6212472D30016BE5F /* Material.swift in Sources */,
 				3BF76FCF21246FCC0016BE5F /* User.swift in Sources */,
+				3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */,
 				3BF7700021281F190016BE5F /* CollectionAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

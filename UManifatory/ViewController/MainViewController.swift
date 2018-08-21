@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: BaseViewController {
+class MainViewController: BaseQRCodeReaderViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +21,15 @@ class MainViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func startScanQRCode(_ sender: Any) {
+        self.startScan()
+    }
     @IBAction func gotoBluetoothView(_ sender: Any) {
         self.performSegue(withIdentifier: Segue.main_to_bluetooth, sender: self)
     }
-    
+    override func processQRCode(qrCode: String) {
+        Util.showAlert(message: "\(qrCode)")
+    }
     /*
     // MARK: - Navigation
 

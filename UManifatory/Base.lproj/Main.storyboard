@@ -100,6 +100,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="startScanQRCode:" destination="01Y-yf-RlW" eventType="touchUpInside" id="zib-PD-sRQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.17060597182123027" alpha="0.063168878424657529" colorSpace="custom" customColorSpace="sRGB"/>
@@ -247,7 +250,7 @@
                                     <constraint firstAttribute="width" constant="40" id="wtP-8y-bJh"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="assign:" destination="9Jd-f3-pgU" eventType="touchUpInside" id="Qzr-YJ-N3u"/>
+                                    <action selector="startScanQRCode:" destination="9Jd-f3-pgU" eventType="touchUpInside" id="3mA-SC-dK4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -271,10 +274,10 @@
             </objects>
             <point key="canvasLocation" x="4772" y="1249"/>
         </scene>
-        <!--Task View Controller-->
+        <!--Activity View Controller-->
         <scene sceneID="nUv-Ms-idp">
             <objects>
-                <viewController id="Q3N-X8-iw2" customClass="TaskViewController" customModule="UManifatory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Q3N-X8-iw2" customClass="ActivityViewController" customModule="UManifatory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ogS-Nu-suB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,6 +304,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LL9-FQ-VWK" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="10" y="174" width="355" height="177"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Q7-lM-2T3">
+                                <rect key="frame" x="325" y="311" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="5zz-q4-VSs"/>
+                                    <constraint firstAttribute="height" constant="40" id="iLX-1O-vC1"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="selectImage:" destination="Q3N-X8-iw2" eventType="touchUpInside" id="wSR-sI-gop"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -308,15 +326,34 @@
                             <constraint firstItem="aDh-Ep-ij2" firstAttribute="leading" secondItem="IoX-IE-7RQ" secondAttribute="leading" constant="10" id="1Zi-8a-g8K"/>
                             <constraint firstItem="lFX-ZC-ezO" firstAttribute="height" secondItem="ogS-Nu-suB" secondAttribute="height" multiplier="2:5" id="45F-tg-aHc"/>
                             <constraint firstItem="IoX-IE-7RQ" firstAttribute="trailing" secondItem="lFX-ZC-ezO" secondAttribute="trailing" constant="10" id="4Ft-3D-q4K"/>
+                            <constraint firstItem="LL9-FQ-VWK" firstAttribute="top" secondItem="aDh-Ep-ij2" secondAttribute="bottom" constant="5" id="9YH-UK-jy4"/>
+                            <constraint firstItem="LL9-FQ-VWK" firstAttribute="leading" secondItem="IoX-IE-7RQ" secondAttribute="leading" constant="10" id="FIF-06-Csu"/>
                             <constraint firstItem="lFX-ZC-ezO" firstAttribute="bottom" secondItem="IoX-IE-7RQ" secondAttribute="bottom" constant="10" id="NbL-iV-PCx"/>
                             <constraint firstItem="UIA-B3-fqA" firstAttribute="leading" secondItem="IoX-IE-7RQ" secondAttribute="leading" constant="10" id="Qzl-hJ-6lH"/>
                             <constraint firstItem="IoX-IE-7RQ" firstAttribute="trailing" secondItem="UIA-B3-fqA" secondAttribute="trailing" constant="10" id="V8C-GS-QhL"/>
                             <constraint firstItem="IoX-IE-7RQ" firstAttribute="trailing" secondItem="aDh-Ep-ij2" secondAttribute="trailing" constant="10" id="VrI-CX-Dig"/>
+                            <constraint firstItem="IoX-IE-7RQ" firstAttribute="trailing" secondItem="6Q7-lM-2T3" secondAttribute="trailing" constant="10" id="a75-zG-Mic"/>
                             <constraint firstItem="lFX-ZC-ezO" firstAttribute="leading" secondItem="IoX-IE-7RQ" secondAttribute="leading" constant="10" id="c5L-Zk-mEZ"/>
+                            <constraint firstItem="lFX-ZC-ezO" firstAttribute="top" secondItem="LL9-FQ-VWK" secondAttribute="bottom" constant="10" id="hR4-7J-VFZ"/>
                             <constraint firstItem="aDh-Ep-ij2" firstAttribute="top" secondItem="UIA-B3-fqA" secondAttribute="bottom" constant="5" id="iPB-Sd-2LE"/>
+                            <constraint firstItem="6Q7-lM-2T3" firstAttribute="bottom" secondItem="LL9-FQ-VWK" secondAttribute="bottom" id="xEh-eV-I0B"/>
+                            <constraint firstItem="IoX-IE-7RQ" firstAttribute="trailing" secondItem="LL9-FQ-VWK" secondAttribute="trailing" constant="10" id="xUU-0t-2vh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IoX-IE-7RQ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ylD-n6-sLR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="UMe-LN-80w">
+                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="save:" destination="Q3N-X8-iw2" id="W61-RP-89z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageSlide" destination="LL9-FQ-VWK" id="27h-Pa-VN4"/>
+                        <outlet property="txtDescription" destination="aDh-Ep-ij2" id="RmV-nc-jVH"/>
+                        <outlet property="txtTitle" destination="UIA-B3-fqA" id="KoR-Vw-AJ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIe-jZ-jeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -378,7 +415,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAa-wd-zwD">
-                                <rect key="frame" x="156" y="433" width="46" height="30"/>
+                                <rect key="frame" x="313" y="302" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>

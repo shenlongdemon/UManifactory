@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import QRCode
-import DataCompression
 import Alamofire
 import ObjectMapper
 class Util {
@@ -66,17 +65,35 @@ class Util {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         VC.present(alert, animated: true, completion: nil)
     }
-    
-    static func showAlert(message:String?)-> Void {
+    static func getTopViewController() -> UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
+            return topController
+        }
+        else {
+            return nil
+        }
+    }
+    static func showAlert(message:String?)-> Void {
+        if let topController = Util.getTopViewController() {
             let alert = UIAlertController(title: "Dassee", message: message ?? "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             topController.present(alert, animated: true, completion: nil)
             // topController should now be your topmost view controller
         }
+    }
+    static func showAlert(message:String?, okHandle: @escaping ()->Void){
+        if let topController = Util.getTopViewController() {
+            let alert = UIAlertController(title: "Dassee", message: message ?? "", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(alert: UIAlertAction!) in
+                okHandle()
+            }))
+            topController.present(alert, animated: true, completion: nil)
+        }
+        
     }
     static func showModal(modalVC: UIViewController) {
         if let currentVC = getVC() {

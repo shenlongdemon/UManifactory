@@ -49,6 +49,14 @@ class BaseViewController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.dismissIndicatorDialog()
-    }    
+    }
+    func bactToRoot()  {
+        self.dismiss(animated: true, completion: {});
+        self.navigationController?.popViewController(animated: true);
+    }
+    func back() {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
 }
 

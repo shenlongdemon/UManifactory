@@ -19,14 +19,18 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.15:5000"
-    //static let HOST = "http://192.168.79.84:5000"
-    //static let HOST = "http://192.168.60.67:5000" // wifi
+    static let HOST = "http://192.168.1.3:5000"
+    
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
+    static let GET_USER_BY_ID = "\(WebApi.HOST)/api/manifactory/getUserById?id={id}"
+    
     static let GET_MATERIALS_BY_BLUETOOTH_UUIDS = "\(WebApi.HOST)/api/manifactory/getProjectsByBluetoothUUIDs"
     static let GET_MATERIALS_BY_OWNERID = "\(WebApi.HOST)/api/manifactory/getMaterialsByOwnerId?id={id}&pageSize={pageSize}&pageNum={pageNum}"
     static let LOGIN = "\(WebApi.HOST)/api/manifactory/login"
     static let ASSIGN_WORKER_TO_TASK = "\(WebApi.HOST)/api/manifactory/assignWorkerToTask"
+    static let SAVE_ACTIVITY = "\(WebApi.HOST)/api/manifactory/saveActivity"
+    static let UPLOAD_ACTIVITY_IMAGE = "\(WebApi.HOST)/api/upload/manifactory/activity?id={id}"
+    
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
@@ -79,6 +83,24 @@ class WebApi{
                 }                
                 if(apiModel.Status == 1){
                     let item: Material? = Mapper<Material>().map(JSONObject: apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+        }
+    }
+    static func getUserById(id: String, completion: @escaping (_ user: User?)->Void){
+        let url = URL(string: WebApi.GET_USER_BY_ID.replacingOccurrences(of: "{id}", with: id))
+        
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let item: User? = Mapper<User>().map(JSONObject: apiModel.Data)
                     completion(item)
                 }
                 else {
@@ -156,5 +178,56 @@ class WebApi{
                 
         }
     }
+    static func saveActivity(_ materialId: String, _ taskId: String!, _ workerId: String, _ title: String, _ description: String, _ imageNames: [String],completion: @escaping (_ done: Bool )->Void){
+        let parameters: Parameters = [
+            "materialId": materialId,
+            "taskId": taskId,
+            "workerId": workerId,
+            "title": title,
+            "description": description,
+            "imageNames": imageNames
+        ]
+        let url = URL(string: WebApi.SAVE_ACTIVITY)
+        
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(false)
+                    return
+                }
+                completion(apiModel.Status == 1)                
+        }
+    }
+    static func uploadActivityImages(taskId: String, images: [UIImage], names: [String],completion: @escaping (_ done: Bool )->Void){
+    
+        let url = WebApi.UPLOAD_ACTIVITY_IMAGE.replacingOccurrences(of: "{id}", with: taskId)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (index, element) in images.enumerated() {
+                let imgData = UIImageJPEGRepresentation(images[index], 0.2)
+                let name = names[index]
+                multipartFormData.append(imgData!, withName: "imgUploader",fileName: name, mimeType: "image/jpg")
+                
+            }
+            
+            
+        }, to: url) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    completion(true)
+                }
+                
+            case .failure(let encodingError):
+                completion(false)
+            }
+        }
+    
+    }
+    
 }
 

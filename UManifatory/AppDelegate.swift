@@ -9,15 +9,30 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import CoreLocation
+import DropDown
+import GoogleMaps
+import GooglePlaces
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-
-
+    var locationManager = CLLocationManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        GMSServices.provideAPIKey("AIzaSyCaUN_gPVbw-hTZq6qivI1pHlvQ_7SFT8k")
+        GMSPlacesClient.provideAPIKey("AIzaSyCaUN_gPVbw-hTZq6qivI1pHlvQ_7SFT8k")
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+        DropDown.startListeningToKeyboard()
         IQKeyboardManager.shared.enable = true
         return true
     }
@@ -89,6 +104,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locationObj = locations.last!
+        let coordinate = locationObj.coordinate
+        let position : Position = Position()
+        let coord : Coord = Coord()
+        
+        coord.latitude = coordinate.latitude
+        coord.longitude = coordinate.longitude
+        coord.altitude = locationObj.altitude
+        
+        position.coord = coord
+        
+        StoreUtil.savePosition(position: position);
     }
 
 }

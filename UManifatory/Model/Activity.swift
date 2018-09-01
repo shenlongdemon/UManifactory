@@ -14,6 +14,10 @@ class Activity: IObject, Mappable {
     var description: String = ""
     var time: Int64 = 0
     var images:[String] = []
+    var files:[String]? = []
+    var logoTask: String!
+    var worker: Worker!
+    var coord : Coord!
     override init() {
         
     }
@@ -27,6 +31,7 @@ class Activity: IObject, Mappable {
         self.description   <- map["description"]
         self.time   <- map["time"]
         self.images   <- map["images"]
+        self.files   <- map["files"]
         
     }
 }

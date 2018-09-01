@@ -38,14 +38,14 @@ class StoreUtil {
         user = json.cast()
         return user
     }
-//    static func getUserHistory() -> History? {
-//        var user: History? = nil
-//        guard let json = UserDefaults.standard.object(forKey: "user") as? String else {
-//            return nil
-//        }
-//        user = json.cast()
-//        return user
-//    }
+    static func getUserInfo() -> UserInfo? {
+        var user: UserInfo? = nil
+        guard let json = UserDefaults.standard.object(forKey: "user") as? String else {
+            return nil
+        }
+        user = json.cast()
+        return user
+    }
     static func getPosition() -> Position? {
         var position: Position? = nil
         guard let json = UserDefaults.standard.object(forKey: "position") else {

@@ -31,4 +31,8 @@ class BLEDevice: IObject, Mappable  {
         self.coord     <- map["coord"]
         self.ownerId     <- map["ownerId"]
     }
+    func getName() -> String {
+        let n = self.name.count > 0 ? self.name : self.id
+        return n;
+    }
 }

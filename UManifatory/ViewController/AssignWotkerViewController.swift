@@ -19,6 +19,9 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
     var items: NSMutableArray = NSMutableArray()
     var collectionAdapter:CollectionAdapter!
     var isScanning: Bool = false
+    let user = StoreUtil.getUser()!
+    
+    @IBOutlet weak var viewDescription: UIView!
     lazy var reader: QRCodeReader = QRCodeReader()
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -31,6 +34,7 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
         return QRCodeReaderViewController(builder: builder)
     }()
     override func viewDidLoad() {
+        self.viewDescription.isHidden = true
         super.viewDidLoad()
         initCollection()
         // Do any additional setup after loading the view.
@@ -84,6 +88,7 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
                     
                     self.items.removeAllObjects()
                     self.items.addObjects(from: task.workers)
+                    self.viewDescription.isHidden = true
                     self.collectionView.reloadData()
                     Util.showAlert(message: "Assign done!")
                 }
@@ -128,6 +133,13 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
         
         self.collectionAdapter = CollectionAdapter(items:self.items, cellIdentifier: cellIdentifier,itemPerRow: 2, cellHeight : WorkerCollectionViewCell.height)
         
+        self.collectionAdapter.filter { (w) -> Bool in
+            let worker = w as! Worker
+            
+            return self.user.id == worker.materialOwnerId // i am owner of material
+                || worker.owner.id == self.user.id   // i am worker
+        }
+        
         self.collectionAdapter.onDidSelectRowAt { (worker) in
             self.performSegue(withIdentifier: Segue.assignworker_to_activity, sender: worker)
         }
@@ -143,6 +155,9 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
         } as! Task
         
         self.items.addObjects(from: task.workers)
+        if self.items.count == 0 {
+            self.viewDescription.isHidden = false
+        }
         self.collectionView.reloadData()
     }
     
@@ -169,7 +184,8 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
             else {
                 self.showIndicatorDialog()
                 WebApi.getUserById(id: qrCode, completion: { (u) in
-                    self.dismissIndicatorDialog()
+                    
+                    //self.dismissIndicatorDialogAnd()
                     if let user = u {
                         Util.showYesNoAlert(VC: self, message: "Do you want to assign \(user.firstName) to this task ?", yesHandle: { () in
                             self.assignWorker(workerId: user.id)
@@ -182,6 +198,8 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
                         Util.showAlert(message: "The code is invalid!!!")
                     }
                 })
+                    
+                
             }
         }
         

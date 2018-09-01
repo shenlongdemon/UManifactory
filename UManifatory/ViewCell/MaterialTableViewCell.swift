@@ -12,6 +12,8 @@ class MaterialTableViewCell: TableCell {
 
     var item : Material!
     
+    @IBOutlet weak var lbModifiedAt: UILabel!
+    @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lbName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +29,9 @@ class MaterialTableViewCell: TableCell {
         super.initData(object: object)
         self.item = object as! Material
         self.lbName.text = self.item.name
+        self.imgImage.image = Util.getImage(data64: self.item.image)
+        self.lbModifiedAt.text = Util.getDate(milisecond: self.item.updatedAt, format: "yyyy-MM-dd")
+        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,6 +49,6 @@ class MaterialTableViewCell: TableCell {
     
     static let nibName = String(describing:  MaterialTableViewCell.self)
     static let reuseIdentifier = String(describing: MaterialTableViewCell.self)
-    static let height : CGFloat = 100
+    static let height : CGFloat = 70
     
 }

@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B59583D212DDC3900E74838 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */; };
+		3B59583E212DDC3900E74838 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */; };
+		3B595840212DFB1E00E74838 /* CreateMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */; };
+		3B595842212DFE0D00E74838 /* BluetoothDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B595841212DFE0D00E74838 /* BluetoothDeviceViewController.swift */; };
+		3B595845212EE4A600E74838 /* BLEDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */; };
+		3B595846212EE4A600E74838 /* BLEDeviceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B595844212EE4A600E74838 /* BLEDeviceTableViewCell.xib */; };
+		3B595848212EEF0900E74838 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B595847212EEF0900E74838 /* UserInfo.swift */; };
+		3B59584A212F122000E74838 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B595849212F122000E74838 /* CreateTaskViewController.swift */; };
+		3B59584D2130B74400E74838 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59584B2130B74400E74838 /* ProductTableViewCell.swift */; };
+		3B59584E2130B74400E74838 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B59584C2130B74400E74838 /* ProductTableViewCell.xib */; };
+		3B5958502130B7A400E74838 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59584F2130B7A400E74838 /* ProductsViewController.swift */; };
+		3B5958522130B8FD00E74838 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958512130B8FD00E74838 /* Item.swift */; };
+		3B5958542130B9D300E74838 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958532130B9D300E74838 /* Category.swift */; };
+		3B5958562130BBB500E74838 /* CreateIProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958552130BBB500E74838 /* CreateIProductViewController.swift */; };
+		3B5958582133625C00E74838 /* MaterialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958572133625C00E74838 /* MaterialDetailViewController.swift */; };
+		3B59585A2134456D00E74838 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958592134456D00E74838 /* ProfileViewController.swift */; };
+		3B59585D2134A71A00E74838 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */; };
+		3B59585F2136FEE800E74838 /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B59585E2136FEE800E74838 /* style.json */; };
 		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
 		3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA7212464C90016BE5F /* AppDelegate.swift */; };
 		3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA9212464C90016BE5F /* ViewController.swift */; };
@@ -51,6 +69,25 @@
 
 /* Begin PBXFileReference section */
 		000F523E35BACC9E0D654859 /* Pods_UManifatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UManifatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
+		3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaterialViewController.swift; sourceTree = "<group>"; };
+		3B595841212DFE0D00E74838 /* BluetoothDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothDeviceViewController.swift; sourceTree = "<group>"; };
+		3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		3B595844212EE4A600E74838 /* BLEDeviceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLEDeviceTableViewCell.xib; sourceTree = "<group>"; };
+		3B595847212EEF0900E74838 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		3B595849212F122000E74838 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
+		3B59584B2130B74400E74838 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		3B59584C2130B74400E74838 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		3B59584F2130B7A400E74838 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		3B5958512130B8FD00E74838 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		3B5958532130B9D300E74838 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		3B5958552130BBB500E74838 /* CreateIProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIProductViewController.swift; sourceTree = "<group>"; };
+		3B5958572133625C00E74838 /* MaterialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDetailViewController.swift; sourceTree = "<group>"; };
+		3B5958592134456D00E74838 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3B59585B21344ED500E74838 /* UManifatory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UManifatory.entitlements; sourceTree = "<group>"; };
+		3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
+		3B59585E2136FEE800E74838 /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		3BF76FA4212464C90016BE5F /* UManifatory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UManifatory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF76FA7212464C90016BE5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +174,8 @@
 		3BF76FA6212464C90016BE5F /* UManifatory */ = {
 			isa = PBXGroup;
 			children = (
+				3B59585B21344ED500E74838 /* UManifatory.entitlements */,
+				3B59585E2136FEE800E74838 /* style.json */,
 				3BF76FE02124722E0016BE5F /* ViewCell */,
 				3BF76FD72124716F0016BE5F /* Adapter */,
 				3BF76FC821246FAA0016BE5F /* Model */,
@@ -157,14 +196,22 @@
 		3BF76FBC212465D20016BE5F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */,
+				3BF770072128672E0016BE5F /* ActivityViewController.swift */,
 				3BF7700921286FD80016BE5F /* AssignWotkerViewController.swift */,
+				3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */,
 				3BF76FBF212466350016BE5F /* BaseViewController.swift */,
+				3B595841212DFE0D00E74838 /* BluetoothDeviceViewController.swift */,
 				3BF76FC421246DA20016BE5F /* BluetoothViewController.swift */,
+				3B5958552130BBB500E74838 /* CreateIProductViewController.swift */,
+				3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */,
+				3B595849212F122000E74838 /* CreateTaskViewController.swift */,
 				3BF76FBD212465F20016BE5F /* MainViewController.swift */,
+				3B5958572133625C00E74838 /* MaterialDetailViewController.swift */,
 				3BF76FE72124786B0016BE5F /* MaterialViewController.swift */,
 				3BF76FE921247A3B0016BE5F /* MyMaterialsViewController.swift */,
-				3BF770072128672E0016BE5F /* ActivityViewController.swift */,
-				3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */,
+				3B59584F2130B7A400E74838 /* ProductsViewController.swift */,
+				3B5958592134456D00E74838 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -185,6 +232,7 @@
 		3BF76FC821246FAA0016BE5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3B5958512130B8FD00E74838 /* Item.swift */,
 				3BF76FEE2127B1CD0016BE5F /* Activity.swift */,
 				3BF76FCC21246FCC0016BE5F /* BLEDevice.swift */,
 				3BF76FCA21246FCB0016BE5F /* Bluetooth.swift */,
@@ -193,6 +241,8 @@
 				3BF76FE5212472D30016BE5F /* Material.swift */,
 				3BF76FF9212809E20016BE5F /* Task.swift */,
 				3BF76FFB21280AB90016BE5F /* Worker.swift */,
+				3B595847212EEF0900E74838 /* UserInfo.swift */,
+				3B5958532130B9D300E74838 /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,6 +259,12 @@
 		3BF76FE02124722E0016BE5F /* ViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				3B59584B2130B74400E74838 /* ProductTableViewCell.swift */,
+				3B59584C2130B74400E74838 /* ProductTableViewCell.xib */,
+				3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */,
+				3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */,
+				3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */,
+				3B595844212EE4A600E74838 /* BLEDeviceTableViewCell.xib */,
 				3BF76FF52127E1E00016BE5F /* MaterialTableViewCell.swift */,
 				3BF76FF62127E1E00016BE5F /* MaterialTableViewCell.xib */,
 				3BF77003212860370016BE5F /* TaskCollectionViewCell.swift */,
@@ -258,6 +314,7 @@
 				3BF76FA1212464C90016BE5F /* Frameworks */,
 				3BF76FA2212464C90016BE5F /* Resources */,
 				C5DD1D48340BDE7DD1BC5402 /* [CP] Embed Pods Frameworks */,
+				9C258434DBF509469730A2C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,6 +338,14 @@
 					3BF76FA3212464C90016BE5F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -308,10 +373,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF7700E212883130016BE5F /* WorkerCollectionViewCell.xib in Resources */,
+				3B595846212EE4A600E74838 /* BLEDeviceTableViewCell.xib in Resources */,
 				3BF76FF82127E1E00016BE5F /* MaterialTableViewCell.xib in Resources */,
+				3B59585F2136FEE800E74838 /* style.json in Resources */,
+				3B59583E212DDC3900E74838 /* ActivityTableViewCell.xib in Resources */,
 				3BF77006212860370016BE5F /* TaskCollectionViewCell.xib in Resources */,
 				3BF76FB5212464C90016BE5F /* LaunchScreen.storyboard in Resources */,
 				3BF76FB2212464C90016BE5F /* Assets.xcassets in Resources */,
+				3B59584E2130B74400E74838 /* ProductTableViewCell.xib in Resources */,
 				3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +406,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9C258434DBF509469730A2C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UManifatory/Pods-UManifatory-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UManifatory/Pods-UManifatory-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C5DD1D48340BDE7DD1BC5402 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -345,8 +434,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-UManifatory/Pods-UManifatory-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/FileBrowser/FileBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
@@ -358,8 +449,10 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FileBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
@@ -380,13 +473,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B595848212EEF0900E74838 /* UserInfo.swift in Sources */,
 				3BF76FE82124786B0016BE5F /* MaterialViewController.swift in Sources */,
 				3BF76FC0212466350016BE5F /* BaseViewController.swift in Sources */,
 				3BF770082128672E0016BE5F /* ActivityViewController.swift in Sources */,
+				3B5958522130B8FD00E74838 /* Item.swift in Sources */,
 				3BF76FD021246FCC0016BE5F /* BLEDevice.swift in Sources */,
 				3BF77005212860370016BE5F /* TaskCollectionViewCell.swift in Sources */,
 				3BF76FB0212464C90016BE5F /* UManifatory.xcdatamodeld in Sources */,
 				3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */,
+				3B59584A212F122000E74838 /* CreateTaskViewController.swift in Sources */,
 				3BF76FC521246DA20016BE5F /* BluetoothViewController.swift in Sources */,
 				3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */,
 				3BF76FFA212809E20016BE5F /* Task.swift in Sources */,
@@ -395,24 +491,35 @@
 				3BF76FFC21280AB90016BE5F /* Worker.swift in Sources */,
 				3BF76FF72127E1E00016BE5F /* MaterialTableViewCell.swift in Sources */,
 				3BF76FD6212470010016BE5F /* StoreUtil.swift in Sources */,
+				3B5958562130BBB500E74838 /* CreateIProductViewController.swift in Sources */,
+				3B59584D2130B74400E74838 /* ProductTableViewCell.swift in Sources */,
 				3BF76FC3212466DC0016BE5F /* Common.swift in Sources */,
 				3BF76FEA21247A3B0016BE5F /* MyMaterialsViewController.swift in Sources */,
+				3B595845212EE4A600E74838 /* BLEDeviceTableViewCell.swift in Sources */,
 				3BF76FF42127B5A70016BE5F /* LoginViewController.swift in Sources */,
+				3B5958502130B7A400E74838 /* ProductsViewController.swift in Sources */,
 				3BF7700A21286FD80016BE5F /* AssignWotkerViewController.swift in Sources */,
 				3BF76FF02127B1CD0016BE5F /* Activity.swift in Sources */,
 				3BF76FCE21246FCC0016BE5F /* Bluetooth.swift in Sources */,
 				3BF76FD5212470010016BE5F /* ApiModel.swift in Sources */,
 				3BF76FC721246F8C0016BE5F /* TypeExtention.swift in Sources */,
+				3B595842212DFE0D00E74838 /* BluetoothDeviceViewController.swift in Sources */,
 				3BF76FD4212470010016BE5F /* WebApi.swift in Sources */,
 				3BF76FBE212465F20016BE5F /* MainViewController.swift in Sources */,
 				3BF76FF22127B28B0016BE5F /* Util.swift in Sources */,
 				3BF76FCD21246FCC0016BE5F /* IObject.swift in Sources */,
+				3B59585D2134A71A00E74838 /* ActivityDetailViewController.swift in Sources */,
 				3BF76FDF2124718C0016BE5F /* TableCell.swift in Sources */,
+				3B59583D212DDC3900E74838 /* ActivityTableViewCell.swift in Sources */,
+				3B5958582133625C00E74838 /* MaterialDetailViewController.swift in Sources */,
+				3B59585A2134456D00E74838 /* ProfileViewController.swift in Sources */,
 				3BF7700D212883130016BE5F /* WorkerCollectionViewCell.swift in Sources */,
 				3BF76FE6212472D30016BE5F /* Material.swift in Sources */,
 				3BF76FCF21246FCC0016BE5F /* User.swift in Sources */,
 				3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */,
 				3BF7700021281F190016BE5F /* CollectionAdapter.swift in Sources */,
+				3B595840212DFB1E00E74838 /* CreateMaterialViewController.swift in Sources */,
+				3B5958542130B9D300E74838 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +657,7 @@
 			baseConfigurationReference = B87799C0D4DEE1E045953BBE /* Pods-UManifatory.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = UManifatory/UManifatory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AJFJJYR4NW;
 				INFOPLIST_FILE = UManifatory/Info.plist;
@@ -567,6 +675,7 @@
 			baseConfigurationReference = 4FDD9798235559FECEB9364A /* Pods-UManifatory.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = UManifatory/UManifatory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AJFJJYR4NW;
 				INFOPLIST_FILE = UManifatory/Info.plist;

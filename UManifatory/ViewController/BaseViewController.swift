@@ -12,19 +12,16 @@ class BaseViewController: UIViewController {
     var waitController: UIAlertController?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_color"))
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _ = waitController{
-            self.dismissIndicatorDialog()
-            self.showIndicatorDialog()
-        }
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_color"))
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +29,7 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func showIndicatorDialog() {
-        
+        waitController = nil
         waitController = UIAlertController(title: nil, message: "Please wait\n\n", preferredStyle: .alert)
         let spinnerIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         
@@ -47,8 +44,10 @@ class BaseViewController: UIViewController {
         waitController?.dismiss(animated: true, completion: nil);
         waitController = nil
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         self.dismissIndicatorDialog()
+        self.navigationController?.navigationBar.backItem?.title = ""
     }
     func bactToRoot()  {
         self.dismiss(animated: true, completion: {});

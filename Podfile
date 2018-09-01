@@ -13,6 +13,10 @@ target 'UManifatory' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'ImageSlideshow', '~> 1.6.1'
   pod 'ImagePicker'
+  pod 'ImageSlideshow/Alamofire'
+  pod 'FileBrowser', '~> 1.0'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   # Pods for UManifatory
 
 end

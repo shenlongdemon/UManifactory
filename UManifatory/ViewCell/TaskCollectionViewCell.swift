@@ -10,6 +10,7 @@ import UIKit
 
 class TaskCollectionViewCell: CollectionCell {
     
+    @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lbName: UILabel!
     var item : Task!
   
@@ -24,6 +25,8 @@ class TaskCollectionViewCell: CollectionCell {
         self.item = object as! Task
         
         self.lbName.text = self.item.name.uppercased()
+        self.imgImage.image = Util.getImage(data64: self.item.image)
+         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {

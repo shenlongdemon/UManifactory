@@ -21,9 +21,12 @@ class MyMaterialsViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
         loadData()
         
+    }
+    @IBAction func gotoCreateMaterial(_ sender: Any) {
+        self.performSegue(withIdentifier: Segue.to_create_material, sender: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

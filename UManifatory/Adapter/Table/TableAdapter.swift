@@ -41,7 +41,6 @@ class TableAdapter: NSObject, UITableViewDelegate, UITableViewDataSource {
     func sort(predicate: @escaping ((Any, Any) -> ComparisonResult)) {
         self.sortPredicate = predicate
         self.items.sort(usingComparator: sortPredicate!)
-        
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

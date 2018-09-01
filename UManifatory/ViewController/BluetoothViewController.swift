@@ -9,7 +9,9 @@
 import UIKit
 import CoreBluetooth
 import SwiftyJSON
-
+protocol ChoiceMaterialProto {
+    func selectMaterial(material: Material)
+}
 class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBPeripheralDelegate {
     var manager:CBCentralManager!
     var peripheral:CBPeripheral!
@@ -19,7 +21,7 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
     var devices: NSMutableArray = NSMutableArray()
     let SERVICE : [CBUUID]? = nil //[CBUUID.init()]
     var user = StoreUtil.getUser()!
-    
+    var choiceMaterialProto : ChoiceMaterialProto?
     @IBOutlet weak var progress: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,9 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
         manager = CBCentralManager(delegate: self, queue: nil, options: opts)
         progress.stopAnimating()
     }
-    
+    func initProto(choiceMaterialProto : ChoiceMaterialProto){
+        self.choiceMaterialProto = choiceMaterialProto
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -61,42 +65,24 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
     }
     func stopScanForBLEDevice(){
         manager?.stopScan()
-        print("scan stopped")
+        print("scan stopped with \(self.devices.count) devices are founds")
     }
     func loadData() {
         self.items.removeAllObjects()
         self.tableView.reloadData()
-        
+        self.progress.stopAnimating()
+        let testBle : BLEDevice = BLEDevice();
+        testBle.id = "1AB3AC95-CFCE-6385-E9E9-E79EDAE8D9CF"
+        self.devices.add(testBle)
         if (self.devices.count > 0){
+            self.showIndicatorDialog()
             let coord = StoreUtil.getPosition()!.coord!
-//            WebApi.getProjectsByBluetoothUUIDs(devices: self.devices as! [BLEDevice], coord: coord) { (list) in
-//                self.items.addObjects(from: list)
-//                
-//                var bluetoothIds = self.items.map({ (i) -> String in
-//                    return (i as! Item).bluetoothCode
-//                })
-//                
-//                self.devices.forEach({ (device) in
-//                    if !bluetoothIds.contains((device as! BLEDevice).id) {
-//                        if let d = device as? BLEDevice{
-//                            let i : Item = Item()
-//                            i.name = d.name
-//                            i.description = d.localName
-//                            i.bluetoothCode = d.id
-//                            i.price = d.getDistance()
-//                            i.id = ""
-//                            self.items.add(i)
-//                        }
-//                    }
-//                })
-//                self.tableView.reloadData()
-//                self.progress.stopAnimating()
-//            }
+            WebApi.getMaterialsByBluetooths(bluetooths: self.devices as! [BLEDevice], coord: coord, myId: self.user.id, completion: { (mats) in
+                self.dismissIndicatorDialog()
+                self.items.addObjects(from: mats)
+                self.tableView.reloadData()
+            })
         }
-        else {
-            self.progress.stopAnimating()
-        }
-        
     }
     func prepareModel(){
         
@@ -108,8 +94,12 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
         
         self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : MaterialTableViewCell.height)
         self.tableAdapter.onDidSelectRowAt { (item) in
-            if item.id.count > 0{
-                self.performSegue(withIdentifier: "bluetoothdevice", sender: item)
+            if let choice = self.choiceMaterialProto {
+                self.choiceMaterialProto?.selectMaterial(material: item as! Material)
+                self.back()
+            }
+            else {
+                self.performSegue(withIdentifier: Segue.bluetooth_to_material, sender: item)
             }
         }
         self.tableView.delegate = self.tableAdapter
@@ -126,17 +116,12 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if (segue.identifier == "bluetoothdevice"){
-//            let vc = segue.destination as! ProductViewController
-//            vc.prepareModel(item: sender as! Item)
-//        }
-//        else if segue.identifier == "bluetoothmap" {
-//            let vc = segue.destination as! ProductMapViewController
-//            let its = self.items.filter({ (i) -> Bool in
-//                return (i as! Item).id.count > 0
-//            }) as! [Item]
-//            vc.prepareModel(items: its)
-//        }
+        
+        if (segue.identifier == Segue.bluetooth_to_material) {
+            let material = sender as! Material
+            let vc = segue.destination as! MaterialViewController
+            vc.initItem(itemId: material.id)
+        }
     }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch(central.state){

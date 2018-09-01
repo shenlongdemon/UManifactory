@@ -12,6 +12,14 @@ import QRCode
 import Alamofire
 import ObjectMapper
 class Util {
+    
+    static func getDate(milisecond: Int64, format: String) -> String{
+        let dateVar = Date(timeIntervalSince1970: TimeInterval(milisecond) / 1000)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return (dateFormatter.string(from: dateVar))
+    }
+    
     static let transformDouble = TransformOf<Double, String>(fromJSON: { (value: String?) -> Double? in
         // transform value from String? to Int?
         if let v = value {
@@ -149,22 +157,22 @@ class Util {
         let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         return strBase64
     }
-//    static func getUesrInfo(completion: @escaping (_ history: History? )->Void){
-//        var history : History = StoreUtil.getUserHistory()!
-//        history.position = StoreUtil.getPosition()!
-//        WebApi.getWeather(lat: history.position.coord.latitude, lon: history.position.coord.longitude) { (weather) in
-//            if let wa = weather {
-//                history.weather = wa
-//                let nowDoublevaluseis = NSDate().timeIntervalSince1970
-//                history.time = Int64(nowDoublevaluseis*1000)
-//                completion(history)
-//            }
-//            else {
-//                Util.showAlert(message: "Cannot get weather.")
-//                completion(nil)
-//            }
-//        }
-//    }
+    static func getUesrInfo(completion: @escaping (_ usrInfo: UserInfo? )->Void){
+        var userInfo : UserInfo = StoreUtil.getUserInfo()!
+        userInfo.position = StoreUtil.getPosition()!
+        WebApi.getWeather(lat: userInfo.position.coord.latitude, lon: userInfo.position.coord.longitude) { (weather) in
+            if let wa = weather {
+                userInfo.weather = wa
+                let nowDoublevaluseis = NSDate().timeIntervalSince1970
+                userInfo.time = Int64(nowDoublevaluseis*1000)
+                completion(userInfo)
+            }
+            else {
+                Util.showAlert(message: "Cannot get weather.")
+                completion(nil)
+            }
+        }
+    }
 
     static func drawOMIDCode(strCode : String) -> UIImage{
         let str = strCode.lowercased()

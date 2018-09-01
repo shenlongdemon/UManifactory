@@ -13,7 +13,8 @@ import ObjectMapper
 class Worker: IObject, Mappable {
     var owner: User!
     var activities : [Activity] = []
-    
+    var materialId: String = ""
+    var materialOwnerId: String = ""
     override init() {
         
     }
@@ -25,5 +26,8 @@ class Worker: IObject, Mappable {
         self.id <- map["id"]
         self.owner     <- map["owner"]
         self.activities   <- map["activities"]
+        for (_, activity) in self.activities.enumerated() {
+            activity.worker = self
+        }
     }
 }

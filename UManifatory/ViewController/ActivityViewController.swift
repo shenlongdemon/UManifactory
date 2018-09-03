@@ -32,7 +32,7 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
     override func viewDidLoad() {
         super.viewDidLoad()
         let now = (Int64)(Date().timeIntervalSince1970 * 1000)
-        self.lbDatetime.text = "\(Util.getDate(milisecond: now, format: "yyyy/MM/dd hh:mm a"))"
+        self.lbDatetime.text = "\(Util.getDate(milisecond: now, format: "yyyy-MM-dd HH:mm a"))"
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         

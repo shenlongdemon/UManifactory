@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-class CreateIProductViewController: BaseViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChoiceProto, ChoiceMaterialProto {
+class CreateIProductViewController: BaseViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChoiceProto, ChoiceMaterialProto,UITextFieldDelegate {
 
     @IBOutlet weak var tfCategory: UITextField!
     @IBOutlet weak var imgImage: UIImageView!
@@ -44,6 +44,14 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
             self.selectCategpry = self.categories[index]
             self.tfCategory.text = item
         }
+        self.tfCategory.tag = 999
+        self.tfCategory.delegate = self
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField.tag == 999 {            
+            return false
+        }
+        return true
     }
     func loadCategories(){
         self.showIndicatorDialog()

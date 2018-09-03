@@ -25,6 +25,8 @@
 		3B59585A2134456D00E74838 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5958592134456D00E74838 /* ProfileViewController.swift */; };
 		3B59585D2134A71A00E74838 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */; };
 		3B59585F2136FEE800E74838 /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B59585E2136FEE800E74838 /* style.json */; };
+		3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA65213B147000B5140F /* BaseButton.swift */; };
+		3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA66213B147000B5140F /* BaseImage.swift */; };
 		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
 		3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA7212464C90016BE5F /* AppDelegate.swift */; };
 		3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA9212464C90016BE5F /* ViewController.swift */; };
@@ -88,6 +90,8 @@
 		3B59585B21344ED500E74838 /* UManifatory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UManifatory.entitlements; sourceTree = "<group>"; };
 		3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		3B59585E2136FEE800E74838 /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
+		3B5BEA65213B147000B5140F /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		3B5BEA66213B147000B5140F /* BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImage.swift; sourceTree = "<group>"; };
 		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		3BF76FA4212464C90016BE5F /* UManifatory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UManifatory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF76FA7212464C90016BE5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3B5BEA64213B144E00B5140F /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				3B5BEA65213B147000B5140F /* BaseButton.swift */,
+				3B5BEA66213B147000B5140F /* BaseImage.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
 		3BF76F9B212464C90016BE5F = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +187,7 @@
 		3BF76FA6212464C90016BE5F /* UManifatory */ = {
 			isa = PBXGroup;
 			children = (
+				3B5BEA64213B144E00B5140F /* CustomUI */,
 				3B59585B21344ED500E74838 /* UManifatory.entitlements */,
 				3B59585E2136FEE800E74838 /* style.json */,
 				3BF76FE02124722E0016BE5F /* ViewCell */,
@@ -232,17 +246,17 @@
 		3BF76FC821246FAA0016BE5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B5958512130B8FD00E74838 /* Item.swift */,
 				3BF76FEE2127B1CD0016BE5F /* Activity.swift */,
 				3BF76FCC21246FCC0016BE5F /* BLEDevice.swift */,
 				3BF76FCA21246FCB0016BE5F /* Bluetooth.swift */,
+				3B5958532130B9D300E74838 /* Category.swift */,
 				3BF76FC921246FCB0016BE5F /* IObject.swift */,
-				3BF76FCB21246FCB0016BE5F /* User.swift */,
+				3B5958512130B8FD00E74838 /* Item.swift */,
 				3BF76FE5212472D30016BE5F /* Material.swift */,
 				3BF76FF9212809E20016BE5F /* Task.swift */,
-				3BF76FFB21280AB90016BE5F /* Worker.swift */,
+				3BF76FCB21246FCB0016BE5F /* User.swift */,
 				3B595847212EEF0900E74838 /* UserInfo.swift */,
-				3B5958532130B9D300E74838 /* Category.swift */,
+				3BF76FFB21280AB90016BE5F /* Worker.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,14 +273,14 @@
 		3BF76FE02124722E0016BE5F /* ViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				3B59584B2130B74400E74838 /* ProductTableViewCell.swift */,
-				3B59584C2130B74400E74838 /* ProductTableViewCell.xib */,
 				3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */,
 				3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */,
 				3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */,
 				3B595844212EE4A600E74838 /* BLEDeviceTableViewCell.xib */,
 				3BF76FF52127E1E00016BE5F /* MaterialTableViewCell.swift */,
 				3BF76FF62127E1E00016BE5F /* MaterialTableViewCell.xib */,
+				3B59584B2130B74400E74838 /* ProductTableViewCell.swift */,
+				3B59584C2130B74400E74838 /* ProductTableViewCell.xib */,
 				3BF77003212860370016BE5F /* TaskCollectionViewCell.swift */,
 				3BF77004212860370016BE5F /* TaskCollectionViewCell.xib */,
 				3BF7700B212883130016BE5F /* WorkerCollectionViewCell.swift */,
@@ -505,8 +519,10 @@
 				3BF76FC721246F8C0016BE5F /* TypeExtention.swift in Sources */,
 				3B595842212DFE0D00E74838 /* BluetoothDeviceViewController.swift in Sources */,
 				3BF76FD4212470010016BE5F /* WebApi.swift in Sources */,
+				3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */,
 				3BF76FBE212465F20016BE5F /* MainViewController.swift in Sources */,
 				3BF76FF22127B28B0016BE5F /* Util.swift in Sources */,
+				3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */,
 				3BF76FCD21246FCC0016BE5F /* IObject.swift in Sources */,
 				3B59585D2134A71A00E74838 /* ActivityDetailViewController.swift in Sources */,
 				3BF76FDF2124718C0016BE5F /* TableCell.swift in Sources */,

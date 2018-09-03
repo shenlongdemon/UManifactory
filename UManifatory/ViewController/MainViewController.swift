@@ -18,6 +18,11 @@ class MainViewController: BaseQRCodeReaderViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_main"))
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_main"))
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -82,7 +87,7 @@ class MainViewController: BaseQRCodeReaderViewController {
             handleForMaterial(material: material)
         }
         else {
-            if material.hasMyTasks() {
+            if material.hasMyTasks() || material.isIAmOwner() {
                 self.performSegue(withIdentifier: Segue.main_to_material, sender: material)
             }
             else {

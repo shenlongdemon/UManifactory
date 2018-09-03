@@ -93,15 +93,21 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
             let coord = activity.coord!
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
-            path.add(marker.position)
+            
             bounds = bounds.includingCoordinate(marker.position)
-            marker.icon = #imageLiteral(resourceName: "white_marker")
+            marker.icon =  #imageLiteral(resourceName: "white_marker")
+            marker.map = self.mapView
+            
+            path.add(marker.position)
         }
+        
         let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 10.0
+        polyline.strokeWidth = 1.0
         polyline.geodesic = true
         polyline.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        polyline.map = mapView
+        polyline.map = self.mapView
+        
+        mapView.animate(with: GMSCameraUpdate.fit(bounds, with: UIEdgeInsetsMake(50.0 , 50.0 ,50.0 ,50.0)))
        
     }
     override func didReceiveMemoryWarning() {

@@ -32,7 +32,7 @@ class Activity: IObject, Mappable {
         self.time   <- map["time"]
         self.images   <- map["images"]
         self.files   <- map["files"]
-        
+        self.coord   <- map["coord"]
     }
 }
 class Weather: Mappable {

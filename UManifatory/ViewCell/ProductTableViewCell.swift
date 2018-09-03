@@ -14,7 +14,6 @@ class ProductTableViewCell: TableCell {
     @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lbName: UILabel!
     
-    @IBOutlet weak var lbOwner: UILabel!
     @IBOutlet weak var lbStatus: UILabel!
     @IBOutlet weak var lbCategory: UILabel!
     @IBOutlet weak var imgNext: UIButton!
@@ -44,7 +43,6 @@ class ProductTableViewCell: TableCell {
             self.lbCategory.text = self.item.category.value
             
             self.lbPrice.text = "$ \(self.item.price)"
-            self.lbOwner.text = "\(self.item.owner.lastName )"
             self.lbStatus.text = ""
             if self.item.buyerCode.count > 0 {
                 self.lbStatus.text = "SOLD by \(self.item.buyer?.firstName ?? "" )"
@@ -70,10 +68,10 @@ class ProductTableViewCell: TableCell {
             self.lbCategory.text = self.item.bluetoothCode
             self.lbPrice.text = self.item.price
             self.lbStatus.text = ""
-            self.lbOwner.text = self.item.description
             
             
         }
+        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

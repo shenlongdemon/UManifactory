@@ -157,7 +157,7 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
         if let device = (advertisementData as NSDictionary) .object(forKey: CBAdvertisementDataLocalNameKey) as? NSString {
             bleDevice.name = device as String
         }
-        var position = StoreUtil.getPosition()
+        let position = StoreUtil.getPosition()
         let coord = position!.toBLEPosition().coord!
         coord.distance = Util.getBLEBeaconDistance(RSSI: RSSI)
         bleDevice.coord = coord

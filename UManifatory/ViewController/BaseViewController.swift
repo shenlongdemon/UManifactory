@@ -12,16 +12,20 @@ class BaseViewController: UIViewController {
     var waitController: UIAlertController?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_color"))
+        //self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_color"))
+        self.view.backgroundColor = #colorLiteral(red: 0.1607843137, green: 0.1568627451, blue: 0.1803921569, alpha: 1)
+        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //self.navigationController?.navigationBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background_color"))
+        self.view.backgroundColor = #colorLiteral(red: 0.1607843137, green: 0.1568627451, blue: 0.1803921569, alpha: 1)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        // self.navigationController?.navigationBar.topItem?.title = " "
     }
     
     override func didReceiveMemoryWarning() {

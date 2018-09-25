@@ -34,6 +34,7 @@ class Activity: IObject, Mappable {
         self.files   <- map["files"]
         self.coord   <- map["coord"]
     }
+    
 }
 class Weather: Mappable {
     var main: WeatherMain!

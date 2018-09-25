@@ -36,9 +36,10 @@ class ProductsViewController: BaseViewController {
         self.tableView.reloadData()
         let user = StoreUtil.getUser()!
         WebApi.getItemsByOwnerId(userId: user.id) { (its) in
+            self.dismissIndicatorDialog()
             self.items.addObjects(from: its)
             self.tableView.reloadData()
-            self.dismissIndicatorDialog()
+            
         }
     }
     func initTable() {
@@ -48,20 +49,32 @@ class ProductsViewController: BaseViewController {
         
         self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : ProductTableViewCell.height)
         self.tableAdapter.onDidSelectRowAt { (item) in
-            
+            self.performSegue(withIdentifier: Segue.goods_to_detail, sender: item)
         }
         self.tableView.delegate = self.tableAdapter
         self.tableView.dataSource = self.tableAdapter
         
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == Segue.goods_to_detail {
+            let item =  sender as! Item
+            let VC = segue.destination as! UITabBarController
+            for (_, v) in (VC.viewControllers?.enumerated())! {
+                if let vc = v as? ItemAttachFilesViewController {
+                    vc.initItem(item: item)
+                }
+                else if let vc = v as? ItemInfoViewController {
+                    vc.initItem(item: item)
+                }
+            }
+        }
     }
-    */
+    
 
 }

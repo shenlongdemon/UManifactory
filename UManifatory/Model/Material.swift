@@ -77,6 +77,13 @@ class Material: IObject, Mappable {
         }
         return worker
     }
+    func getWorkers() -> [Worker] {
+        let workers = self.tasks.flatMap { (task) -> [Worker] in
+            return task.workers
+        }
+        return workers
+        
+    }
     func getActivities() -> [Activity] {
         let activities = self.tasks.flatMap { (task) -> [Activity] in
             return task.workers.flatMap({ (worker) -> [Activity] in
@@ -84,6 +91,40 @@ class Material: IObject, Mappable {
             })
         }
         return activities
-        
+    }
+    func getStatusPercent() -> Float {
+        if self.tasks.count == 0 {
+            return 0.0
+        }
+        var percent : Float = 0.0
+        for (_, task) in self.tasks.enumerated() {
+            percent += task.getStatusPercent()
+        }
+        percent = percent / Float(self.tasks.count)
+        return percent
+    }
+    func getPDFFiles() -> [IObject] {
+        let pdfFiles = self.tasks.flatMap({ (task) -> [IObject] in
+            return task.getPDFFiles()
+        })
+        return pdfFiles
+    }
+    func getActivityImages() -> [String] {
+        return self.tasks.flatMap({ (task) -> [String] in
+            return task.getActivityImages()
+        })
+    }
+    func getImage() -> UIImage? {
+        return Util.getImage(data64: self.image)
+    }
+    func getTaskDescription() -> String{
+        let descriptions = self.tasks.map { (task) -> String in
+            return task.getAllDescription()
+        }
+        return "\nBlock: \(self.name)\n \(descriptions.joined(separator: "\n"))"
+    }
+    func getAllDescription() -> String {
+        let str = "\(self.description)\n\nBlocks\n\(self.getTaskDescription())"
+        return str
     }
 }

@@ -24,7 +24,8 @@ class Item: IObject, Mappable {
     var section: Section!
     var owner: UserInfo!
     var buyer: UserInfo?
-    var location:BLEPosition!
+    var iBeacon: BLEDevice?
+    var location: BLEPosition!
     var bluetooth : Bluetooth?
     var view3d : String = ""
     var material: Material? = nil
@@ -54,6 +55,7 @@ class Item: IObject, Mappable {
         self.bluetooth   <- map["bluetooth"]
         self.view3d   <- map["view3d"]
         self.material   <- map["material"]
+        self.iBeacon   <- map["iBeacon"]
     }
     func getImage() -> UIImage? {
         return Util.getImage(data64: self.image)
@@ -71,7 +73,10 @@ class Item: IObject, Mappable {
         }
        return code
     }
-    
+    func getAllDescription() -> String {
+        var str = "\(self.description)\n\n\(self.material?.getAllDescription() ?? "")"
+        return str
+    }
 }
 class Section: Mappable {
     var code : String = ""

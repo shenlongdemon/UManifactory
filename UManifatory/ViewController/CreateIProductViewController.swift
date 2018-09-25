@@ -123,7 +123,7 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
         
         self.showIndicatorDialog()
         let device = self.bluetoothDevice?.id ?? ""
-        
+        self.bluetoothDevice?.proximityUUID = self.tfBluetoothSource.text ?? ""
         let item : Item = Item()
         item.name = tfName.text!
         item.price = tfPrice.text!
@@ -131,7 +131,9 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
         item.category = cat
         item.image = Util.getData64(image: imgImage.image)
         item.bluetoothCode = device
+        item.iBeacon = self.bluetoothDevice
         item.material = self.material
+        
         Util.getUesrInfo { (history) in
             if let his = history {
                 if let ble = self.bluetoothDevice {

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,12 +28,15 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="isS-kn-d1r" customClass="BaseImage" customModule="UManifatory" customModuleProvider="target">
-                        <rect key="frame" x="5" y="5" width="166" height="129"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="isS-kn-d1r" customClass="BaseImage" customModule="UManifatory" customModuleProvider="target">
+                        <rect key="frame" x="18.5" y="0.0" width="139" height="139"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="isS-kn-d1r" secondAttribute="height" multiplier="1:1" id="F3Q-Z8-dXA"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="50"/>
+                                <real key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,11 +51,10 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="e6Q-yQ-hWw" secondAttribute="trailing" constant="5" id="247-nX-KVl"/>
                 <constraint firstItem="e6Q-yQ-hWw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="BYW-4g-atB"/>
-                <constraint firstItem="isS-kn-d1r" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Ufs-jf-CEA"/>
                 <constraint firstAttribute="bottom" secondItem="e6Q-yQ-hWw" secondAttribute="bottom" constant="5" id="Vsx-KY-Zgf"/>
-                <constraint firstAttribute="trailing" secondItem="isS-kn-d1r" secondAttribute="trailing" constant="5" id="bGQ-sC-6Ss"/>
-                <constraint firstItem="e6Q-yQ-hWw" firstAttribute="top" secondItem="isS-kn-d1r" secondAttribute="bottom" constant="5" id="gNX-Rk-klC"/>
-                <constraint firstItem="isS-kn-d1r" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="oDo-XN-p2o"/>
+                <constraint firstItem="e6Q-yQ-hWw" firstAttribute="top" secondItem="isS-kn-d1r" secondAttribute="bottom" id="gNX-Rk-klC"/>
+                <constraint firstItem="isS-kn-d1r" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="hBK-7b-Z5a"/>
+                <constraint firstItem="isS-kn-d1r" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oDo-XN-p2o"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="176" height="165"/>

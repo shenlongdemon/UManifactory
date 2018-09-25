@@ -15,6 +15,7 @@ class Worker: IObject, Mappable {
     var activities : [Activity] = []
     var materialId: String = ""
     var materialOwnerId: String = ""
+    var status : Enums.TaskStatus = Enums.TaskStatus.not_start
     override init() {
         
     }
@@ -26,8 +27,15 @@ class Worker: IObject, Mappable {
         self.id <- map["id"]
         self.owner     <- map["owner"]
         self.activities   <- map["activities"]
+        self.status   <- (map["status"],EnumTransform<Enums.TaskStatus>())
         for (_, activity) in self.activities.enumerated() {
             activity.worker = self
         }
+    }
+    func getActivityImages() -> [String] {
+        return self.activities.flatMap({ (act) -> [String] in
+            return act.images
+        })
+        
     }
 }

@@ -19,12 +19,13 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.5:5000"
+    static let HOST = "http://192.168.1.2:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_USER_BY_ID = "\(WebApi.HOST)/api/manifactory/getUserById?id={id}"
-    
     static let GET_MATERIALS_BY_BLUETOOTH_UUIDS = "\(WebApi.HOST)/api/manifactory/getProjectsByBluetoothUUIDs"
+    static let GET_PRODUCTS_BY_BLUETOOTH_UUIDS = "\(WebApi.HOST)/api/manifactory/getItemsByBeaconUUIDs"
+
     static let GET_MATERIALS_BY_OWNERID = "\(WebApi.HOST)/api/manifactory/getMaterialsByOwnerId?id={id}&pageSize={pageSize}&pageNum={pageNum}"
     static let LOGIN = "\(WebApi.HOST)/api/manifactory/login"
     static let ASSIGN_WORKER_TO_TASK = "\(WebApi.HOST)/api/manifactory/assignWorkerToTask"
@@ -34,9 +35,15 @@ class WebApi{
     static let GET_MATERIAL_BY_QRCODE = "\(WebApi.HOST)/api/manifactory/getMaterialByQRCode"
     static let CREATE_MATERIAL = "\(WebApi.HOST)/api/manifactory/createMaterial"
     static let CREATE_TASK = "\(WebApi.HOST)/api/manifactory/createTask"
+    
     static let GET_MATERIALS_BY_BLUETOOTHS = "\(WebApi.HOST)/api/manifactory/getMaterialsByBluetooths"
     static let GET_ITEMS_BY_USERID = "\(WebApi.HOST)/api/sellrecognizer/getItemsByOwnerId?ownerId={userId}&pageNum=1&pageSize=10000"
     static let ADD_ITEM = "\(WebApi.HOST)/api/sellrecognizer/insertItem"
+    
+    static let GET_TASK_BY_ID = "\(WebApi.HOST)/api/manifactory/getTaskById?materialId={materialId}&taskId={taskId}"
+    static let FINISH_TASK = "\(WebApi.HOST)/api/manifactory/finishTask"
+    static let UPLOAD_BEACON_LOCATION = "\(WebApi.HOST)/api/manifactory/uploadBeaconLocation"
+    
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
@@ -430,6 +437,96 @@ class WebApi{
                 
         }
     }
-    
+    static func getTaskById(materialId: String, taskId: String, completion: @escaping (_ item: Task? )->Void){
+        let str = WebApi.GET_TASK_BY_ID.replacingOccurrences(of: "{materialId}", with: materialId).replacingOccurrences(of: "{taskId}", with: taskId)
+        let url = URL(string: str)
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let item: Task? = Mapper<Task>().map(JSONObject: apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+        }
+    }
+    static func finishTask(materialId: String, taskId: String, taskName: String, userInfo: UserInfo, completion: @escaping (_ done: Bool )->Void){
+        let parameters: Parameters = [
+            "materialId": materialId,
+            "taskId": taskId,
+            "taskName": taskName,
+            "userInfo" : userInfo.toJSON()
+        ]
+        let url = URL(string: WebApi.FINISH_TASK)
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(false)
+                    return
+                }
+                if(apiModel.Status == 1){
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+        }
+    }
+    static func getProductsByBluetoothIds(bluetoothIds: [String], completion: @escaping (_ items: [Item] )->Void){
+        
+        let parameters: Parameters = [
+            "beaconUUIDs": bluetoothIds
+        ]
+        let url = URL(string: WebApi.GET_PRODUCTS_BY_BLUETOOTH_UUIDS)
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion([])
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let items : [Item] = Mapper<Item>().mapArray(JSONObject:apiModel.Data) ?? []
+                    completion(items)
+                }
+                else {
+                    completion([])
+                }
+        }
+    }
+    static func uploadBeaconLocation(itemId: String, proximityId: String, position: Position, distance: Float, userId: String, completion: @escaping (_ item: Item? )->Void){
+        let date = Date()
+        let calendar = Calendar.current
+        let seconds = calendar.component(.second, from: date)
+        if seconds % 2 != 0 {
+            return
+        }
+        let parameters: Parameters = [
+            "itemId": itemId,
+            "proximityId": proximityId,
+            "position": position.coord.toJSON(),
+            "distance": distance,
+            "userId": userId
+        ]
+        let url = URL(string: WebApi.UPLOAD_BEACON_LOCATION)
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let item : Item? = Mapper<Item>().map(JSONObject:apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+        }
+    }
 }
 

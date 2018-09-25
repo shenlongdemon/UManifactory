@@ -8,10 +8,15 @@
 
 import UIKit
 import CoreBluetooth
+import GoogleMaps
+import GooglePlaces
 protocol ChoiceProto {
     func select(device: BLEDevice)
 }
-class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate, CBPeripheralDelegate  {
+class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate, CBPeripheralDelegate, GMSMapViewDelegate   {
+    
+    @IBOutlet weak var mapUIView: UIView!
+    var mapView : GMSMapView!
     
     @IBOutlet weak var tableView: UITableView!
     let user = StoreUtil.getUser()!
@@ -24,11 +29,40 @@ class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate
     var choiceProto : ChoiceProto?
     override func viewDidLoad() {
         super.viewDidLoad()
+        initMap()
         initTable()
         let opts = [CBCentralManagerOptionShowPowerAlertKey: true]
         manager = CBCentralManager(delegate: self, queue: nil, options: opts)
         progress.stopAnimating()
         // Do any additional setup after loading the view.
+    }
+    func initMap(){
+        mapView = GMSMapView(frame: self.mapUIView.bounds)
+        mapView.isMyLocationEnabled = false
+        mapView.delegate = self
+        
+        
+        let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: mapView.camera.target.latitude, longitude: mapView.camera.target.longitude), zoom: kGMSMinZoomLevel, bearing: mapView.camera.bearing, viewingAngle:  mapView.camera.viewingAngle)
+        
+        mapView.camera = camera
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        
+        self.mapUIView.addSubview(mapView)
+        
+    }
+    func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
+        if let title = overlay.title {
+            Util.showAlert(message: title )
+        }
     }
     func initTable() {
         let cellIdentifier = BLEDeviceTableViewCell.reuseIdentifier

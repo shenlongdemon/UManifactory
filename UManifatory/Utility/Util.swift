@@ -11,10 +11,38 @@ import UIKit
 import QRCode
 import Alamofire
 import ObjectMapper
+import CoreBluetooth
+import CoreLocation
 class Util {
     
+    static func getDistance(beacon: CLBeacon, currentPosition: Position?) -> Float{
+        var distance : Float = -1.0
+        guard let pos = currentPosition else {
+            return distance
+        }
+        distance = abs(Float(beacon.accuracy) - 0.5)
+        return distance
+    }
+//    static func CLProximity2Int(proximity:CLProximity) -> Int {
+//        switch proximity {
+//        case .unknown:
+//            return -1
+//        case .far:
+//            return 1
+//        case .near:
+//            return 5
+//        case .immediate:
+//            return 20
+//        default:
+//            return -1 // Also handles .Unknown case
+//        }
+//    }
+
     static func getDate(milisecond: Int64, format: String) -> String{
-        let dateVar = Date(timeIntervalSince1970: TimeInterval(milisecond) / 1000)
+        if (milisecond == 0) {
+            return ""
+        }
+        let dateVar = Date(timeIntervalSince1970: TimeInterval(milisecond) / 1000)        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return (dateFormatter.string(from: dateVar))
@@ -156,6 +184,10 @@ class Util {
         let imageData:NSData = UIImagePNGRepresentation(img)! as NSData
         let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         return strBase64
+    }
+    static func getAppDelegate() -> AppDelegate? {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        return appDelegate;
     }
     static func getUesrInfo(completion: @escaping (_ usrInfo: UserInfo? )->Void){
         var userInfo : UserInfo = StoreUtil.getUserInfo()!

@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreBluetooth
+import GoogleMaps
+import GooglePlaces
 import SwiftyJSON
 protocol ChoiceMaterialProto {
     func selectMaterial(material: Material)
@@ -23,9 +25,11 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
     var user = StoreUtil.getUser()!
     var choiceMaterialProto : ChoiceMaterialProto?
     @IBOutlet weak var progress: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initTable()
+        initMap()
         let opts = [CBCentralManagerOptionShowPowerAlertKey: true]
         manager = CBCentralManager(delegate: self, queue: nil, options: opts)
         progress.stopAnimating()
@@ -75,8 +79,9 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
         testBle.id = "1AB3AC95-CFCE-6385-E9E9-E79EDAE8D9CF"
         self.devices.add(testBle)
         if (self.devices.count > 0){
-            self.showIndicatorDialog()
+            
             let coord = StoreUtil.getPosition()!.coord!
+            self.showIndicatorDialog()
             WebApi.getMaterialsByBluetooths(bluetooths: self.devices as! [BLEDevice], coord: coord, myId: self.user.id, completion: { (mats) in
                 self.dismissIndicatorDialog()
                 self.items.addObjects(from: mats)
@@ -167,6 +172,35 @@ class BluetoothViewController: BaseViewController ,CBCentralManagerDelegate, CBP
         }).contains(bleDevice.id) {
             self.devices.add(bleDevice)
         }
+    }
+    // MARK: Map
+    @IBOutlet weak var mapUIView: UIView!
+    var mapView : GMSMapView!
+}
+
+extension BluetoothViewController : GMSMapViewDelegate {
+    
+    func initMap(){
+        mapView = GMSMapView(frame: self.mapUIView.bounds)
+        mapView.isMyLocationEnabled = true
+        mapView.delegate = self
+        let pos = StoreUtil.getPosition()!
+        let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: pos.coord.latitude, longitude: pos.coord.longitude), zoom: kGMSMaxZoomLevel, bearing: mapView.camera.bearing, viewingAngle:  mapView.camera.viewingAngle)
+        
+        mapView.camera = camera
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        
+        self.mapUIView.addSubview(mapView)
+        
     }
     
 }

@@ -13,25 +13,22 @@ import CoreLocation
 import DropDown
 import GoogleMaps
 import GooglePlaces
+
+protocol IBeaconAction {
+    func onReceive(beacon: CLBeacon)
+}
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var locationManager = CLLocationManager()
-    
+    var proximityUUIDs: [String] = []
+    var beaconProto: IBeaconAction?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyCaUN_gPVbw-hTZq6qivI1pHlvQ_7SFT8k")
         GMSPlacesClient.provideAPIKey("AIzaSyCaUN_gPVbw-hTZq6qivI1pHlvQ_7SFT8k")
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestAlwaysAuthorization()
-        if (CLLocationManager.locationServicesEnabled())
-        {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.requestAlwaysAuthorization()
-            locationManager.startUpdatingLocation()
-        }
+        self.initLocationManager()
         DropDown.startListeningToKeyboard()
         IQKeyboardManager.shared.enable = true
         return true
@@ -105,6 +102,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             }
         }
     }
+    
+}
+extension AppDelegate :CLLocationManagerDelegate {
+    func initLocationManager() {
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locationObj = locations.last!
         let coordinate = locationObj.coordinate
@@ -119,6 +130,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         StoreUtil.savePosition(position: position);
     }
-
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    startScanning()
+                }
+            }
+        }
+    }
+    
+    func startScanning() {
+        // let uuid = UUID(uuidString: "\(("FDA50693-A4E2-4FB1-AFCF-C6EB07647825").uppercased())")!
+        let uuid = UUID(uuidString: "\(("FDA50123-A4E2-4FB1-AFCF-C6EB07647825").uppercased())")!
+        // let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: 1, minor: 1, identifier: "TheBreedBusiness")
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "omid")
+        locationManager.startMonitoring(for: beaconRegion)
+        locationManager.startRangingBeacons(in: beaconRegion)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        for(index, beacon) in beacons.enumerated() {
+            if beacon.proximity != .unknown {
+                self.beaconProto?.onReceive(beacon: beacon)
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        region.identifier
+    }
+    func updateDistance(_ distance: CLProximity) {
+        var a = 10
+    }
+    func track(bleDevice: BLEDevice) {
+        let proUUID = bleDevice.proximityUUID.uppercased()
+        
+        if !self.proximityUUIDs.contains(proUUID) && proUUID != "" {
+            self.proximityUUIDs.append(proUUID)
+            let uuid = UUID(uuidString: proUUID)!
+            let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: bleDevice.name)
+            locationManager.startMonitoring(for: beaconRegion)
+            locationManager.startRangingBeacons(in: beaconRegion)
+        }
+    }
+    func stopScanBeacon(){
+    }
 }
-

@@ -7,21 +7,30 @@
 //
 
 import UIKit
-
+import UICircularProgressRing
 class MaterialViewController : BaseViewController {
+    
+    @IBOutlet weak var imgImage: UIImageView!
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbDate: UILabel!
+    @IBOutlet weak var viewPercent: UICircularProgressRing!
+    
     var materialId : String!
     var material : Material!
     var items: NSMutableArray = NSMutableArray()
-    var collectionAdapter:CollectionAdapter!
+    var tableAdapter:TableAdapter!
     
     @IBOutlet weak var viewDescription: UIView!
     
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         self.viewDescription.isHidden = true
         super.viewDidLoad()
+        viewPercent.maxValue = 100
         initCollection()
+        
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -41,44 +50,76 @@ class MaterialViewController : BaseViewController {
     
     func initCollection() {
         let user = StoreUtil.getUser()!
-        let cellIdentifier = TaskCollectionViewCell.reuseIdentifier
+        let cellIdentifier = BlockStatusTableViewCell.reuseIdentifier
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
-        self.collectionView.register(cellNib, forCellWithReuseIdentifier: cellIdentifier)
+        self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
         
-        self.collectionAdapter = CollectionAdapter(items:self.items, cellIdentifier: cellIdentifier,itemPerRow: 2, cellHeight : MaterialTableViewCell.height)
-        
-        self.collectionAdapter.filter { (tsk) -> Bool in
+        self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : BlockStatusTableViewCell.height)
+        self.tableAdapter.filter { (tsk) -> Bool in
+            if (self.material.ownerId == user.id){
+                return true;
+            }
             let task = tsk as! Task
             let isContains = task.workers.contains(where: { (wk) -> Bool in
                 return wk.owner.id == user.id
             })
-            return isContains || self.material.ownerId == user.id
+            return isContains
         }
-        self.collectionAdapter.onDidSelectRowAt { (task) in
-            if self.material.isIAmOwner() {
-                self.performSegue(withIdentifier: Segue.material_to_assignworker, sender: task.getId())
+        self.tableAdapter.onDidSelectRowAt { (task) in
+            let t = task as! Task
+            if t.isGenCode() {
+                self.performSegue(withIdentifier: Segue.task_to_gencode, sender: t.id)
+            }
+            else if self.material.isIAmOwner() {
+                self.performSegue(withIdentifier: Segue.material_to_taskdetail, sender: t)
             }
         }
-        
-        self.collectionView.delegate = self.collectionAdapter
-        self.collectionView.dataSource = self.collectionAdapter
+        self.tableView.delegate = self.tableAdapter
+        self.tableView.dataSource = self.tableAdapter
         
     }
     func loadData()  {
-        self.showIndicatorDialog()
+        //self.showIndicatorDialog()
         WebApi.getMaterialById(id: self.materialId) { (material) in
             guard let mat = material else {
                 Util.showAlert(message: "Material is not valid!")
                 return
             }
             self.material = mat
+            let percent = self.material.getStatusPercent()
+            self.viewPercent.startProgress(to: UICircularProgressRing.ProgressValue(percent), duration: 2.0) {
+                print("Done animating!")
+                // Do anything your heart desires...
+            }
+
+            self.imgImage.image = Util.getImage(data64: self.material.image)
+            self.lbName.text = self.material.name.uppercased()
+            self.lbDate.text = Util.getDate(milisecond: self.material.createdAt, format: Constant.Date_Format)
             self.items.removeAllObjects()
             self.items.addObjects(from: self.material.tasks)
-            self.collectionView.reloadData()
+            self.addGenCodeItem()
+            self.tableView.reloadData()
             if self.items.count == 0 {
                 self.viewDescription.isHidden = false
             }
-            self.dismissIndicatorDialog()
+            //self.dismissIndicatorDialog()
+        }
+    }
+    func addGenCodeItem(){
+        let tasks = self.material.tasks;
+        if (tasks.count > 0 ){
+            var lastTaskFinishded = -1;
+            for (index, task) in tasks.enumerated() {
+                if (task.isDone()){
+                    lastTaskFinishded = index;
+                }
+            }
+            if (lastTaskFinishded > -1){
+                let genCode : Task = Task()
+                genCode.id = "Gencode_\(self.material.code)"
+                genCode.name = "Gen. QR Code"
+                self.items.insert(genCode, at: lastTaskFinishded + 1)
+            }
         }
     }
     override func didReceiveMemoryWarning() {
@@ -109,6 +150,16 @@ class MaterialViewController : BaseViewController {
         else if segue.identifier == Segue.material_to_detail {
             let VC = segue.destination as! MaterialDetailViewController
             VC.initItem(materialId: self.materialId)
+        }
+        else if segue.identifier == Segue.material_to_taskdetail {
+            let task = sender as! Task
+            let VC = segue.destination as! TaskDetailViewController
+            VC.initItem(task: task)
+        }
+        else if segue.identifier == Segue.task_to_gencode {
+            let code = sender as! String
+            let VC = segue.destination as! TaskGenCodeViewController
+            VC.initItem(item: code)
         }
     }
     

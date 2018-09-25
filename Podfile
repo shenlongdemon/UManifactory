@@ -17,6 +17,7 @@ target 'UManifatory' do
   pod 'FileBrowser', '~> 1.0'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'UICircularProgressRing'
   # Pods for UManifatory
 
 end

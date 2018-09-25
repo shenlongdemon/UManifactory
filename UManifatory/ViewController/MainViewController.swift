@@ -41,7 +41,7 @@ class MainViewController: BaseQRCodeReaderViewController {
         self.startScan()
     }
     @IBAction func gotoBluetoothView(_ sender: Any) {
-        self.performSegue(withIdentifier: Segue.main_to_bluetooth, sender: self)
+        self.performSegue(withIdentifier: Segue.main_to_bluetoothproduct_around, sender: self)
     }
     
     @IBAction func gotoProfile(_ sender: Any) {
@@ -53,9 +53,7 @@ class MainViewController: BaseQRCodeReaderViewController {
             WebApi.getMaterialByQRCode(qrcode: qrCode, completion: { (mat) in
                 self.dismissIndicatorDialog()
                 if let material = mat {
-                    
-                    self.handle(material: material, qrcode: qrCode)
-                    
+                    self.handle(material: material, qrcode: qrCode)                    
                 }
             })
         }
@@ -68,9 +66,7 @@ class MainViewController: BaseQRCodeReaderViewController {
         if material.isIAmOwner() {
             self.performSegue(withIdentifier: Segue.main_to_material, sender: material)
         }
-        else {
-           
-            
+        else {            
             Util.showAlert(message: "The code is invalid!!!")
         }
     }

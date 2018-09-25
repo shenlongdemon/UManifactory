@@ -12,8 +12,9 @@ import ObjectMapper
 class BLEDevice: IObject, Mappable  {
     var name: String = ""
     var localName : String = ""
+    var proximityUUID : String = ""
     var ownerId : String = ""
-    var coord : BLECoord!
+    var coord : BLECoord!    
     override init() {
         super.init()
     }
@@ -28,6 +29,7 @@ class BLEDevice: IObject, Mappable  {
         self.id     <- map["id"]
         self.name     <- map["name"]
         self.localName   <- map["localName"]
+        self.proximityUUID   <- map["proximityUUID"]
         self.coord     <- map["coord"]
         self.ownerId     <- map["ownerId"]
     }

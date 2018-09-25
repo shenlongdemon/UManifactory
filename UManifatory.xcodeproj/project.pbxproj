@@ -28,6 +28,19 @@
 		3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA65213B147000B5140F /* BaseButton.swift */; };
 		3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA66213B147000B5140F /* BaseImage.swift */; };
 		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
+		3B9B4AEB214E8FDF00E787C6 /* BlockStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */; };
+		3B9B4AEC214E8FDF00E787C6 /* BlockStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */; };
+		3B9B4AEE214EB6B800E787C6 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */; };
+		3B9B4AF1214ED11700E787C6 /* PDTFilesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AEF214ED11700E787C6 /* PDTFilesTableViewCell.swift */; };
+		3B9B4AF2214ED11700E787C6 /* PDTFilesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B9B4AF0214ED11700E787C6 /* PDTFilesTableViewCell.xib */; };
+		3B9B4AF42151B19200E787C6 /* TaskGenCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AF32151B19200E787C6 /* TaskGenCodeViewController.swift */; };
+		3B9B4AF72151BCAC00E787C6 /* ItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AF62151BCAC00E787C6 /* ItemInfoViewController.swift */; };
+		3B9B4AF92151BCC300E787C6 /* ItemHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AF82151BCC300E787C6 /* ItemHistoryViewController.swift */; };
+		3B9B4AFB2151BCCF00E787C6 /* ItemReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AFA2151BCCF00E787C6 /* ItemReviewsViewController.swift */; };
+		3B9B4AFD2151BCF300E787C6 /* ItemAttachFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AFC2151BCF300E787C6 /* ItemAttachFilesViewController.swift */; };
+		3B9B4AFF2151CC8800E787C6 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AFE2151CC8800E787C6 /* AppUtil.swift */; };
+		3B9B4B02215624CE00E787C6 /* BaseBluetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4B01215624CC00E787C6 /* BaseBluetoothViewController.swift */; };
+		3B9B4B04215625D300E787C6 /* BluetoothProductAroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4B03215625D300E787C6 /* BluetoothProductAroundViewController.swift */; };
 		3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA7212464C90016BE5F /* AppDelegate.swift */; };
 		3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF76FA9212464C90016BE5F /* ViewController.swift */; };
 		3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF76FAB212464C90016BE5F /* Main.storyboard */; };
@@ -93,6 +106,19 @@
 		3B5BEA65213B147000B5140F /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		3B5BEA66213B147000B5140F /* BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImage.swift; sourceTree = "<group>"; };
 		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
+		3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStatusTableViewCell.swift; sourceTree = "<group>"; };
+		3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockStatusTableViewCell.xib; sourceTree = "<group>"; };
+		3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		3B9B4AEF214ED11700E787C6 /* PDTFilesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDTFilesTableViewCell.swift; sourceTree = "<group>"; };
+		3B9B4AF0214ED11700E787C6 /* PDTFilesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDTFilesTableViewCell.xib; sourceTree = "<group>"; };
+		3B9B4AF32151B19200E787C6 /* TaskGenCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGenCodeViewController.swift; sourceTree = "<group>"; };
+		3B9B4AF62151BCAC00E787C6 /* ItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoViewController.swift; sourceTree = "<group>"; };
+		3B9B4AF82151BCC300E787C6 /* ItemHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHistoryViewController.swift; sourceTree = "<group>"; };
+		3B9B4AFA2151BCCF00E787C6 /* ItemReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReviewsViewController.swift; sourceTree = "<group>"; };
+		3B9B4AFC2151BCF300E787C6 /* ItemAttachFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAttachFilesViewController.swift; sourceTree = "<group>"; };
+		3B9B4AFE2151CC8800E787C6 /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		3B9B4B01215624CC00E787C6 /* BaseBluetoothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBluetoothViewController.swift; sourceTree = "<group>"; };
+		3B9B4B03215625D300E787C6 /* BluetoothProductAroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothProductAroundViewController.swift; sourceTree = "<group>"; };
 		3BF76FA4212464C90016BE5F /* UManifatory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UManifatory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF76FA7212464C90016BE5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BF76FA9212464C90016BE5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +192,25 @@
 			path = CustomUI;
 			sourceTree = "<group>";
 		};
+		3B9B4AF52151BC8800E787C6 /* ItemTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				3B9B4AF62151BCAC00E787C6 /* ItemInfoViewController.swift */,
+				3B9B4AF82151BCC300E787C6 /* ItemHistoryViewController.swift */,
+				3B9B4AFA2151BCCF00E787C6 /* ItemReviewsViewController.swift */,
+				3B9B4AFC2151BCF300E787C6 /* ItemAttachFilesViewController.swift */,
+			);
+			path = ItemTabbar;
+			sourceTree = "<group>";
+		};
+		3B9B4B00215624BD00E787C6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3B9B4B01215624CC00E787C6 /* BaseBluetoothViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		3BF76F9B212464C90016BE5F = {
 			isa = PBXGroup;
 			children = (
@@ -210,12 +255,15 @@
 		3BF76FBC212465D20016BE5F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3B9B4B00215624BD00E787C6 /* Base */,
+				3B9B4AF52151BC8800E787C6 /* ItemTabbar */,
 				3B59585C2134A71A00E74838 /* ActivityDetailViewController.swift */,
 				3BF770072128672E0016BE5F /* ActivityViewController.swift */,
 				3BF7700921286FD80016BE5F /* AssignWotkerViewController.swift */,
 				3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */,
 				3BF76FBF212466350016BE5F /* BaseViewController.swift */,
 				3B595841212DFE0D00E74838 /* BluetoothDeviceViewController.swift */,
+				3B9B4B03215625D300E787C6 /* BluetoothProductAroundViewController.swift */,
 				3BF76FC421246DA20016BE5F /* BluetoothViewController.swift */,
 				3B5958552130BBB500E74838 /* CreateIProductViewController.swift */,
 				3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */,
@@ -226,6 +274,8 @@
 				3BF76FE921247A3B0016BE5F /* MyMaterialsViewController.swift */,
 				3B59584F2130B7A400E74838 /* ProductsViewController.swift */,
 				3B5958592134456D00E74838 /* ProfileViewController.swift */,
+				3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */,
+				3B9B4AF32151B19200E787C6 /* TaskGenCodeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -239,6 +289,7 @@
 				3BF76FD1212470000016BE5F /* WebApi.swift */,
 				3BF76FC621246F8C0016BE5F /* TypeExtention.swift */,
 				3BF76FC2212466DC0016BE5F /* Common.swift */,
+				3B9B4AFE2151CC8800E787C6 /* AppUtil.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -285,6 +336,10 @@
 				3BF77004212860370016BE5F /* TaskCollectionViewCell.xib */,
 				3BF7700B212883130016BE5F /* WorkerCollectionViewCell.swift */,
 				3BF7700C212883130016BE5F /* WorkerCollectionViewCell.xib */,
+				3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */,
+				3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */,
+				3B9B4AEF214ED11700E787C6 /* PDTFilesTableViewCell.swift */,
+				3B9B4AF0214ED11700E787C6 /* PDTFilesTableViewCell.xib */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
@@ -393,6 +448,8 @@
 				3B59583E212DDC3900E74838 /* ActivityTableViewCell.xib in Resources */,
 				3BF77006212860370016BE5F /* TaskCollectionViewCell.xib in Resources */,
 				3BF76FB5212464C90016BE5F /* LaunchScreen.storyboard in Resources */,
+				3B9B4AEC214E8FDF00E787C6 /* BlockStatusTableViewCell.xib in Resources */,
+				3B9B4AF2214ED11700E787C6 /* PDTFilesTableViewCell.xib in Resources */,
 				3BF76FB2212464C90016BE5F /* Assets.xcassets in Resources */,
 				3B59584E2130B74400E74838 /* ProductTableViewCell.xib in Resources */,
 				3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */,
@@ -459,6 +516,7 @@
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -474,6 +532,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -489,21 +548,27 @@
 			files = (
 				3B595848212EEF0900E74838 /* UserInfo.swift in Sources */,
 				3BF76FE82124786B0016BE5F /* MaterialViewController.swift in Sources */,
+				3B9B4AFD2151BCF300E787C6 /* ItemAttachFilesViewController.swift in Sources */,
 				3BF76FC0212466350016BE5F /* BaseViewController.swift in Sources */,
+				3B9B4AEE214EB6B800E787C6 /* TaskDetailViewController.swift in Sources */,
+				3B9B4AF1214ED11700E787C6 /* PDTFilesTableViewCell.swift in Sources */,
 				3BF770082128672E0016BE5F /* ActivityViewController.swift in Sources */,
 				3B5958522130B8FD00E74838 /* Item.swift in Sources */,
 				3BF76FD021246FCC0016BE5F /* BLEDevice.swift in Sources */,
 				3BF77005212860370016BE5F /* TaskCollectionViewCell.swift in Sources */,
 				3BF76FB0212464C90016BE5F /* UManifatory.xcdatamodeld in Sources */,
 				3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */,
+				3B9B4AF92151BCC300E787C6 /* ItemHistoryViewController.swift in Sources */,
 				3B59584A212F122000E74838 /* CreateTaskViewController.swift in Sources */,
 				3BF76FC521246DA20016BE5F /* BluetoothViewController.swift in Sources */,
 				3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */,
+				3B9B4B04215625D300E787C6 /* BluetoothProductAroundViewController.swift in Sources */,
 				3BF76FFA212809E20016BE5F /* Task.swift in Sources */,
 				3BF76FDE2124718C0016BE5F /* TableAdapter.swift in Sources */,
 				3BF7700221281FC20016BE5F /* CollectionCell.swift in Sources */,
 				3BF76FFC21280AB90016BE5F /* Worker.swift in Sources */,
 				3BF76FF72127E1E00016BE5F /* MaterialTableViewCell.swift in Sources */,
+				3B9B4AF72151BCAC00E787C6 /* ItemInfoViewController.swift in Sources */,
 				3BF76FD6212470010016BE5F /* StoreUtil.swift in Sources */,
 				3B5958562130BBB500E74838 /* CreateIProductViewController.swift in Sources */,
 				3B59584D2130B74400E74838 /* ProductTableViewCell.swift in Sources */,
@@ -511,6 +576,7 @@
 				3BF76FEA21247A3B0016BE5F /* MyMaterialsViewController.swift in Sources */,
 				3B595845212EE4A600E74838 /* BLEDeviceTableViewCell.swift in Sources */,
 				3BF76FF42127B5A70016BE5F /* LoginViewController.swift in Sources */,
+				3B9B4AFF2151CC8800E787C6 /* AppUtil.swift in Sources */,
 				3B5958502130B7A400E74838 /* ProductsViewController.swift in Sources */,
 				3BF7700A21286FD80016BE5F /* AssignWotkerViewController.swift in Sources */,
 				3BF76FF02127B1CD0016BE5F /* Activity.swift in Sources */,
@@ -520,6 +586,7 @@
 				3B595842212DFE0D00E74838 /* BluetoothDeviceViewController.swift in Sources */,
 				3BF76FD4212470010016BE5F /* WebApi.swift in Sources */,
 				3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */,
+				3B9B4AEB214E8FDF00E787C6 /* BlockStatusTableViewCell.swift in Sources */,
 				3BF76FBE212465F20016BE5F /* MainViewController.swift in Sources */,
 				3BF76FF22127B28B0016BE5F /* Util.swift in Sources */,
 				3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */,
@@ -529,11 +596,14 @@
 				3B59583D212DDC3900E74838 /* ActivityTableViewCell.swift in Sources */,
 				3B5958582133625C00E74838 /* MaterialDetailViewController.swift in Sources */,
 				3B59585A2134456D00E74838 /* ProfileViewController.swift in Sources */,
+				3B9B4B02215624CE00E787C6 /* BaseBluetoothViewController.swift in Sources */,
 				3BF7700D212883130016BE5F /* WorkerCollectionViewCell.swift in Sources */,
+				3B9B4AF42151B19200E787C6 /* TaskGenCodeViewController.swift in Sources */,
 				3BF76FE6212472D30016BE5F /* Material.swift in Sources */,
 				3BF76FCF21246FCC0016BE5F /* User.swift in Sources */,
 				3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */,
 				3BF7700021281F190016BE5F /* CollectionAdapter.swift in Sources */,
+				3B9B4AFB2151BCCF00E787C6 /* ItemReviewsViewController.swift in Sources */,
 				3B595840212DFB1E00E74838 /* CreateMaterialViewController.swift in Sources */,
 				3B5958542130B9D300E74838 /* Category.swift in Sources */,
 			);

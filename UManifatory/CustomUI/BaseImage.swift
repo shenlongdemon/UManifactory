@@ -22,6 +22,7 @@ class BaseImage: UIImageView {
     @IBInspectable var cornerRadius: CGFloat = 0{
         didSet{
             self.layer.cornerRadius = cornerRadius
+            self.clipsToBounds = self.layer.cornerRadius > 0
         }
     }
     

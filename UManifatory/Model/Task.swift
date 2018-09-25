@@ -39,14 +39,13 @@ class Task: IObject, Mappable {
         self.name     <- map["name"]
         self.image   <- map["image"]
         self.code   <- map["code"]
-        self.workers   <- map["workers"]
-        
+        self.materialId   <- map["materialId"]
+        self.materialOwnerId   <- map["materialOwnerId"]
+        self.workers   <- map["workers"]        
         for (_, worker) in self.workers.enumerated() {
             for (_, activity) in worker.activities.enumerated() {
                 activity.logoTask = self.image
-                
             }
-            
         }
     }
     
@@ -63,6 +62,100 @@ class Task: IObject, Mappable {
             return wk.owner.id == id
         }
         return worker
+    }
+    func getActivities() -> [Activity] {
+        let activities : [Activity] = self.workers.flatMap { (worker) -> [Activity] in
+            return worker.activities
+            } as [Activity]
+        return activities;
+    }
+    func getLastActivity() -> Activity? {
+        let activities = self.getActivities()
+        let lastActivity : Activity? = activities.sorted { (a1, a2) -> Bool in
+                return a1.time < a2.time
+            }.first
+        return lastActivity
+    }
+    func getStatus() -> Enums.TaskStatus{
+        var status = Enums.TaskStatus.not_start
+        let dones = self.workers.filter { (worker) -> Bool in
+            return worker.status == Enums.TaskStatus.done
+            }.count
+        let startings = self.workers.filter { (worker) -> Bool in
+            return worker.status == Enums.TaskStatus.starting
+            }.count
+        if self.workers.count == 0 {
+            status = Enums.TaskStatus.not_start
+        }
+        else if dones == self.workers.count {
+            status = Enums.TaskStatus.done
+        }
+        else if startings > 0 {
+            status = Enums.TaskStatus.starting
+        }
+        return status
+    }
+    func getStatusPercent() -> Float {
+        
+        if self.workers.count == 0 {
+            return 0.0;
+        }
+        
+        let doneWorkers = self.workers.filter { (worker) -> Bool in
+            return worker.status == Enums.TaskStatus.done
+            }.count
+        
+        let startingWorkers = self.workers.filter { (worker) -> Bool in
+            return worker.status == Enums.TaskStatus.starting
+            }.count
+        
+        let percent = Float(Float(doneWorkers)  + (Float(startingWorkers) * 0.5)) / Float(self.workers.count) * 100.0
+        return percent
+    }
+    func isGenCode() -> Bool {
+        return self.id.hasPrefix("Gencode")
+    }
+    func isDone() -> Bool {
+        if self.workers.count == 0 {
+            return false;
+        }
+        return self.workers.filter { (worker) -> Bool in
+            return worker.status == Enums.TaskStatus.done
+            }.count == self.workers.count
+    }
+    func getActivityImageLinks() -> [String] {
+        
+        let images: [String] = self.getActivities().flatMap { (activity) -> [String] in
+            return activity.images
+        }
+        return images
+    }
+    func getPDFFiles() -> [IObject] {
+        let files: [IObject] = self.getActivities().flatMap { (activity) -> [IObject] in
+            return activity.files?.map({ (f) -> IObject in
+                let file: IObject = IObject()
+                file.id = f
+                return file
+            }) ?? []
+        }
+        return files
+    }
+    func getActivityImages() -> [String] {
+        return self.workers.flatMap({ (worker) -> [String] in
+            return worker.getActivityImages()
+        })        
+    }
+    func getActivityDescriptions() -> String{
+        let descriptions = self.workers.flatMap { (worker) -> [String] in
+            return worker.activities.map({ (activity) -> String in
+                return activity.description
+            })
+        }
+        return descriptions.joined(separator: "\n")
+    }
+    func getAllDescription() -> String {
+        let str = "\n\nActivities:\n\(self.getActivityDescriptions())"
+        return str
     }
     
 }

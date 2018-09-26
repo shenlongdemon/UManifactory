@@ -40,6 +40,7 @@ class BaseBluetoothViewController: BaseViewController ,CBCentralManagerDelegate,
     }
     func scanBLEDevice(){
         self.devices.removeAllObjects()
+        self.onStartScanBluetooths()
         manager?.scanForPeripherals(withServices: nil, options: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.stopScanForBLEDevice()
@@ -47,6 +48,9 @@ class BaseBluetoothViewController: BaseViewController ,CBCentralManagerDelegate,
         }
     }
     func onReceivedBluetooths(){
+        
+    }
+    func onStartScanBluetooths(){
         
     }
     func getBLEDevices() -> [BLEDevice]{

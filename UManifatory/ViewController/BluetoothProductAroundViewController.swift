@@ -12,6 +12,7 @@ import GoogleMaps
 import GooglePlaces
 import SwiftyJSON
 class BluetoothProductAroundViewController: BaseBluetoothViewController {
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     // begin-table
     @IBOutlet weak var tableView: UITableView!
     var tableAdapter : TableAdapter!
@@ -36,14 +37,17 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func onStartScanBluetooths() {
+        self.progress.startAnimating()
+    }
     override func onReceivedBluetooths() {
-        
+        self.progress.stopAnimating()
         let devices = self.getBLEDevices()
         // because they have no proximityUUID - it means because we just scan bluetooth
         let bluetoothIds = devices.map { (ble) -> String in
             return ble.id
         }
+        
         WebApi.getProductsByBluetoothIds(bluetoothIds: bluetoothIds) { (items) in
             self.items.removeAllObjects()
             self.items.addObjects(from: items)
@@ -88,6 +92,7 @@ extension BluetoothProductAroundViewController: IBeaconAction {
             self.calculateBeaconPosition(beacon: beacon)
         }
     }
+    
     func calculateBeaconPosition(beacon: CLBeacon){
         let proximityId: String = beacon.proximityUUID.uuidString
         let distance = Util.getDistance(beacon: beacon, currentPosition: StoreUtil.getPosition())

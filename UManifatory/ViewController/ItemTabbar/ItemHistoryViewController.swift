@@ -80,10 +80,12 @@ class ItemHistoryViewController: BaseViewController {
     
     func showAllHistories()  {
         self.items.removeAllObjects()
+        guard let location = self.item.location else {
+            return
+        }
         
         
-        
-        let packaging = ItemHistory(location: self.item.location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage())
+        let packaging = ItemHistory(location: location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage())
         self.items.add(packaging)
         
         self.tableView.reloadData()

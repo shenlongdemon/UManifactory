@@ -2249,22 +2249,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kvd-HD-dtH">
+                                <rect key="frame" x="177" y="311.5" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hgI-yw-y7M" firstAttribute="height" secondItem="bE6-3H-wX7" secondAttribute="height" multiplier="1:2" id="1QM-Rg-zEG"/>
                             <constraint firstItem="Iy9-Wa-Ahh" firstAttribute="leading" secondItem="SzQ-A8-oNL" secondAttribute="leading" id="CtY-Bg-b1r"/>
+                            <constraint firstItem="kvd-HD-dtH" firstAttribute="centerX" secondItem="SzQ-A8-oNL" secondAttribute="centerX" id="PrF-e2-mns"/>
                             <constraint firstItem="SzQ-A8-oNL" firstAttribute="bottom" secondItem="Iy9-Wa-Ahh" secondAttribute="bottom" id="THC-jZ-mVM"/>
                             <constraint firstItem="Iy9-Wa-Ahh" firstAttribute="top" secondItem="hgI-yw-y7M" secondAttribute="bottom" id="Zg0-Dm-rP8"/>
                             <constraint firstItem="hgI-yw-y7M" firstAttribute="trailing" secondItem="SzQ-A8-oNL" secondAttribute="trailing" id="dDe-bX-o6g"/>
                             <constraint firstItem="hgI-yw-y7M" firstAttribute="leading" secondItem="SzQ-A8-oNL" secondAttribute="leading" id="kW4-OD-Mig"/>
                             <constraint firstItem="hgI-yw-y7M" firstAttribute="top" secondItem="SzQ-A8-oNL" secondAttribute="top" id="nUF-wJ-Y0N"/>
                             <constraint firstItem="SzQ-A8-oNL" firstAttribute="trailing" secondItem="Iy9-Wa-Ahh" secondAttribute="trailing" id="txX-P2-jkq"/>
+                            <constraint firstItem="kvd-HD-dtH" firstAttribute="top" secondItem="Iy9-Wa-Ahh" secondAttribute="top" constant="10" id="wwx-HJ-DqP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SzQ-A8-oNL"/>
                     </view>
                     <connections>
                         <outlet property="mapUIView" destination="hgI-yw-y7M" id="sXd-eO-zZf"/>
+                        <outlet property="progress" destination="kvd-HD-dtH" id="MCz-tD-5o6"/>
                         <outlet property="tableView" destination="Iy9-Wa-Ahh" id="4yy-Ec-TXM"/>
                     </connections>
                 </viewController>
@@ -2465,7 +2472,7 @@
         <segue reference="cE1-ua-zmV"/>
         <segue reference="aaf-ZB-iKM"/>
         <segue reference="4lS-Bx-qS9"/>
-        <segue reference="g7j-6W-wa5"/>
+        <segue reference="Wed-kk-IOe"/>
         <segue reference="DN1-3I-exU"/>
         <segue reference="sPP-2h-Qy6"/>
         <segue reference="3mp-WO-5QL"/>

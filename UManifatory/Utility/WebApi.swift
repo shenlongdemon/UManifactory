@@ -18,8 +18,8 @@ import Foundation
 import Alamofire
 import ObjectMapper
 class WebApi{
-    //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.2:5000"
+    static let HOST = "http://96.93.123.233:5000"
+    //static let HOST = "http://192.168.1.2:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
@@ -107,9 +107,14 @@ class WebApi{
             DispatchQueue.global().async {
                 let u = URL(string:  url)
                 let data = try? Data(contentsOf: u!)
-                DispatchQueue.main.async { () -> Void in
-                    
-                    completion(UIImage(data: data!))
+                if let d = data {
+                    DispatchQueue.main.async { () -> Void in
+                        
+                        completion(UIImage(data: d))
+                    }
+                }
+                else {
+                    completion(nil)
                 }
             }
         }

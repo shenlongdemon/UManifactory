@@ -50,10 +50,20 @@ class MainViewController: BaseQRCodeReaderViewController {
     override func processQRCode(qrCode: String) {
         if self.isScanning == false {
             self.showIndicatorDialog()
-            WebApi.getMaterialByQRCode(qrcode: qrCode, completion: { (mat) in
+            WebApi.getObjectByQRCode(qrcode: qrCode, completion: { (result) in
                 self.dismissIndicatorDialog()
-                if let material = mat {
-                    self.handle(material: material, qrcode: qrCode)                    
+                
+                if let resultItem = result {
+                    if resultItem.type == Enums.ScanQRItemType.material {
+                        if let material: Material = (resultItem.item as? NSDictionary)?.cast(){
+                            self.handle(material: material, qrcode: qrCode)
+                        }
+                    }
+                    else if resultItem.type == Enums.ScanQRItemType.product {
+                        if let product: Item = (resultItem.item as? NSDictionary)?.cast(){
+                            self.handleForItem(item: product, qrcode: qrCode)
+                        }
+                    }
                 }
             })
         }
@@ -91,7 +101,9 @@ class MainViewController: BaseQRCodeReaderViewController {
             }            
         }
     }
-    
+    func handleForItem(item: Item, qrcode: String){
+        self.performSegue(withIdentifier: Segue.main_scan_to_product, sender: item)
+    }
     @IBAction func gotoMyMaterials(_ sender: Any) {
         self.performSegue(withIdentifier: Segue.main_to_mymaterial, sender: nil)
     }
@@ -114,6 +126,11 @@ class MainViewController: BaseQRCodeReaderViewController {
         }
         else if segue.identifier == Segue.main_to_mymaterial {
             let _ = segue.destination as! MyMaterialsViewController
+        }
+        else if segue.identifier == Segue.main_scan_to_product {
+            let item =  sender as! Item
+            let VC = segue.destination as! ProductTabBarViewController
+            VC.initItem(item: item)         
         }
     }
     

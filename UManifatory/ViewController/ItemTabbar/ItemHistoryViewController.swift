@@ -7,21 +7,117 @@
 //
 
 import UIKit
-
+import GoogleMaps
+import GooglePlaces
 class ItemHistoryViewController: BaseViewController {
 
+    @IBOutlet weak var mapUIView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    var tableAdapter:TableAdapter!
+    var items: NSMutableArray = NSMutableArray()
+    var item : Item!    
+    var mapView : GMSMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initMap()
+        initTable()
+        loadHistoryData()
         // Do any additional setup after loading the view.
     }
-
+    func initMap(){
+        mapView = GMSMapView(frame: self.mapUIView.bounds)
+        mapView.isMyLocationEnabled = false
+        
+        let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: mapView.camera.target.latitude, longitude: mapView.camera.target.longitude), zoom: kGMSMinZoomLevel, bearing: mapView.camera.bearing, viewingAngle:  mapView.camera.viewingAngle)
+        
+        mapView.camera = camera
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        
+        self.mapUIView.addSubview(mapView)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func initItem(item:Item){
+        self.item = item
+    }
+    func initTable() {
+        let cellIdentifier = ItemHistoryTableViewCell.reuseIdentifier
+        let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
+        self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        
+        self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : ItemHistoryTableViewCell.height)
+        
+        self.tableAdapter.onDidSelectRowAt { (item) in
+            
+        }
+        self.tableView.delegate = self.tableAdapter
+        self.tableView.dataSource = self.tableAdapter
+        
+    }
+    func loadHistoryData()  {
+        //self.showIndicatorDialog()
+        WebApi.getItemById(id: self.item.id) { (i) in
+            guard let it = i else {
+                Util.showAlert(message: "Product is not valid!")
+                return
+            }
+            self.item = it
+            self.showAllHistories()
+        }
+    }
     
-
+    func showAllHistories()  {
+        self.items.removeAllObjects()
+        
+        
+        
+        let packaging = ItemHistory(location: self.item.location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage())
+        self.items.add(packaging)
+        
+        self.tableView.reloadData()
+        
+        var bounds = GMSCoordinateBounds()
+        let path = GMSMutablePath()
+        for (_, item) in self.items.enumerated() {
+            let history = item as! ItemHistory
+            let coord = history.location
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
+            
+            bounds = bounds.includingCoordinate(marker.position)
+            marker.icon =  #imageLiteral(resourceName: "white_marker")
+            marker.map = self.mapView
+            
+            path.add(marker.position)
+        }
+        
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 1.0
+        polyline.geodesic = true
+        polyline.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        polyline.map = self.mapView
+        
+        if self.items.count > 0 {
+            mapView.animate(with: GMSCameraUpdate.fit(bounds, with: UIEdgeInsetsMake(50.0 , 50.0 ,50.0 ,50.0)))
+        }
+        else {
+            
+            mapView.animate(with: GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude: packaging.location.latitude, longitude: packaging.location.longitude), zoom: kGMSMinZoomLevel))
+        }
+        
+    }
     /*
     // MARK: - Navigation
 

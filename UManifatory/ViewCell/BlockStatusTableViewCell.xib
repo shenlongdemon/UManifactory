@@ -25,13 +25,13 @@
                         <rect key="frame" x="64" y="3" width="361" height="70.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhl-Rd-hwl">
-                                <rect key="frame" x="20" y="25.5" width="176.5" height="20.5"/>
+                                <rect key="frame" x="20" y="25.5" width="210.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aa7-vw-2lz">
-                                <rect key="frame" x="206.5" y="0.0" width="154.5" height="71"/>
+                                <rect key="frame" x="240.5" y="0.0" width="120.5" height="71"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nci-Pr-VaH">
                                         <rect key="frame" x="0.5" y="24" width="23.5" height="23"/>
@@ -40,13 +40,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017/04/01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXM-Z2-Cm9">
-                                        <rect key="frame" x="24" y="15" width="130.5" height="18"/>
+                                        <rect key="frame" x="24" y="15" width="96.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 : 15 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkB-tF-X0l">
-                                        <rect key="frame" x="24" y="32.5" width="131" height="18"/>
+                                        <rect key="frame" x="24" y="32.5" width="97" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.74889216479999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="aa7-vw-2lz" firstAttribute="leading" secondItem="dhl-Rd-hwl" secondAttribute="trailing" constant="10" id="fMD-rn-W6S"/>
                             <constraint firstAttribute="trailing" secondItem="aa7-vw-2lz" secondAttribute="trailing" id="hnX-B2-cfn"/>
                             <constraint firstItem="dhl-Rd-hwl" firstAttribute="centerY" secondItem="WV3-xr-bUd" secondAttribute="centerY" id="nD6-AA-ngt"/>
-                            <constraint firstItem="aa7-vw-2lz" firstAttribute="width" secondItem="WV3-xr-bUd" secondAttribute="width" multiplier="3:7" id="u2S-q5-Rp3"/>
+                            <constraint firstItem="aa7-vw-2lz" firstAttribute="width" secondItem="WV3-xr-bUd" secondAttribute="width" multiplier="3:8" id="u2S-q5-Rp3"/>
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="abc" translatesAutoresizingMaskIntoConstraints="NO" id="YJ8-Zd-uLL">

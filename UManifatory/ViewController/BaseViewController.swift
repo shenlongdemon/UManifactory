@@ -24,8 +24,10 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        // self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // self.navigationController?.navigationBar.topItem?.title = " "
+        
+        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +45,10 @@ class BaseViewController: UIViewController {
         
         waitController?.view.addSubview(spinnerIndicator)
         self.present(waitController!, animated: false, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            self.dismissIndicatorDialog()
+        }
     }
     func dismissIndicatorDialog() {
         waitController?.dismiss(animated: true, completion: nil);

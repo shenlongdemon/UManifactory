@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B297631215A22F600396243 /* ScanQRItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B297630215A22F600396243 /* ScanQRItem.swift */; };
+		3B297633215A286400396243 /* ProductTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B297632215A286400396243 /* ProductTabBarViewController.swift */; };
+		3B297635215B07AE00396243 /* ItemHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B297634215B07AE00396243 /* ItemHistory.swift */; };
+		3B297638215B0A1700396243 /* ItemHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B297636215B0A1700396243 /* ItemHistoryTableViewCell.swift */; };
+		3B297639215B0A1700396243 /* ItemHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B297637215B0A1700396243 /* ItemHistoryTableViewCell.xib */; };
+		3B3F3F632159E3740001993E /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F3F612159E3740001993E /* ReviewTableViewCell.swift */; };
+		3B3F3F642159E3740001993E /* ReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B3F3F622159E3740001993E /* ReviewTableViewCell.xib */; };
+		3B3F3F662159E3E70001993E /* ProductSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F3F652159E3E70001993E /* ProductSearch.swift */; };
+		3B3F3F692159E4330001993E /* ProductSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B3F3F672159E4330001993E /* ProductSearchTableViewCell.xib */; };
+		3B3F3F6A2159E4330001993E /* ProductSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F3F682159E4330001993E /* ProductSearchTableViewCell.swift */; };
 		3B59583D212DDC3900E74838 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */; };
 		3B59583E212DDC3900E74838 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */; };
 		3B595840212DFB1E00E74838 /* CreateMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */; };
@@ -84,6 +94,16 @@
 
 /* Begin PBXFileReference section */
 		000F523E35BACC9E0D654859 /* Pods_UManifatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UManifatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B297630215A22F600396243 /* ScanQRItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRItem.swift; sourceTree = "<group>"; };
+		3B297632215A286400396243 /* ProductTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTabBarViewController.swift; sourceTree = "<group>"; };
+		3B297634215B07AE00396243 /* ItemHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHistory.swift; sourceTree = "<group>"; };
+		3B297636215B0A1700396243 /* ItemHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		3B297637215B0A1700396243 /* ItemHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		3B3F3F612159E3740001993E /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		3B3F3F622159E3740001993E /* ReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableViewCell.xib; sourceTree = "<group>"; };
+		3B3F3F652159E3E70001993E /* ProductSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSearch.swift; sourceTree = "<group>"; };
+		3B3F3F672159E4330001993E /* ProductSearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductSearchTableViewCell.xib; sourceTree = "<group>"; };
+		3B3F3F682159E4330001993E /* ProductSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSearchTableViewCell.swift; sourceTree = "<group>"; };
 		3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		3B59583F212DFB1E00E74838 /* CreateMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMaterialViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +219,7 @@
 				3B9B4AF82151BCC300E787C6 /* ItemHistoryViewController.swift */,
 				3B9B4AFA2151BCCF00E787C6 /* ItemReviewsViewController.swift */,
 				3B9B4AFC2151BCF300E787C6 /* ItemAttachFilesViewController.swift */,
+				3B297632215A286400396243 /* ProductTabBarViewController.swift */,
 			);
 			path = ItemTabbar;
 			sourceTree = "<group>";
@@ -297,6 +318,7 @@
 		3BF76FC821246FAA0016BE5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3B3F3F652159E3E70001993E /* ProductSearch.swift */,
 				3BF76FEE2127B1CD0016BE5F /* Activity.swift */,
 				3BF76FCC21246FCC0016BE5F /* BLEDevice.swift */,
 				3BF76FCA21246FCB0016BE5F /* Bluetooth.swift */,
@@ -308,6 +330,8 @@
 				3BF76FCB21246FCB0016BE5F /* User.swift */,
 				3B595847212EEF0900E74838 /* UserInfo.swift */,
 				3BF76FFB21280AB90016BE5F /* Worker.swift */,
+				3B297630215A22F600396243 /* ScanQRItem.swift */,
+				3B297634215B07AE00396243 /* ItemHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,18 +352,24 @@
 				3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */,
 				3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */,
 				3B595844212EE4A600E74838 /* BLEDeviceTableViewCell.xib */,
+				3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */,
+				3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */,
 				3BF76FF52127E1E00016BE5F /* MaterialTableViewCell.swift */,
 				3BF76FF62127E1E00016BE5F /* MaterialTableViewCell.xib */,
+				3B9B4AEF214ED11700E787C6 /* PDTFilesTableViewCell.swift */,
+				3B9B4AF0214ED11700E787C6 /* PDTFilesTableViewCell.xib */,
+				3B3F3F682159E4330001993E /* ProductSearchTableViewCell.swift */,
+				3B3F3F672159E4330001993E /* ProductSearchTableViewCell.xib */,
 				3B59584B2130B74400E74838 /* ProductTableViewCell.swift */,
 				3B59584C2130B74400E74838 /* ProductTableViewCell.xib */,
+				3B3F3F612159E3740001993E /* ReviewTableViewCell.swift */,
+				3B3F3F622159E3740001993E /* ReviewTableViewCell.xib */,
 				3BF77003212860370016BE5F /* TaskCollectionViewCell.swift */,
 				3BF77004212860370016BE5F /* TaskCollectionViewCell.xib */,
 				3BF7700B212883130016BE5F /* WorkerCollectionViewCell.swift */,
 				3BF7700C212883130016BE5F /* WorkerCollectionViewCell.xib */,
-				3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */,
-				3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */,
-				3B9B4AEF214ED11700E787C6 /* PDTFilesTableViewCell.swift */,
-				3B9B4AF0214ED11700E787C6 /* PDTFilesTableViewCell.xib */,
+				3B297636215B0A1700396243 /* ItemHistoryTableViewCell.swift */,
+				3B297637215B0A1700396243 /* ItemHistoryTableViewCell.xib */,
 			);
 			path = ViewCell;
 			sourceTree = "<group>";
@@ -445,12 +475,15 @@
 				3B595846212EE4A600E74838 /* BLEDeviceTableViewCell.xib in Resources */,
 				3BF76FF82127E1E00016BE5F /* MaterialTableViewCell.xib in Resources */,
 				3B59585F2136FEE800E74838 /* style.json in Resources */,
+				3B297639215B0A1700396243 /* ItemHistoryTableViewCell.xib in Resources */,
 				3B59583E212DDC3900E74838 /* ActivityTableViewCell.xib in Resources */,
 				3BF77006212860370016BE5F /* TaskCollectionViewCell.xib in Resources */,
 				3BF76FB5212464C90016BE5F /* LaunchScreen.storyboard in Resources */,
 				3B9B4AEC214E8FDF00E787C6 /* BlockStatusTableViewCell.xib in Resources */,
 				3B9B4AF2214ED11700E787C6 /* PDTFilesTableViewCell.xib in Resources */,
+				3B3F3F642159E3740001993E /* ReviewTableViewCell.xib in Resources */,
 				3BF76FB2212464C90016BE5F /* Assets.xcassets in Resources */,
+				3B3F3F692159E4330001993E /* ProductSearchTableViewCell.xib in Resources */,
 				3B59584E2130B74400E74838 /* ProductTableViewCell.xib in Resources */,
 				3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */,
 			);
@@ -558,7 +591,9 @@
 				3BF77005212860370016BE5F /* TaskCollectionViewCell.swift in Sources */,
 				3BF76FB0212464C90016BE5F /* UManifatory.xcdatamodeld in Sources */,
 				3BF76FAA212464C90016BE5F /* ViewController.swift in Sources */,
+				3B297638215B0A1700396243 /* ItemHistoryTableViewCell.swift in Sources */,
 				3B9B4AF92151BCC300E787C6 /* ItemHistoryViewController.swift in Sources */,
+				3B297635215B07AE00396243 /* ItemHistory.swift in Sources */,
 				3B59584A212F122000E74838 /* CreateTaskViewController.swift in Sources */,
 				3BF76FC521246DA20016BE5F /* BluetoothViewController.swift in Sources */,
 				3BF76FA8212464C90016BE5F /* AppDelegate.swift in Sources */,
@@ -568,6 +603,7 @@
 				3BF7700221281FC20016BE5F /* CollectionCell.swift in Sources */,
 				3BF76FFC21280AB90016BE5F /* Worker.swift in Sources */,
 				3BF76FF72127E1E00016BE5F /* MaterialTableViewCell.swift in Sources */,
+				3B3F3F632159E3740001993E /* ReviewTableViewCell.swift in Sources */,
 				3B9B4AF72151BCAC00E787C6 /* ItemInfoViewController.swift in Sources */,
 				3BF76FD6212470010016BE5F /* StoreUtil.swift in Sources */,
 				3B5958562130BBB500E74838 /* CreateIProductViewController.swift in Sources */,
@@ -579,6 +615,8 @@
 				3B9B4AFF2151CC8800E787C6 /* AppUtil.swift in Sources */,
 				3B5958502130B7A400E74838 /* ProductsViewController.swift in Sources */,
 				3BF7700A21286FD80016BE5F /* AssignWotkerViewController.swift in Sources */,
+				3B297633215A286400396243 /* ProductTabBarViewController.swift in Sources */,
+				3B297631215A22F600396243 /* ScanQRItem.swift in Sources */,
 				3BF76FF02127B1CD0016BE5F /* Activity.swift in Sources */,
 				3BF76FCE21246FCC0016BE5F /* Bluetooth.swift in Sources */,
 				3BF76FD5212470010016BE5F /* ApiModel.swift in Sources */,
@@ -587,6 +625,7 @@
 				3BF76FD4212470010016BE5F /* WebApi.swift in Sources */,
 				3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */,
 				3B9B4AEB214E8FDF00E787C6 /* BlockStatusTableViewCell.swift in Sources */,
+				3B3F3F6A2159E4330001993E /* ProductSearchTableViewCell.swift in Sources */,
 				3BF76FBE212465F20016BE5F /* MainViewController.swift in Sources */,
 				3BF76FF22127B28B0016BE5F /* Util.swift in Sources */,
 				3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */,
@@ -598,6 +637,7 @@
 				3B59585A2134456D00E74838 /* ProfileViewController.swift in Sources */,
 				3B9B4B02215624CE00E787C6 /* BaseBluetoothViewController.swift in Sources */,
 				3BF7700D212883130016BE5F /* WorkerCollectionViewCell.swift in Sources */,
+				3B3F3F662159E3E70001993E /* ProductSearch.swift in Sources */,
 				3B9B4AF42151B19200E787C6 /* TaskGenCodeViewController.swift in Sources */,
 				3BF76FE6212472D30016BE5F /* Material.swift in Sources */,
 				3BF76FCF21246FCC0016BE5F /* User.swift in Sources */,

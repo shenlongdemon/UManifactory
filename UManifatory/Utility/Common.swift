@@ -31,16 +31,18 @@ class Segue {
     static let additem_to_bluetoottmaterial = "additem_to_bluetoottmaterial"
     static let material_to_detail = "material_to_detail"
     static let main_to_profile = "main_to_profile"
+    static let main_scan_to_product = "main_scan_to_product"
     static let activity_to_detail = "activity_to_detail"
     static let materialdetail_to_activitydetail = "materialdetail_to_activitydetail"
     static let material_to_taskdetail = "material_to_taskdetail"
     static let task_to_gencode = "task_to_gencode"
     static let goods_to_detail = "goods_to_detail"
     static let main_to_bluetoothproduct_around = "main_to_bluetoothproduct_around"
+    
 }
 
 class Constant {
-    static let Hour_Format = "HH:mm a"
+    static let Hour_Format = "HH : mm a"
     static let Date_Format = "yyyy/MM/dd"
 }
 class Enums {
@@ -50,6 +52,19 @@ class Enums {
         // Một hằng số tĩnh chứa tất cả các phần tử của enum Month.
         static let allValues = [not_start, starting, done]
         
+    }
+    enum SearchProductTypes : Int  {
+        case in_app = 0,
+        on_web
+        // Một hằng số tĩnh chứa tất cả các phần tử của enum Month.
+        static let allValues = [in_app, on_web]
+        
+    }
+    enum ScanQRItemType : Int {
+        case unknown = 0,
+        material,
+        product
+        static let allValues = [unknown, material, product]
     }
 }
 

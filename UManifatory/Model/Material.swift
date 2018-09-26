@@ -117,14 +117,14 @@ class Material: IObject, Mappable {
     func getImage() -> UIImage? {
         return Util.getImage(data64: self.image)
     }
-    func getTaskDescription() -> String{
+    private func getTaskDescription() -> String{
         let descriptions = self.tasks.map { (task) -> String in
             return task.getAllDescription()
         }
-        return "\nBlock: \(self.name)\n \(descriptions.joined(separator: "\n"))"
+        return "\(descriptions.joined(separator: "\n\n"))"
     }
     func getAllDescription() -> String {
-        let str = "\(self.description)\n\nBlocks\n\(self.getTaskDescription())"
+        let str = "\(self.name) \n\n\(self.description)\n\n\(self.getTaskDescription())"
         return str
     }
 }

@@ -61,6 +61,9 @@ class BlockStatusTableViewCell: TableCell {
             image = #imageLiteral(resourceName: "status_starting")
             self.imgImage.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         }
+        else {
+            self.imgImage.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        }
         return image
     }
     required init?(coder aDecoder: NSCoder) {

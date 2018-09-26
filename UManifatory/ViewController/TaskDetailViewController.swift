@@ -36,7 +36,7 @@ class TaskDetailViewController: BaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.lbName.text = self.task.name        
+        self.lbName.text = self.task.name.uppercased()
         self.imgImage.image = Util.getImage(data64: self.task.image)
         self.btnDone.setTitle("Close \(self.task.name.capitalized(with: Locale.current)) Step", for: .normal)
         loadData()

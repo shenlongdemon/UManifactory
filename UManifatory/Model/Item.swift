@@ -29,6 +29,7 @@ class Item: IObject, Mappable {
     var bluetooth : Bluetooth?
     var view3d : String = ""
     var material: Material? = nil
+    var time: Int64 = Util.getCurrentMillis()
     override init() {
         
     }
@@ -43,7 +44,6 @@ class Item: IObject, Mappable {
         self.category     <- map["category"]
         self.image   <- map["image"]
         self.description     <- map["description"]
-
         self.code     <- map["code"]
         self.sellCode   <- map["sellCode"]
         self.buyerCode     <- map["buyerCode"]
@@ -56,6 +56,7 @@ class Item: IObject, Mappable {
         self.view3d   <- map["view3d"]
         self.material   <- map["material"]
         self.iBeacon   <- map["iBeacon"]
+        self.time   <- map["time"]
     }
     func getImage() -> UIImage? {
         return Util.getImage(data64: self.image)
@@ -74,7 +75,7 @@ class Item: IObject, Mappable {
        return code
     }
     func getAllDescription() -> String {
-        var str = "\(self.description)\n\n\(self.material?.getAllDescription() ?? "")"
+        let str = "\(self.name)\n\n\(self.description)\n\n\(self.material?.getAllDescription() ?? "")"
         return str
     }
 }

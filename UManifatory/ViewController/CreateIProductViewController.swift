@@ -106,7 +106,7 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
     func select(device: BLEDevice) {
         
         self.bluetoothDevice = device
-        self.tfBluetooth.text = device.getName()
+        // self.tfBluetooth.text = device.getName()
         self.lbBluetooth.text = device.id
         
     }
@@ -123,7 +123,7 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
         
         self.showIndicatorDialog()
         let device = self.bluetoothDevice?.id ?? ""
-        self.bluetoothDevice?.proximityUUID = self.tfBluetoothSource.text ?? ""
+        self.bluetoothDevice?.proximityUUID = self.tfBluetooth.text ?? ""
         let item : Item = Item()
         item.name = tfName.text!
         item.price = tfPrice.text!

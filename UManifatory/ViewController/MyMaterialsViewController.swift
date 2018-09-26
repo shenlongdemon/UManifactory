@@ -38,6 +38,7 @@ class MyMaterialsViewController: BaseViewController {
         self.tableView.reloadData()
         let user = StoreUtil.getUser()!
         WebApi.getMaterialsByOwnerId(ownerId: user.id, pageSize: 10000, pageNum: 1) { (list) in
+            self.items.removeAllObjects()
             self.items.addObjects(from: list)
             self.tableView.reloadData()
             self.progress.stopAnimating()

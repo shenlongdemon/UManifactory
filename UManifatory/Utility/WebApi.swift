@@ -22,6 +22,7 @@ class WebApi{
     static let HOST = "http://192.168.1.2:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
+    static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
     static let GET_USER_BY_ID = "\(WebApi.HOST)/api/manifactory/getUserById?id={id}"
     static let GET_MATERIALS_BY_BLUETOOTH_UUIDS = "\(WebApi.HOST)/api/manifactory/getProjectsByBluetoothUUIDs"
     static let GET_PRODUCTS_BY_BLUETOOTH_UUIDS = "\(WebApi.HOST)/api/manifactory/getItemsByBeaconUUIDs"
@@ -33,6 +34,7 @@ class WebApi{
     static let UPLOAD_ACTIVITY_IMAGE = "\(WebApi.HOST)/api/upload/manifactory/activity?id={id}"
     static let UPLOAD_ACTIVITY_FILE = "\(WebApi.HOST)/api/upload/manifactory/activity?id={id}"
     static let GET_MATERIAL_BY_QRCODE = "\(WebApi.HOST)/api/manifactory/getMaterialByQRCode"
+    static let GET_OBJECT_BY_QRCODE = "\(WebApi.HOST)/api/manifactory/getObjectByQRCode"
     static let CREATE_MATERIAL = "\(WebApi.HOST)/api/manifactory/createMaterial"
     static let CREATE_TASK = "\(WebApi.HOST)/api/manifactory/createTask"
     
@@ -43,6 +45,7 @@ class WebApi{
     static let GET_TASK_BY_ID = "\(WebApi.HOST)/api/manifactory/getTaskById?materialId={materialId}&taskId={taskId}"
     static let FINISH_TASK = "\(WebApi.HOST)/api/manifactory/finishTask"
     static let UPLOAD_BEACON_LOCATION = "\(WebApi.HOST)/api/manifactory/uploadBeaconLocation"
+    static let GET_PRODUCTS_ON_WEB = "\(WebApi.HOST)/api/sellrecognizer/getProductsOnWeb?obj={name}"
     
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
@@ -122,6 +125,24 @@ class WebApi{
                 }                
                 if(apiModel.Status == 1){
                     let item: Material? = Mapper<Material>().map(JSONObject: apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+        }
+    }
+    static func getItemById(id: String, completion: @escaping (_ item: Item?)->Void){
+        let url = URL(string: WebApi.GET_ITEM_BY_ID.replacingOccurrences(of: "{id}", with: id))
+        
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let item: Item? = Mapper<Item>().map(JSONObject: apiModel.Data)
                     completion(item)
                 }
                 else {
@@ -311,6 +332,28 @@ class WebApi{
                 
                 if(apiModel.Status == 1){
                     let item: Material? = Mapper<Material>().map(JSONObject: apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+        }
+    }
+    static func getObjectByQRCode(qrcode: String, completion: @escaping (_ obj: ScanQRItem? )->Void){
+        let parameters: Parameters = [
+            "qrcode": qrcode
+        ]
+        let url = URL(string: WebApi.GET_OBJECT_BY_QRCODE)
+        
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let item: ScanQRItem? = Mapper<ScanQRItem>().map(JSONObject: apiModel.Data)
                     completion(item)
                 }
                 else {
@@ -526,6 +569,30 @@ class WebApi{
                 else {
                     completion(nil)
                 }
+        }
+    }
+    static func getProductSearch(name:String, completion: @escaping (_ list:[ProductSearch])->Void){
+        let originalString = WebApi.GET_PRODUCTS_ON_WEB.replacingOccurrences(of: "{name}", with: name)
+        let escapedString = originalString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+        
+        let url = URL(string: escapedString!)
+        
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion([])
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let products: [ProductSearch] = Mapper<ProductSearch>().mapArray(JSONObject: apiModel.Data) ?? []
+                    completion(products)
+                }
+                else {
+                    completion([])
+                }
+                
         }
     }
 }

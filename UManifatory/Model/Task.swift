@@ -11,6 +11,7 @@ import Alamofire
 import ObjectMapper
 class Task: IObject, Mappable {
     var name: String = ""
+    var description: String = ""
     var image: String = ""
     var code: String = ""
     var workers : [Worker] = []
@@ -37,6 +38,7 @@ class Task: IObject, Mappable {
     func mapping(map: Map) {
         self.id <- map["id"]
         self.name     <- map["name"]
+        self.description     <- map["description"]
         self.image   <- map["image"]
         self.code   <- map["code"]
         self.materialId   <- map["materialId"]
@@ -96,11 +98,9 @@ class Task: IObject, Mappable {
         return status
     }
     func getStatusPercent() -> Float {
-        
         if self.workers.count == 0 {
             return 0.0;
         }
-        
         let doneWorkers = self.workers.filter { (worker) -> Bool in
             return worker.status == Enums.TaskStatus.done
             }.count
@@ -154,7 +154,7 @@ class Task: IObject, Mappable {
         return descriptions.joined(separator: "\n")
     }
     func getAllDescription() -> String {
-        let str = "\n\nActivities:\n\(self.getActivityDescriptions())"
+        let str = " - \(self.name)\n \(self.description)"
         return str
     }
     

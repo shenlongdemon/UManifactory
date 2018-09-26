@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var locationManager = CLLocationManager()
     var proximityUUIDs: [String] = []
+    var beaconRegions: [CLBeaconRegion] = []
     var beaconProto: IBeaconAction?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initLocationManager()
         DropDown.startListeningToKeyboard()
         IQKeyboardManager.shared.enable = true
+        //UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0.0, -1000.0), for: .default)
         return true
     }
 
@@ -165,15 +167,21 @@ extension AppDelegate :CLLocationManagerDelegate {
     }
     func track(bleDevice: BLEDevice) {
         let proUUID = bleDevice.proximityUUID.uppercased()
-        
-        if !self.proximityUUIDs.contains(proUUID) && proUUID != "" {
-            self.proximityUUIDs.append(proUUID)
-            let uuid = UUID(uuidString: proUUID)!
-            let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: bleDevice.name)
-            locationManager.startMonitoring(for: beaconRegion)
-            locationManager.startRangingBeacons(in: beaconRegion)
+        if proUUID != "" {
+            if !self.proximityUUIDs.contains(proUUID) {
+                self.proximityUUIDs.append(proUUID)
+                let uuid = UUID(uuidString: proUUID)!
+                let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: bleDevice.name)
+                locationManager.startMonitoring(for: beaconRegion)
+                locationManager.startRangingBeacons(in: beaconRegion)
+                self.beaconRegions.append(beaconRegion)
+            }
         }
     }
     func stopScanBeacon(){
+        for (_, beaconRegion) in self.beaconRegions.enumerated() {
+            locationManager.stopMonitoring(for: beaconRegion)
+            locationManager.stopRangingBeacons(in: beaconRegion)
+        }
     }
 }

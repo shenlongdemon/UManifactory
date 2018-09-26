@@ -64,15 +64,8 @@ class ProductsViewController: BaseViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == Segue.goods_to_detail {
             let item =  sender as! Item
-            let VC = segue.destination as! UITabBarController
-            for (_, v) in (VC.viewControllers?.enumerated())! {
-                if let vc = v as? ItemAttachFilesViewController {
-                    vc.initItem(item: item)
-                }
-                else if let vc = v as? ItemInfoViewController {
-                    vc.initItem(item: item)
-                }
-            }
+            let VC = segue.destination as! ProductTabBarViewController
+            VC.initItem(item: item)            
         }
     }
     

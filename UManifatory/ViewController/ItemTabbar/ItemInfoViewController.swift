@@ -11,13 +11,15 @@ import ImageSlideshow
 class ItemInfoViewController: BaseViewController {
     var item: Item!
     
+    @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var tvDescription: UITextView!
     @IBOutlet weak var imageSlideShow: ImageSlideshow!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageSlideShow.setImageInputs( AppUtil.getInputSources(item: self.item) )
+    self.imageSlideShow.setImageInputs( AppUtil.getInputSources(item: self.item) )
         self.tvDescription.text = item.getAllDescription()
         // Do any additional setup after loading the view.
+        self.lbName.text = self.item.name
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,6 +29,7 @@ class ItemInfoViewController: BaseViewController {
     
     func initItem(item: Item) {
         self.item = item
+        
     }
     /*
     // MARK: - Navigation

@@ -15,6 +15,10 @@ import CoreBluetooth
 import CoreLocation
 class Util {
     
+    static func getCurrentMillis()->Int64 {
+        return Int64(Date().timeIntervalSince1970 * 1000)
+    }
+    
     static func getDistance(beacon: CLBeacon, currentPosition: Position?) -> Float{
         var distance : Float = -1.0
         guard let pos = currentPosition else {

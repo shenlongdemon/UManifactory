@@ -25,6 +25,10 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
     var mapView : GMSMapView!
     // end-map
     
+    // begin-flag
+    var isTracking : Bool = false
+    // end-flag
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initTable()
@@ -32,7 +36,16 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
         Util.getAppDelegate()?.beaconProto = self
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.isTracking = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.isTracking = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -87,9 +100,11 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
 }
 
 extension BluetoothProductAroundViewController: IBeaconAction {
-    func onReceive(beacon: CLBeacon) {   
-        DispatchQueue.main.async{
-            self.calculateBeaconPosition(beacon: beacon)
+    func onReceive(beacon: CLBeacon) {
+        if self.isTracking {
+            DispatchQueue.main.async{
+                self.calculateBeaconPosition(beacon: beacon)
+            }
         }
     }
     
@@ -98,7 +113,7 @@ extension BluetoothProductAroundViewController: IBeaconAction {
         let distance = Util.getDistance(beacon: beacon, currentPosition: StoreUtil.getPosition())
         guard let item = self.items.first(where: { (i) -> Bool in
             let item: Item = i as! Item
-            return (item.iBeacon?.proximityUUID ?? "") == proximityId
+            return (item.iBeacon?.proximityUUID.uppercased() ?? "") == proximityId
         }) as? Item else {
             return
         }

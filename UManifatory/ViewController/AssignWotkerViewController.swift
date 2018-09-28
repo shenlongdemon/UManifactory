@@ -223,7 +223,7 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
         if segue.identifier == Segue.assignworker_to_activity {
             let worker = sender as! Worker
             let VC = segue.destination as! ActivityViewController
-            VC.initData(materialId: self.materialId, taskId: self.taskId, workerId: worker.owner.id)
+            VC.initData(itemId: "", materialId: self.materialId, taskId: self.taskId, workerId: worker.owner.id)
         }
     }
     

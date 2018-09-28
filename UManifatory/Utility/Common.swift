@@ -38,7 +38,7 @@ class Segue {
     static let task_to_gencode = "task_to_gencode"
     static let goods_to_detail = "goods_to_detail"
     static let main_to_bluetoothproduct_around = "main_to_bluetoothproduct_around"
-    
+    static let material_detail_to_add_activity = "material_detail_to_add_activity"
 }
 
 class Constant {

@@ -122,7 +122,7 @@ class MainViewController: BaseQRCodeReaderViewController {
             let task = sender as! Task
             let user = StoreUtil.getUser()!
             let VC = segue.destination as! ActivityViewController
-            VC.initData(materialId: task.materialId, taskId: task.id, workerId: user.id)
+            VC.initData(itemId: "", materialId: task.materialId, taskId: task.id, workerId: user.id)
         }
         else if segue.identifier == Segue.main_to_mymaterial {
             let _ = segue.destination as! MyMaterialsViewController

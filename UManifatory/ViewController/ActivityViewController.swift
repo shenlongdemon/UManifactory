@@ -11,7 +11,7 @@ import ImageSlideshow
 import ImagePicker
 import MobileCoreServices
 import FileBrowser
-class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumentPickerDelegate, UIDocumentMenuDelegate {
+class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumentPickerDelegate {
     
     @IBOutlet weak var lbDatetime: UILabel!
     
@@ -21,6 +21,7 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
     var materialId: String!
     var taskId: String!
     var workerId: String!
+    var itemId: String! = ""
     var images : [UIImage] = []
     
     @IBOutlet weak var lbAttackFile: UILabel!
@@ -48,7 +49,10 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
         // Do any additional setup after loading the view.
     }
     
-    func initData(materialId : String!, taskId: String!, workerId: String?){
+    func initData(itemId: String!, materialId : String!, taskId: String!, workerId: String?){
+        if let _ = itemId {
+            self.itemId = itemId
+        }
         if let _ = workerId {
             self.workerId = workerId!
         }
@@ -66,7 +70,7 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
 //
 //        }
         
-        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        let importMenu = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
         self.present(importMenu, animated: true, completion: nil)
@@ -82,7 +86,7 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
         self.lbAttackFile.text = fileName
     }
 
-    func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+    func documentMenu(_ documentMenu: UIDocumentPickerViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         self.present(self.documentPicker, animated: true, completion: nil)
     }
     func loadData() {
@@ -118,7 +122,7 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
             guard let userInfo = ui else {
                 return
             }
-            WebApi.saveActivity(self.materialId, self.taskId, self.workerId, title, description, names, files, userInfo) { (done) in
+            WebApi.saveActivity(self.itemId, self.materialId, self.taskId, self.workerId, title, description, names, files, userInfo) { (done) in
                 
                 if done {
                     WebApi.uploadActivityImages(taskId: self.taskId, images: self.images, names: names, completion: { (finished) in

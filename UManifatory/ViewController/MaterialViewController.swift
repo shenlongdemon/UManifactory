@@ -68,7 +68,7 @@ class MaterialViewController : BaseViewController {
         self.tableAdapter.onDidSelectRowAt { (task) in
             let t = task as! Task
             if t.isGenCode() {
-                self.performSegue(withIdentifier: Segue.task_to_gencode, sender: t.id)
+                self.performSegue(withIdentifier: Segue.task_to_gencode, sender: t.code)
             }
             else if self.material.isIAmOwner() {
                 self.performSegue(withIdentifier: Segue.material_to_taskdetail, sender: t)
@@ -118,6 +118,7 @@ class MaterialViewController : BaseViewController {
                 let genCode : Task = Task()
                 genCode.id = "Gencode_\(self.material.code)"
                 genCode.name = "Gen. QR Code"
+                genCode.code = self.material.code
                 self.items.insert(genCode, at: lastTaskFinishded + 1)
             }
         }
@@ -149,7 +150,7 @@ class MaterialViewController : BaseViewController {
         }
         else if segue.identifier == Segue.material_to_detail {
             let VC = segue.destination as! MaterialDetailViewController
-            VC.initItem(materialId: self.materialId)
+            VC.initItem(itemId: "", materialId: self.materialId)
         }
         else if segue.identifier == Segue.material_to_taskdetail {
             let task = sender as! Task

@@ -19,7 +19,7 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     static let HOST = "http://96.93.123.233:5000"
-    //static let HOST = "http://192.168.1.2:5000"
+    //static let HOST = "http://192.168.1.8:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
@@ -243,8 +243,9 @@ class WebApi{
                 
         }
     }
-    static func saveActivity(_ materialId: String, _ taskId: String!, _ workerId: String, _ title: String, _ description: String, _ imageNames: [String],_ fileNames: [String],_ userInfo: UserInfo,completion: @escaping (_ done: Bool )->Void){
+    static func saveActivity(_ itemId: String,_ materialId: String, _ taskId: String!, _ workerId: String, _ title: String, _ description: String, _ imageNames: [String],_ fileNames: [String],_ userInfo: UserInfo,completion: @escaping (_ done: Bool )->Void){
         let parameters: Parameters = [
+            "itemId": itemId,
             "materialId": materialId,
             "taskId": taskId,
             "workerId": workerId,

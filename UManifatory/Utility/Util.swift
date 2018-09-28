@@ -194,7 +194,7 @@ class Util {
         return appDelegate;
     }
     static func getUesrInfo(completion: @escaping (_ usrInfo: UserInfo? )->Void){
-        var userInfo : UserInfo = StoreUtil.getUserInfo()!
+        let userInfo : UserInfo = StoreUtil.getUserInfo()!
         userInfo.position = StoreUtil.getPosition()!
         WebApi.getWeather(lat: userInfo.position.coord.latitude, lon: userInfo.position.coord.longitude) { (weather) in
             if let wa = weather {

@@ -46,7 +46,7 @@ class BaseViewController: UIViewController {
         waitController?.view.addSubview(spinnerIndicator)
         self.present(waitController!, animated: false, completion: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
             self.dismissIndicatorDialog()
         }
     }

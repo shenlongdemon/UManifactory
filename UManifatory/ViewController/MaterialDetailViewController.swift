@@ -16,8 +16,10 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
     @IBOutlet weak var tableView: UITableView!
     var tableAdapter:TableAdapter!
     var items: NSMutableArray = NSMutableArray()
-    var material : Material!
+    var material : Material?
     var materialId: String!
+    var itemId: String!
+    var item : Item?
     var mapView : GMSMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,10 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
         self.mapUIView.addSubview(mapView)
         
     }
+    @IBAction func addActivity(_ sender: Any) {
+        self.performSegue(withIdentifier: Segue.material_detail_to_add_activity, sender: nil)
+    }
+    
     func initTable() {
         let cellIdentifier = ActivityTableViewCell.reuseIdentifier
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
@@ -67,29 +73,48 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
         loadData()
     }
     func loadData(){
+        
         self.showIndicatorDialog()
-        WebApi.getMaterialById(id: self.materialId) { (mat) in
-            
-            if let material = mat {
-                self.material = material
+        
+        if self.itemId != "" {
+            WebApi.getItemById(id: self.itemId, completion: { (it) in
+                if let i = it {
+                    self.item = i
+                }
+                self.dismissIndicatorDialog()
                 self.showAllActivities()
-                self.navigationController?.navigationBar.topItem?.title = self.material.name
+            })
+        }
+        else {
+            WebApi.getMaterialById(id: self.materialId) { (mat) in
+                if let material = mat {
+                    self.material = material
+                }
+                
+                self.dismissIndicatorDialog()
+                self.showAllActivities()
+            
             }
-            self.dismissIndicatorDialog()
         }
     }
     func showAllActivities()  {
         self.items.removeAllObjects()
-        let activities = self.material.getActivities().sorted { (a1, a2) -> Bool in
+        let activities = self.material?.getActivities().sorted { (a1, a2) -> Bool in
             return a1.time > a2.time
-        }
-        
+        } ?? []
+        let maintainceActivity: [Activity] = self.item?.maintains.sorted { (a1, a2) -> Bool in
+            return a1.time > a2.time
+        } ?? []
+        let activityesInItem : [Activity] = self.item?.material?.getActivities() ?? []
+        self.items.addObjects(from: maintainceActivity)
         self.items.addObjects(from: activities)
+        self.items.addObjects(from: activityesInItem)
         self.tableView.reloadData()
         
         var bounds = GMSCoordinateBounds()
         let path = GMSMutablePath()
-        for (_, activity) in activities.enumerated() {
+        for (_, act) in self.items.enumerated() {
+            let activity = act as! Activity
             let coord = activity.coord!
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
@@ -114,7 +139,8 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func initItem(materialId: String){
+    func initItem(itemId: String, materialId: String){
+        self.itemId = itemId
         self.materialId = materialId
     }
     func mapView(_ mapView: GMSMapView, didTap overlay: GMSOverlay) {
@@ -131,6 +157,11 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
             let activity = sender as! Activity
             let VC = segue.destination as! ActivityDetailViewController
             VC.initItem(item: activity)
+        }
+        else if segue.identifier == Segue.material_detail_to_add_activity {
+            let workerId = StoreUtil.getUser()!.id
+            let VC = segue.destination as! ActivityViewController
+            VC.initData(itemId: self.itemId ,materialId: self.materialId, taskId: UUID.init().uuidString, workerId: workerId)
         }
     }
  

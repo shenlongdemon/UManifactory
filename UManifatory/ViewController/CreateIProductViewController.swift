@@ -123,7 +123,7 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
         
         self.showIndicatorDialog()
         let device = self.bluetoothDevice?.id ?? ""
-        self.bluetoothDevice?.proximityUUID = self.tfBluetooth.text ?? ""
+        self.bluetoothDevice?.proximityUUID = (self.tfBluetooth.text ?? "").uppercased()
         let item : Item = Item()
         item.name = tfName.text!
         item.price = tfPrice.text!

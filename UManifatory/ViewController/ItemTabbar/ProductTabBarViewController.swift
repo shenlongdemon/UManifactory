@@ -34,6 +34,9 @@ class ProductTabBarViewController: UITabBarController {
             else if let vc = v as? ItemHistoryViewController {
                 vc.initItem(item: item)
             }
+            else if let vc = v as? MaterialDetailViewController {
+                vc.initItem(itemId: item.id, materialId: item.material?.id ?? "")
+            }
         }
     }
     

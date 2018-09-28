@@ -33,6 +33,7 @@ class Activity: IObject, Mappable {
         self.images   <- map["images"]
         self.files   <- map["files"]
         self.coord   <- map["coord"]
+        self.worker   <- map["worker"]
     }
     
 }

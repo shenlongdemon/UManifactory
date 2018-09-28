@@ -30,6 +30,7 @@ class Item: IObject, Mappable {
     var view3d : String = ""
     var material: Material? = nil
     var time: Int64 = Util.getCurrentMillis()
+    var maintains: [Activity] = []
     override init() {
         
     }
@@ -57,6 +58,7 @@ class Item: IObject, Mappable {
         self.material   <- map["material"]
         self.iBeacon   <- map["iBeacon"]
         self.time   <- map["time"]
+        self.maintains   <- map["maintains"]
     }
     func getImage() -> UIImage? {
         return Util.getImage(data64: self.image)

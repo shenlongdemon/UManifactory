@@ -9,14 +9,16 @@
 import UIKit
 
 class ItemHistory: IObject {
-    var location: BLECoord;
-    var name: String;
-    var time: Int64;
-    var image: UIImage?;
-    init(location: BLECoord, name: String, time: Int64, image: UIImage?){
+    var location: Coord
+    var name: String
+    var time: Int64
+    var image: UIImage?
+    var activity: Activity?
+    init(location: Coord, name: String, time: Int64, image: UIImage?, activity: Activity?){
         self.location = location
         self.name = name
         self.time = time
         self.image = image
+        self.activity = activity
     }
 }

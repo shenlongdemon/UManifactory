@@ -39,6 +39,12 @@ class Segue {
     static let goods_to_detail = "goods_to_detail"
     static let main_to_bluetoothproduct_around = "main_to_bluetoothproduct_around"
     static let material_detail_to_add_activity = "material_detail_to_add_activity"
+    static let bluetooth_around_to_product = "bluetooth_around_to_product"
+    static let itemhistory_to_activitydetail = "itemhistory_to_activitydetail"
+    static let main_to_search = "main_to_search"
+    static let search_to_product = "search_to_product"
+    static let productsearch_to_detail = "productsearch_to_detail"
+    static let itemdetail_to_payment = "itemdetail_to_payment"
 }
 
 class Constant {
@@ -65,6 +71,19 @@ class Enums {
         material,
         product
         static let allValues = [unknown, material, product]
+    }
+    enum ItemHistoryType : Int {
+        case no_data = 0,
+        has_data
+        static let allValues = [no_data, has_data]
+    }
+    enum ItemActionType : Int {
+        case no = 0,
+        sell,
+        buy,
+        confirm_buy,
+        cancel_sell
+        static let allValues = [no, sell, buy, confirm_buy, cancel_sell]
     }
 }
 

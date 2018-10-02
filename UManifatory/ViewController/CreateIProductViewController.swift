@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-class CreateIProductViewController: BaseViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChoiceProto, ChoiceMaterialProto,UITextFieldDelegate {
+class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ChoiceProto, ChoiceMaterialProto,UITextFieldDelegate {
 
     @IBOutlet weak var tfCategory: UITextField!
     @IBOutlet weak var imgImage: UIImageView!
@@ -63,6 +63,28 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
                 return cate.value
             })
             self.dropDown.dataSource = names
+        }
+    }
+    
+    @IBAction func scanQR_Material(_ sender: Any) {
+        self.startScan()
+    }
+    
+    override func processQRCode(qrCode: String) {
+        if self.isScanning == false {
+            self.showIndicatorDialog()
+            WebApi.getObjectByQRCode(qrcode: qrCode, completion: { (result) in
+                self.dismissIndicatorDialog()
+                
+                if let resultItem = result {
+                    if resultItem.type == Enums.ScanQRItemType.material {
+                        if let material: Material = (resultItem.item as? NSDictionary)?.cast(){
+                            self.selectMaterial(material: material)
+                            
+                        }
+                    }
+                }
+            })
         }
     }
     @IBAction func showDropdown(_ sender: Any) {
@@ -133,7 +155,7 @@ class CreateIProductViewController: BaseViewController,UIImagePickerControllerDe
         item.bluetoothCode = device
         item.iBeacon = self.bluetoothDevice
         item.material = self.material
-        
+        item.maintains = []
         Util.getUesrInfo { (history) in
             if let his = history {
                 if let ble = self.bluetoothDevice {

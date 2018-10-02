@@ -38,6 +38,13 @@
 		3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA65213B147000B5140F /* BaseButton.swift */; };
 		3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA66213B147000B5140F /* BaseImage.swift */; };
 		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
+		3B977DAF2163DD1A00834632 /* SearchProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DAE2163DD1A00834632 /* SearchProductViewController.swift */; };
+		3B977DB12163DD4200834632 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DB02163DD4200834632 /* ProductListViewController.swift */; };
+		3B977DB42163DE6200834632 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DB22163DE6200834632 /* CategoryTableViewCell.swift */; };
+		3B977DB52163DE6200834632 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B977DB32163DE6200834632 /* CategoryTableViewCell.xib */; };
+		3B977DB82163E05E00834632 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DB62163E05D00834632 /* ProductCollectionViewCell.swift */; };
+		3B977DB92163E05E00834632 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B977DB72163E05D00834632 /* ProductCollectionViewCell.xib */; };
+		3B977DBB2163EED900834632 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DBA2163EED900834632 /* PaymentViewController.swift */; };
 		3B9B4AEB214E8FDF00E787C6 /* BlockStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */; };
 		3B9B4AEC214E8FDF00E787C6 /* BlockStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */; };
 		3B9B4AEE214EB6B800E787C6 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */; };
@@ -126,6 +133,13 @@
 		3B5BEA65213B147000B5140F /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		3B5BEA66213B147000B5140F /* BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImage.swift; sourceTree = "<group>"; };
 		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
+		3B977DAE2163DD1A00834632 /* SearchProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductViewController.swift; sourceTree = "<group>"; };
+		3B977DB02163DD4200834632 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		3B977DB22163DE6200834632 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		3B977DB32163DE6200834632 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		3B977DB62163E05D00834632 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B977DB72163E05D00834632 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		3B977DBA2163EED900834632 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		3B9B4AE9214E8FDF00E787C6 /* BlockStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockStatusTableViewCell.swift; sourceTree = "<group>"; };
 		3B9B4AEA214E8FDF00E787C6 /* BlockStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockStatusTableViewCell.xib; sourceTree = "<group>"; };
 		3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +311,9 @@
 				3B5958592134456D00E74838 /* ProfileViewController.swift */,
 				3B9B4AED214EB6B800E787C6 /* TaskDetailViewController.swift */,
 				3B9B4AF32151B19200E787C6 /* TaskGenCodeViewController.swift */,
+				3B977DAE2163DD1A00834632 /* SearchProductViewController.swift */,
+				3B977DB02163DD4200834632 /* ProductListViewController.swift */,
+				3B977DBA2163EED900834632 /* PaymentViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -348,6 +365,10 @@
 		3BF76FE02124722E0016BE5F /* ViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				3B977DB62163E05D00834632 /* ProductCollectionViewCell.swift */,
+				3B977DB72163E05D00834632 /* ProductCollectionViewCell.xib */,
+				3B977DB22163DE6200834632 /* CategoryTableViewCell.swift */,
+				3B977DB32163DE6200834632 /* CategoryTableViewCell.xib */,
 				3B59583B212DDC3900E74838 /* ActivityTableViewCell.swift */,
 				3B59583C212DDC3900E74838 /* ActivityTableViewCell.xib */,
 				3B595843212EE4A600E74838 /* BLEDeviceTableViewCell.swift */,
@@ -482,10 +503,12 @@
 				3B9B4AEC214E8FDF00E787C6 /* BlockStatusTableViewCell.xib in Resources */,
 				3B9B4AF2214ED11700E787C6 /* PDTFilesTableViewCell.xib in Resources */,
 				3B3F3F642159E3740001993E /* ReviewTableViewCell.xib in Resources */,
+				3B977DB52163DE6200834632 /* CategoryTableViewCell.xib in Resources */,
 				3BF76FB2212464C90016BE5F /* Assets.xcassets in Resources */,
 				3B3F3F692159E4330001993E /* ProductSearchTableViewCell.xib in Resources */,
 				3B59584E2130B74400E74838 /* ProductTableViewCell.xib in Resources */,
 				3BF76FAD212464C90016BE5F /* Main.storyboard in Resources */,
+				3B977DB92163E05E00834632 /* ProductCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B595848212EEF0900E74838 /* UserInfo.swift in Sources */,
+				3B977DB12163DD4200834632 /* ProductListViewController.swift in Sources */,
 				3BF76FE82124786B0016BE5F /* MaterialViewController.swift in Sources */,
 				3B9B4AFD2151BCF300E787C6 /* ItemAttachFilesViewController.swift in Sources */,
 				3BF76FC0212466350016BE5F /* BaseViewController.swift in Sources */,
@@ -603,11 +627,13 @@
 				3BF7700221281FC20016BE5F /* CollectionCell.swift in Sources */,
 				3BF76FFC21280AB90016BE5F /* Worker.swift in Sources */,
 				3BF76FF72127E1E00016BE5F /* MaterialTableViewCell.swift in Sources */,
+				3B977DB42163DE6200834632 /* CategoryTableViewCell.swift in Sources */,
 				3B3F3F632159E3740001993E /* ReviewTableViewCell.swift in Sources */,
 				3B9B4AF72151BCAC00E787C6 /* ItemInfoViewController.swift in Sources */,
 				3BF76FD6212470010016BE5F /* StoreUtil.swift in Sources */,
 				3B5958562130BBB500E74838 /* CreateIProductViewController.swift in Sources */,
 				3B59584D2130B74400E74838 /* ProductTableViewCell.swift in Sources */,
+				3B977DB82163E05E00834632 /* ProductCollectionViewCell.swift in Sources */,
 				3BF76FC3212466DC0016BE5F /* Common.swift in Sources */,
 				3BF76FEA21247A3B0016BE5F /* MyMaterialsViewController.swift in Sources */,
 				3B595845212EE4A600E74838 /* BLEDeviceTableViewCell.swift in Sources */,
@@ -617,7 +643,9 @@
 				3BF7700A21286FD80016BE5F /* AssignWotkerViewController.swift in Sources */,
 				3B297633215A286400396243 /* ProductTabBarViewController.swift in Sources */,
 				3B297631215A22F600396243 /* ScanQRItem.swift in Sources */,
+				3B977DAF2163DD1A00834632 /* SearchProductViewController.swift in Sources */,
 				3BF76FF02127B1CD0016BE5F /* Activity.swift in Sources */,
+				3B977DBB2163EED900834632 /* PaymentViewController.swift in Sources */,
 				3BF76FCE21246FCC0016BE5F /* Bluetooth.swift in Sources */,
 				3BF76FD5212470010016BE5F /* ApiModel.swift in Sources */,
 				3BF76FC721246F8C0016BE5F /* TypeExtention.swift in Sources */,

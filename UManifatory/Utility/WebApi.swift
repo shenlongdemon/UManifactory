@@ -18,8 +18,8 @@ import Foundation
 import Alamofire
 import ObjectMapper
 class WebApi{
-    static let HOST = "http://96.93.123.233:5000"
-    //static let HOST = "http://192.168.1.8:5000"
+    //static let HOST = "http://96.93.123.233:5000"
+    static let HOST = "http://192.168.1.8:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
@@ -46,7 +46,10 @@ class WebApi{
     static let FINISH_TASK = "\(WebApi.HOST)/api/manifactory/finishTask"
     static let UPLOAD_BEACON_LOCATION = "\(WebApi.HOST)/api/manifactory/uploadBeaconLocation"
     static let GET_PRODUCTS_ON_WEB = "\(WebApi.HOST)/api/sellrecognizer/getProductsOnWeb?obj={name}"
-    
+    static let PUBLISH_SELL = "\(WebApi.HOST)/api/sellrecognizer/publishSell"
+    static let CANCEL_SELL =  "\(WebApi.HOST)/api/sellrecognizer/cancelSell"
+    static let GET_PRODUCT_BY_CATEGORY = "\(WebApi.HOST)/api/sellrecognizer/getProductsByCategory"
+    static let COMFIRM_RECEIVED = "\(WebApi.HOST)/api/sellrecognizer/confirmReceiveItem"
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
@@ -526,6 +529,28 @@ class WebApi{
                 }
         }
     }
+    
+    static func confirmReceived(itemId: String,completion: @escaping (_ done: Bool )->Void){
+        
+        let url = URL(string: "\(WebApi.COMFIRM_RECEIVED)?id=\(itemId)")
+        
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(false)
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+                
+        }
+    }
+    
     static func getProductsByBluetoothIds(bluetoothIds: [String], completion: @escaping (_ items: [Item] )->Void){
         
         let parameters: Parameters = [
@@ -593,6 +618,71 @@ class WebApi{
                 
                 if(apiModel.Status == 1){
                     let products: [ProductSearch] = Mapper<ProductSearch>().mapArray(JSONObject: apiModel.Data) ?? []
+                    completion(products)
+                }
+                else {
+                    completion([])
+                }
+                
+        }
+    }
+    static func publishSell(itemId: String, ownerInfo: UserInfo, completion: @escaping (_ item: Item? )->Void){
+        let parameters: Parameters = [
+            "itemId": itemId,
+            "userInfo": ownerInfo.toJSON()
+        ]
+        let url = URL(string: WebApi.PUBLISH_SELL)
+        
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let item : Item? = Mapper<Item>().map(JSONObject:apiModel.Data)
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+                
+        }
+    }
+    
+    static func cancelSell(itemId: String,completion: @escaping (_ done: Bool )->Void){
+        
+        let url = URL(string: "\(WebApi.CANCEL_SELL)?id=\(itemId)")
+        
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(false)
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+                
+        }
+    }
+    static func getProductsByCategory(categoryId: String, completion: @escaping (_ list:[Item])->Void){
+        let url = URL(string: "\(WebApi.GET_PRODUCT_BY_CATEGORY)?categoryId=\(categoryId)&pageNum=1&pageSize=10000")
+        WebApi.manager().request(url!)
+            .responseJSON { (data) in
+                
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion([])
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let products: [Item] = Mapper<Item>().mapArray(JSONObject: apiModel.Data) ?? []
                     completion(products)
                 }
                 else {

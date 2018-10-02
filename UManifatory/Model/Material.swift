@@ -87,7 +87,7 @@ class Material: IObject, Mappable {
     func getActivities() -> [Activity] {
         let activities = self.tasks.flatMap { (task) -> [Activity] in
             return task.workers.flatMap({ (worker) -> [Activity] in
-                return worker.activities
+                return worker.activities ?? []
             })
         }
         return activities

@@ -71,6 +71,10 @@ class MainViewController: BaseQRCodeReaderViewController {
     @IBAction func gotoIProducts(_ sender: Any) {
         self.performSegue(withIdentifier: Segue.main_to_items, sender: nil)
     }
+    @IBAction func gotoSearch(_ sender: Any) {
+        self.performSegue(withIdentifier: Segue.main_to_search, sender: nil)
+    }
+    
     func handleForMaterial(material: Material) {
         
         if material.isIAmOwner() {

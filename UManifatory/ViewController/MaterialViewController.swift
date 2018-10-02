@@ -99,9 +99,8 @@ class MaterialViewController : BaseViewController {
             self.items.addObjects(from: self.material.tasks)
             self.addGenCodeItem()
             self.tableView.reloadData()
-            if self.items.count == 0 {
-                self.viewDescription.isHidden = false
-            }
+            self.viewDescription.isHidden = self.items.count > 0
+            
             //self.dismissIndicatorDialog()
         }
     }
@@ -160,7 +159,7 @@ class MaterialViewController : BaseViewController {
         else if segue.identifier == Segue.task_to_gencode {
             let code = sender as! String
             let VC = segue.destination as! TaskGenCodeViewController
-            VC.initItem(item: code)
+            VC.initItem(item: code, time: self.material.updatedAt, logo: self.material.getImage())
         }
     }
     

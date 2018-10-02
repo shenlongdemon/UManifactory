@@ -29,7 +29,7 @@ class Worker: IObject, Mappable {
         self.activities   <- map["activities"]
         self.status   <- (map["status"],EnumTransform<Enums.TaskStatus>())
         for (_, activity) in self.activities.enumerated() {
-            activity.worker = self
+            activity.worker = self.owner
         }
     }
     func getActivityImages() -> [String] {

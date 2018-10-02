@@ -16,7 +16,7 @@ class Activity: IObject, Mappable {
     var images:[String] = []
     var files:[String]? = []
     var logoTask: String!
-    var worker: Worker!
+    var worker: User!
     var coord : Coord!
     override init() {
         
@@ -132,19 +132,16 @@ class Coord: Mappable {
        
     }
 }
-class BLECoord: Mappable {
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    var altitude: Double = 0.0
+class BLECoord: Coord {
     var distance: Double = 0.0
-    init() {
-        
+    override init() {
+        super.init()
     }
     required init?(map: Map) {
-        
+        super.init(map: map)
     }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
         self.latitude   <-  map["latitude"]
         self.longitude   <-  map["longitude"]
         self.altitude   <-  map["altitude"]

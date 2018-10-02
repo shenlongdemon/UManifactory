@@ -45,7 +45,7 @@ class Task: IObject, Mappable {
         self.materialOwnerId   <- map["materialOwnerId"]
         self.workers   <- map["workers"]        
         for (_, worker) in self.workers.enumerated() {
-            for (_, activity) in worker.activities.enumerated() {
+            for (_, activity) in (worker.activities ?? []).enumerated() {
                 activity.logoTask = self.image
             }
         }
@@ -67,7 +67,7 @@ class Task: IObject, Mappable {
     }
     func getActivities() -> [Activity] {
         let activities : [Activity] = self.workers.flatMap { (worker) -> [Activity] in
-            return worker.activities
+            return worker.activities ?? []
             } as [Activity]
         return activities;
     }
@@ -147,7 +147,7 @@ class Task: IObject, Mappable {
     }
     func getActivityDescriptions() -> String{
         let descriptions = self.workers.flatMap { (worker) -> [String] in
-            return worker.activities.map({ (activity) -> String in
+            return (worker.activities ?? []).map({ (activity) -> String in
                 return activity.description
             })
         }

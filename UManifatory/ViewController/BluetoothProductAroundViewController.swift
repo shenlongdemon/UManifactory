@@ -81,21 +81,24 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
         
         self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : ProductTableViewCell.height)
         self.tableAdapter.onDidSelectRowAt { (item) in
-            //self.performSegue(withIdentifier: Segue.goods_to_detail, sender: item)
+            self.performSegue(withIdentifier: Segue.bluetooth_around_to_product, sender: item)
         }
         self.tableView.delegate = self.tableAdapter
         self.tableView.dataSource = self.tableAdapter
         
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == Segue.bluetooth_around_to_product {
+            let item = sender as! Item
+            let VC = segue.destination as! ProductTabBarViewController
+            VC.initItem(item: item)
+        }
     }
-    */
+    
     
 }
 

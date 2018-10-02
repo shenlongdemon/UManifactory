@@ -80,6 +80,9 @@ class Item: IObject, Mappable {
         let str = "\(self.name)\n\n\(self.description)\n\n\(self.material?.getAllDescription() ?? "")"
         return str
     }
+    func isPublish() -> Bool{
+        return self.sellCode != ""
+    }
 }
 class Section: Mappable {
     var code : String = ""

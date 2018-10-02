@@ -99,16 +99,18 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
     }
     func showAllActivities()  {
         self.items.removeAllObjects()
-        let activities = self.material?.getActivities().sorted { (a1, a2) -> Bool in
-            return a1.time > a2.time
-        } ?? []
-        let maintainceActivity: [Activity] = self.item?.maintains.sorted { (a1, a2) -> Bool in
-            return a1.time > a2.time
-        } ?? []
-        let activityesInItem : [Activity] = self.item?.material?.getActivities() ?? []
-        self.items.addObjects(from: maintainceActivity)
-        self.items.addObjects(from: activities)
-        self.items.addObjects(from: activityesInItem)
+        if self.itemId != "" {
+            let maintainceActivity: [Activity] = self.item?.maintains.sorted { (a1, a2) -> Bool in
+                return a1.time > a2.time
+                } ?? []
+            self.items.addObjects(from: maintainceActivity)
+        }
+        else {
+            let activities = self.material?.getActivities().sorted { (a1, a2) -> Bool in
+                return a1.time > a2.time
+                } ?? []
+            self.items.addObjects(from: activities)
+        }
         self.tableView.reloadData()
         
         var bounds = GMSCoordinateBounds()

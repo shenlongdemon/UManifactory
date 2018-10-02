@@ -60,7 +60,10 @@ class ItemHistoryViewController: BaseViewController {
         self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : ItemHistoryTableViewCell.height)
         
         self.tableAdapter.onDidSelectRowAt { (item) in
-            
+            let itemHistory = item as! ItemHistory
+            if let activity = itemHistory.activity {
+                self.performSegue(withIdentifier: Segue.itemhistory_to_activitydetail, sender: activity)
+            }
         }
         self.tableView.delegate = self.tableAdapter
         self.tableView.dataSource = self.tableAdapter
@@ -85,8 +88,17 @@ class ItemHistoryViewController: BaseViewController {
         }
         
         
-        let packaging = ItemHistory(location: location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage())
+        let packaging = ItemHistory(location: location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage(),  activity: nil)
         self.items.add(packaging)
+        
+        let tasks = (self.item.material?.tasks ?? []).reversed().flatMap { (task) -> [ItemHistory] in
+            
+            let activities = task.getActivities().reversed().map({ (activity) -> ItemHistory in                
+                return ItemHistory(location: activity.coord, name: activity.title, time: activity.time,  image: Util.getImage(data64:  task.image), activity: activity)
+            })
+            return activities
+        }
+        self.items.addObjects(from: tasks)
         
         self.tableView.reloadData()
         
@@ -120,14 +132,19 @@ class ItemHistoryViewController: BaseViewController {
         }
         
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == Segue.itemhistory_to_activitydetail {
+            let item = sender as! Activity
+            let VC = segue.destination as! ActivityDetailViewController
+            VC.initItem(item: item)
+        }
     }
-    */
+    
 
 }

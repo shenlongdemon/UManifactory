@@ -29,7 +29,7 @@ class ActivityDetailViewController: BaseViewController {
                 self.imgPDF.addGestureRecognizer(tapGestureRecognizer)
             }
         }
-        self.lbWorkerName.text = "\(self.activity.worker.owner.firstName) \(self.activity.worker.owner.lastName)"
+        self.lbWorkerName.text = "\(self.activity.worker.firstName) \(self.activity.worker.lastName)"
         
         self.lbDate.text = Util.getDate(milisecond: self.activity.time, format: "yyyy-MM-dd")
         self.lbTime.text = Util.getDate(milisecond: self.activity.time, format: "HH:mm a")

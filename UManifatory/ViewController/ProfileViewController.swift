@@ -21,7 +21,9 @@ class ProfileViewController: BaseViewController {
     let user = StoreUtil.getUser()!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imgProfile.image = Util.getImage(data64: user.image)
+        self.user.getImage { (img) in
+            self.imgProfile.image = img
+        }
         self.imgQRCode.image = Util.getQRCodeImage(str: self.user.id)
         
         self.tfFirstName.text = self.user.firstName

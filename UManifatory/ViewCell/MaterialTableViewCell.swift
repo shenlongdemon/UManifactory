@@ -29,7 +29,9 @@ class MaterialTableViewCell: TableCell {
         super.initData(object: object)
         self.item = object as! Material
         self.lbName.text = self.item.name
-        self.imgImage.image = Util.getImage(data64: self.item.image)
+        self.item.getImage { (img) in
+            self.imgImage.image  = img
+        }
         self.lbModifiedAt.text = Util.getDate(milisecond: self.item.updatedAt, format: "yyyy-MM-dd")
         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }

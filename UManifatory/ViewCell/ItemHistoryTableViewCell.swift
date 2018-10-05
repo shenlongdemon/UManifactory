@@ -17,7 +17,9 @@ class ItemHistoryTableViewCell: TableCell {
     var item: ItemHistory!
     override func initData(object: IObject) {
         self.item = object as! ItemHistory
-        self.imgImage.image = self.item.image
+        self.item.getImage { (img) in
+            self.imgImage.image = img
+        }
         self.imgImage.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         self.lbName.text = self.item.name
         self.lbDate.text = Util.getDate(milisecond: self.item.time, format: Constant.Date_Format)

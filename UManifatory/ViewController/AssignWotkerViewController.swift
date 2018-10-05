@@ -85,12 +85,7 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
                 if let worker = wk{
                     let task = self.material.getTask(id: self.taskId)!
                     task.workers.append(worker)
-                    
-                    self.items.removeAllObjects()
-                    self.items.addObjects(from: task.workers)
-                    self.viewDescription.isHidden = true
-                    self.collectionView.reloadData()
-                    Util.showAlert(message: "Assign done!")
+                    self.back()
                 }
                 else {
                     Util.showAlert(message: "Cannot assign!")
@@ -150,21 +145,32 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
     }
     func loadData(){
         self.items.removeAllObjects()
-        let task = self.material.tasks.first { (t) -> Bool in
-            return t.id == self.taskId
-        } as! Task
         
+        let task = self.material.getTask(id: self.taskId)!
         self.items.addObjects(from: task.workers)
-        if self.items.count == 0 {
-            self.viewDescription.isHidden = false
-        }
+        
+        self.viewDescription.isHidden = self.items.count > 0
         self.collectionView.reloadData()
+        
+//            self.collectionView.reloadData()
+//            self.collectionView.collectionViewLayout.invalidateLayout()
+//            self.collectionView.layoutSubviews()
+//            self.collectionView.reloadSections(IndexSet(integer: 0))
+//            var indexPaths: NSMutableArray = NSMutableArray()
+//            for (index, item) in self.items.enumerated() {
+//                let ip : IndexPath = IndexPath(row: index, section: 0)
+//                indexPaths.add(ip)
+//            }
+//            self.collectionView.layoutIfNeeded()
+//            self.collectionView.reloadItems(at: indexPaths as! [IndexPath])
+//            DispatchQueue.main.async(execute: self.collectionView.reloadData)
+//
+//            // Operation
+//            OperationQueue.main.addOperation(self.collectionView.reloadData)
+        
     }
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        
-        
-        
         
         reader.stopScanning()
         self.isScanning = false

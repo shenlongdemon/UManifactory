@@ -32,8 +32,9 @@ class BlockStatusTableViewCell: TableCell {
             self.selectionStyle = .none
         }
         else {
-        
-            self.imgImage.image = Util.getImage(data64: self.item.image)
+            self.item.getImage(completion: { (img) in
+                self.imgImage.image = img
+            })
             let lastActivity : Activity? = self.item.getLastActivity()
             self.lbDate.text = Util.getDate(milisecond: lastActivity?.time ?? 0, format: Constant.Date_Format)
             self.lbHour.text = Util.getDate(milisecond: lastActivity?.time ?? 0, format: Constant.Hour_Format)

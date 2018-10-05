@@ -37,22 +37,32 @@ class CreateTaskViewController: BaseViewController, UIImagePickerControllerDeleg
         dismiss(animated: true, completion: nil)
     }
     @IBAction func saveTask(_ sender: Any) {
-        let imgStr = Util.getData64(image: self.imgImage.image)
+        let imgs : [UIImage] = [self.imgImage.image ?? #imageLiteral(resourceName: "photo")]
+        let imgNames : [String] = [("\(NSUUID().uuidString.lowercased().replacingOccurrences(of: "-", with: "")).jpg")]
         let name = self.tfTitle.text ?? ""
         let description = self.tvDescription.text ?? ""
-        let user = StoreUtil.getUser()!
         self.showIndicatorDialog()
         
         Util.getUesrInfo { (ui) in
             guard let userInfo = ui else {
+                Util.showAlert(message: "Error !!!")
                 return
             }
-            WebApi.createTask(materialId: self.item.id, title: name, description: description, image: imgStr, userInfo: userInfo, completion: { (t) in
-                self.dismissIndicatorDialog()
+            WebApi.createTask(materialId: self.item.id, title: name, description: description, imageUrl: imgNames[0], userInfo: userInfo, completion: { (t) in
+                
                 if let task = t {
-                    self.back()
+                    WebApi.uploadActivityImages(taskId: task.id, images: imgs, names: imgNames, completion: { (done) in
+                        self.dismissIndicatorDialog()
+                        if done {
+                            self.back()
+                        }
+                        else {
+                            Util.showAlert(message: "Error !!!")
+                        }
+                    })
                 }
                 else {
+                    self.dismissIndicatorDialog()
                     Util.showAlert(message: "Error !!!")
                 }
             })

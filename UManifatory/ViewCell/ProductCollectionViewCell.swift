@@ -23,7 +23,9 @@ class ProductCollectionViewCell: CollectionCell {
         self.item = object as! Item
         
         self.lbName.text = "\(self.item.owner.lastName) \(self.item.owner.firstName)"
-        self.imgImage.image = self.item.getImage()
+        self.item.getImage { (img) in
+            self.imgImage.image = img
+        }
         self.lbPrice.text = "\(self.item.price)"
         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }

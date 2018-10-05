@@ -19,7 +19,7 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.8:5000"
+    static let HOST = "http://192.168.1.13:5000"
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
@@ -50,6 +50,9 @@ class WebApi{
     static let CANCEL_SELL =  "\(WebApi.HOST)/api/sellrecognizer/cancelSell"
     static let GET_PRODUCT_BY_CATEGORY = "\(WebApi.HOST)/api/sellrecognizer/getProductsByCategory"
     static let COMFIRM_RECEIVED = "\(WebApi.HOST)/api/sellrecognizer/confirmReceiveItem"
+    static let PAYMENT = "\(WebApi.HOST)/api/sellrecognizer/payment"
+    static let GET_DESCRIPTION_BY_QRCODE = "\(WebApi.HOST)/api/sellrecognizer/getDescriptionQRCode"
+
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
@@ -297,6 +300,33 @@ class WebApi{
             }
         }
     }
+    static func uploadImage(taskId: String, images: [UIImage], names: [String],completion: @escaping (_ done: Bool )->Void){
+        
+        let url = WebApi.UPLOAD_ACTIVITY_IMAGE.replacingOccurrences(of: "{id}", with: taskId)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (index, _) in images.enumerated() {
+                let imgData = UIImageJPEGRepresentation(images[index], 0.2)
+                let name = names[index]
+                multipartFormData.append(imgData!, withName: "imgUploader",fileName: name, mimeType: "image/jpg")
+                
+            }
+        }, to: url) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    completion(true)
+                }
+                
+            case .failure(let encodingError):
+                completion(false)
+            }
+        }
+    }
     static func uploadActivityFiles(taskId: String, fileUrls: [URL], names: [String],completion: @escaping (_ done: Bool )->Void){
         
         let url = WebApi.UPLOAD_ACTIVITY_FILE.replacingOccurrences(of: "{id}", with: taskId)
@@ -370,12 +400,12 @@ class WebApi{
                 }
         }
     }
-    static func createMaterial(ownerId: String, title: String, description: String, image: String, bluetooth: BLEDevice?, userInfo: UserInfo, completion: @escaping (_ material: Material? )->Void){
+    static func createMaterial(ownerId: String, title: String, description: String, imageUrl: String, bluetooth: BLEDevice?, userInfo: UserInfo, completion: @escaping (_ material: Material? )->Void){
         let parameters: Parameters = [
             "ownerId": ownerId,
             "name": title,
             "description": description,
-            "image": image,
+            "imageUrl": imageUrl,
             "bluetooth": bluetooth?.id ?? "",
             "userInfo" : userInfo.toJSON()
         ]
@@ -397,12 +427,12 @@ class WebApi{
                 }
         }
     }
-    static func createTask(materialId: String, title: String, description: String, image: String, userInfo: UserInfo, completion: @escaping (_ task: Task? )->Void){
+    static func createTask(materialId: String, title: String, description: String, imageUrl: String, userInfo: UserInfo, completion: @escaping (_ task: Task? )->Void){
         let parameters: Parameters = [
             "materialId": materialId,
             "name": title,
             "description": description,
-            "image": image,
+            "imageUrl": imageUrl,
             "userInfo" : userInfo.toJSON()
         ]
         let url = URL(string: WebApi.CREATE_TASK)
@@ -687,6 +717,56 @@ class WebApi{
                 }
                 else {
                     completion([])
+                }
+                
+        }
+    }
+    
+    static func payment(itemId: String, userInfo: UserInfo, completion: @escaping (_ item: Item? )->Void){
+        let parameters: Parameters = [
+            "itemId": itemId,
+            "buyerInfo": userInfo.toJSON()
+        ]
+        let url = URL(string: WebApi.PAYMENT)
+        
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion(nil)
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let dic = apiModel.Data as! NSDictionary
+                    let item : Item = dic.cast()!
+                    completion(item)
+                }
+                else {
+                    completion(nil)
+                }
+                
+        }
+    }
+    static func getDescriptionQRCode(code: String, completion: @escaping (_ description: String )->Void){
+        let parameters: Parameters = [
+            "code": code
+        ]
+        let url = URL(string: WebApi.GET_DESCRIPTION_BY_QRCODE)
+        
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion("Error")
+                    return
+                }
+                
+                if(apiModel.Status == 1){
+                    let description = apiModel.Data as! String
+                    
+                    completion(description)
+                }
+                else {
+                    completion("Error")
                 }
                 
         }

@@ -23,7 +23,9 @@ class WorkerCollectionViewCell: CollectionCell {
         self.item = object as! Worker
         
         self.lbName.text = "\(self.item.owner.lastName) \(self.item.owner.firstName)"
-        self.imgImage.image = self.item.owner.getImage()
+        self.item.owner.getImage { (img) in
+            self.imgImage.image = img
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

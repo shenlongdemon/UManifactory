@@ -18,7 +18,7 @@ class User: IObject, Mappable {
     var zipCode: String = ""
     var state: String = ""
     var country: String = ""
-    var image: String = ""
+    var imageUrl: String = ""
     required init?(map: Map) {
         
     }
@@ -30,12 +30,14 @@ class User: IObject, Mappable {
         self.zipCode     <- map["zipCode"]
         self.state     <- map["state"]
         self.country     <- map["country"]
-        self.image     <- map["image"]
+        self.imageUrl     <- map["imageUrl"]
         self.phone     <- map["phone"]
         self.password     <- map["password"]
     }
-    func getImage() -> UIImage? {
-        return Util.getImage(data64: self.image)
+    func getImage(completion: @escaping (_ img: UIImage?)->Void){
+        AppUtil.getImage(imageName: self.imageUrl) { (img) in
+            completion(img)
+        }
     }
 }
 

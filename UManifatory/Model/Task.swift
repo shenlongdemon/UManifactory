@@ -12,7 +12,7 @@ import ObjectMapper
 class Task: IObject, Mappable {
     var name: String = ""
     var description: String = ""
-    var image: String = ""
+    var imageUrl: String = ""
     var code: String = ""
     var workers : [Worker] = []
     var materialId: String = ""
@@ -39,18 +39,22 @@ class Task: IObject, Mappable {
         self.id <- map["id"]
         self.name     <- map["name"]
         self.description     <- map["description"]
-        self.image   <- map["image"]
+        self.imageUrl   <- map["imageUrl"]
         self.code   <- map["code"]
         self.materialId   <- map["materialId"]
         self.materialOwnerId   <- map["materialOwnerId"]
         self.workers   <- map["workers"]        
         for (_, worker) in self.workers.enumerated() {
             for (_, activity) in (worker.activities ?? []).enumerated() {
-                activity.logoTask = self.image
+                activity.logoTaskUrl = self.imageUrl
             }
         }
     }
-    
+    func getImage(completion: @escaping (_ img: UIImage?)->Void){
+        AppUtil.getImage(imageName: self.imageUrl) { (img) in
+            completion(img)
+        }
+    }
     func isIAmOwner() -> Bool{
         let user = StoreUtil.getUser()!
         return self.workers.contains(where: { (worker) -> Bool in

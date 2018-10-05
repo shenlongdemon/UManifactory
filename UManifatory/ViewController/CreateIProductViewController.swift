@@ -142,7 +142,8 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
             Util.showOKAlert(VC: self, message: "Please select category")
             return
         }
-        
+        let imgs : [UIImage] = [self.imgImage.image ?? #imageLiteral(resourceName: "photo")]
+        let imgNames : [String] = [("\(NSUUID().uuidString.lowercased().replacingOccurrences(of: "-", with: "")).jpg")]
         self.showIndicatorDialog()
         let device = self.bluetoothDevice?.id ?? ""
         self.bluetoothDevice?.proximityUUID = (self.tfBluetooth.text ?? "").uppercased()
@@ -151,7 +152,7 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
         item.price = tfPrice.text!
         item.description = tvDescription.text
         item.category = cat
-        item.image = Util.getData64(image: imgImage.image)
+        item.imageUrl = imgNames[0]
         item.bluetoothCode = device
         item.iBeacon = self.bluetoothDevice
         item.material = self.material
@@ -165,8 +166,14 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
                 item.owner = his
                 WebApi.addItem(item: item, completion: { (item) in
                     if let it = item {
-                        Util.showAlert(message: "Add done !!!", okHandle: {
-                            self.back()
+                        WebApi.uploadActivityImages(taskId: it.id, images: imgs, names: imgNames, completion: { (done) in
+                            self.dismissIndicatorDialog()
+                            if done {
+                                self.back()
+                            }
+                            else {
+                                Util.showAlert(message: "Error !!!")
+                            }
                         })
                     }
                     else{
@@ -182,6 +189,9 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
         }
     }
     
+    @IBAction func selectMyMaterial(_ sender: Any) {
+        self.performSegue(withIdentifier: Segue.additem_to_mymaterial, sender: nil)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -196,7 +206,15 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
             let vc = segue.destination as! BluetoothViewController
             vc.initProto(choiceMaterialProto: self)
         }
+        else if segue.identifier == Segue.additem_to_mymaterial {
+            let vc = segue.destination as! MyMaterialsViewController
+            vc.initItem(choiceMyMaterialProto: self)
+        }
     }
-    
-
 }
+extension CreateIProductViewController : ChoiceMyMaterialProto {
+    func select(material: Material) {
+        self.selectMaterial(material: material)
+    }
+}
+

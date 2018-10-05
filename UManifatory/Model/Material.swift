@@ -17,7 +17,7 @@ class Material: IObject, Mappable {
     var code : String = ""
     var bluetooth : String = ""
     var tasks : [Task] = []
-    var image : String = ""
+    var imageUrl : String = ""
     var createdAt: Int64 = 0
     var updatedAt: Int64 = 0
     override init() {
@@ -32,7 +32,7 @@ class Material: IObject, Mappable {
         self.name   <- map["name"]
         self.ownerId   <- map["ownerId"]
         self.description   <- map["description"]
-        self.image   <- map["image"]
+        self.imageUrl   <- map["imageUrl"]
         self.code   <- map["code"]
         self.bluetooth   <- map["bluetooth"]
         self.tasks   <- map["tasks"]
@@ -114,8 +114,10 @@ class Material: IObject, Mappable {
             return task.getActivityImages()
         })
     }
-    func getImage() -> UIImage? {
-        return Util.getImage(data64: self.image)
+    func getImage(completion: @escaping (_ img: UIImage?)->Void){
+        AppUtil.getImage(imageName: self.imageUrl) { (img) in
+            completion(img)
+        }
     }
     private func getTaskDescription() -> String{
         let descriptions = self.tasks.map { (task) -> String in

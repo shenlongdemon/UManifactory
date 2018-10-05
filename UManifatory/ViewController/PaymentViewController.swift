@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentViewController: BaseViewController {
-
+    var item: Item!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +21,29 @@ class PaymentViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func payment(_ sender: Any) {
+        self.showIndicatorDialog()
+        Util.getUesrInfo { (userInfo) in
+            if let userI = userInfo {
+                WebApi.payment(itemId: self.item.id, userInfo: userI, completion: { (i) in
+                    self.dismissIndicatorDialog()
+                    if let _ = i {
+                        self.bactToRoot()
+                    }
+                    else {
+                        Util.showAlert(message: "Cannot buy this item")
+                    }
+                    
+                })
+            }
+            else {
+                self.dismissIndicatorDialog()
+            }
+        }
+    }
+    func initItem(item: Item){
+        self.item = item
+    }
     /*
     // MARK: - Navigation
 

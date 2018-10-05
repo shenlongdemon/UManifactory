@@ -15,7 +15,7 @@ class Item: IObject, Mappable {
     var price: String = ""
     var description: String = ""
     var category: Category!
-    var image: String = ""
+    var imageUrl: String = ""
     
     var code: String = ""
     var sellCode: String = ""
@@ -43,7 +43,7 @@ class Item: IObject, Mappable {
         self.name     <- map["name"]
         self.price   <- map["price"]
         self.category     <- map["category"]
-        self.image   <- map["image"]
+        self.imageUrl   <- map["imageUrl"]
         self.description     <- map["description"]
         self.code     <- map["code"]
         self.sellCode   <- map["sellCode"]
@@ -60,8 +60,10 @@ class Item: IObject, Mappable {
         self.time   <- map["time"]
         self.maintains   <- map["maintains"]
     }
-    func getImage() -> UIImage? {
-        return Util.getImage(data64: self.image)
+    func getImage(completion: @escaping (_ img: UIImage?)->Void){
+        AppUtil.getImage(imageName: self.imageUrl) { (img) in
+            completion(img)
+        }
     }
     func getProductCode() -> String {
         var code = ""

@@ -13,28 +13,42 @@ class TaskGenCodeViewController: BaseViewController {
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var imgTask: BaseImage!
     @IBOutlet weak var imgImage: UIImageView!
-    var item: String = ""
+    var code: String = ""
     var time: Int64 = Util.getCurrentMillis()
-    var logo: UIImage?
+    var logoUrl: String = ""
     @IBOutlet weak var tvCode: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imgImage.image = Util.getQRCodeImage(str: self.item)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(qrCodeImageTapped(tapGestureRecognizer:)))
+        self.imgImage.isUserInteractionEnabled = true
+        self.imgImage.addGestureRecognizer(tapGestureRecognizer)
+        self.imgImage.image = Util.getQRCodeImage(str: self.code)
         // Do any additional setup after loading the view.
-        self.tvCode.text = self.item
-        self.imgTask.image = logo
+        self.tvCode.text = self.code
+        AppUtil.getImage(imageName: self.logoUrl) { (img) in
+            self.imgTask.image = img
+        }
         self.lbDate.text = Util.getDate(milisecond: self.time, format: Constant.Date_Format)
     }
-
+    
+    @objc func qrCodeImageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        if self.code != "" {
+            WebApi.getDescriptionQRCode(code: self.code) { (description) in
+                Util.showOKAlert(VC: self, message: description);
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func initItem(item: String, time: Int64, logo: UIImage?){
-        self.item = item
+    func initItem(code: String, time: Int64, logoUrl: String){
+        self.code = code
         self.time = time
-        self.logo = logo
+        self.logoUrl = logoUrl
     }
     /*
     // MARK: - Navigation

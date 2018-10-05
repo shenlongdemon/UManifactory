@@ -35,7 +35,9 @@ class ActivityTableViewCell: TableCell {
         self.tvDescription.text = self.item.description
         self.lbDate.text = Util.getDate(milisecond: self.item.time, format: "yyyy-MM-dd")
         self.lbHour.text = Util.getDate(milisecond: self.item.time, format: "HH:mm a")
-        self.imgImage.image = self.item.worker.getImage() // Util.getImage(data64: self.item.logoTask)
+        self.item.worker.getImage { (img) in
+            self.imgImage.image = img
+        }
         
         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }

@@ -64,7 +64,7 @@ class ItemInfoViewController: BaseViewController {
     }
     
     @IBAction func doAction(_ sender: Any) {
-        self.showIndicatorDialog()
+        
         let action = self.makeButtonAction()
         if action == Enums.ItemActionType.cancel_sell {
             self.cancelSell()
@@ -145,7 +145,9 @@ class ItemInfoViewController: BaseViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segue.itemdetail_to_payment {
-            
+            let item = sender as! Item
+            let VC = segue.destination as! PaymentViewController
+            VC.initItem(item: item)
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

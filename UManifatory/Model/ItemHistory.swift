@@ -11,14 +11,21 @@ import UIKit
 class ItemHistory: IObject {
     var location: Coord
     var name: String
+    var code: String
     var time: Int64
-    var image: UIImage?
+    var imageUrl: String?
     var activity: Activity?
-    init(location: Coord, name: String, time: Int64, image: UIImage?, activity: Activity?){
+    init(location: Coord, name: String, code: String, time: Int64, imageUrl: String?, activity: Activity?){
         self.location = location
         self.name = name
+        self.code = code
         self.time = time
-        self.image = image
+        self.imageUrl = imageUrl
         self.activity = activity
+    }
+    func getImage(completion: @escaping (_ img: UIImage?)->Void){
+        AppUtil.getImage(imageName: self.imageUrl ?? "") { (img) in
+            completion(img)
+        }
     }
 }

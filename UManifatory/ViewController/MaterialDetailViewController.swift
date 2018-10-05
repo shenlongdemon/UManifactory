@@ -14,6 +14,8 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
 
     @IBOutlet weak var mapUIView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnAddMaintain: UIButton!
+    
     var tableAdapter:TableAdapter!
     var items: NSMutableArray = NSMutableArray()
     var material : Material?
@@ -21,6 +23,7 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
     var itemId: String!
     var item : Item?
     var mapView : GMSMapView!
+    let user = StoreUtil.getUser()!
     override func viewDidLoad() {
         super.viewDidLoad()
         initTable()
@@ -80,9 +83,14 @@ class MaterialDetailViewController: BaseViewController, GMSMapViewDelegate  {
             WebApi.getItemById(id: self.itemId, completion: { (it) in
                 if let i = it {
                     self.item = i
+                    if self.item?.owner.id != self.user.id {
+                        self.btnAddMaintain.isHidden = true
+                    }
                 }
+                
                 self.dismissIndicatorDialog()
                 self.showAllActivities()
+                
             })
         }
         else {

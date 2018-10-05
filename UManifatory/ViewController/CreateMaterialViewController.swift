@@ -53,7 +53,8 @@ class CreateMaterialViewController: BaseViewController, ChoiceProto, UIImagePick
         self.createMaterial()
     }
     func createMaterial(){
-        let imgStr = Util.getData64(image: self.imgImage.image)
+        let imgs : [UIImage] = [self.imgImage.image ?? #imageLiteral(resourceName: "photo")]
+        let imgNames : [String] = [("\(NSUUID().uuidString.lowercased().replacingOccurrences(of: "-", with: "")).jpg")]
         let name = self.tfTitle.text ?? ""
         let description = self.tfDescription.text ?? ""
         let user = StoreUtil.getUser()!
@@ -62,14 +63,20 @@ class CreateMaterialViewController: BaseViewController, ChoiceProto, UIImagePick
             guard let userInfo = ui else {
                 return
             }
-            WebApi.createMaterial(ownerId: user.id, title: name, description: description, image: imgStr, bluetooth: self.bleDevice, userInfo: userInfo, completion: { (mat) in
-                self.dismissIndicatorDialog()
+            WebApi.createMaterial(ownerId: user.id, title: name, description: description, imageUrl: imgNames[0], bluetooth: self.bleDevice, userInfo: userInfo, completion: { (mat) in
                 if let material = mat {
-                    
-                    self.back()
-                    
+                    WebApi.uploadActivityImages(taskId: material.id, images: imgs, names: imgNames, completion: { (done) in
+                        self.dismissIndicatorDialog()
+                        if done {
+                            self.back()
+                        }
+                        else {
+                            Util.showAlert(message: "Error !!!")
+                        }
+                    })                    
                 }
                 else {
+                    self.dismissIndicatorDialog()
                     Util.showAlert(message: "Error !!!")
                 }
             })

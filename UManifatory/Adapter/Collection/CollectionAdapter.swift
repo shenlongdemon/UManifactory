@@ -55,9 +55,7 @@ class CollectionAdapter: NSObject,UICollectionViewDelegate, UICollectionViewData
             self.didSelectRowAt?(item as! IObject)
         }
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{       
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! CollectionCell
         if self.isIndexPathValid(indexPath: indexPath) {
             let item = self.items[indexPath.row]
@@ -66,7 +64,6 @@ class CollectionAdapter: NSObject,UICollectionViewDelegate, UICollectionViewData
             cell.performSelectAt = self.didPerformSelectRowAt
             cell.isHidden = !(self.filterPredicate?(item as! IObject) ?? true)
         }
-        
         return cell
         
     }

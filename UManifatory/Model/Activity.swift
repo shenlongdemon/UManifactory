@@ -15,7 +15,7 @@ class Activity: IObject, Mappable {
     var time: Int64 = 0
     var images:[String] = []
     var files:[String]? = []
-    var logoTask: String!
+    var logoTaskUrl: String!
     var worker: User!
     var coord : Coord!
     override init() {

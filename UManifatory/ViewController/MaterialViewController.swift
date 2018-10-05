@@ -79,8 +79,9 @@ class MaterialViewController : BaseViewController {
         
     }
     func loadData()  {
-        //self.showIndicatorDialog()
+        self.showIndicatorDialog()
         WebApi.getMaterialById(id: self.materialId) { (material) in
+            self.dismissIndicatorDialog()
             guard let mat = material else {
                 Util.showAlert(message: "Material is not valid!")
                 return
@@ -91,8 +92,9 @@ class MaterialViewController : BaseViewController {
                 print("Done animating!")
                 // Do anything your heart desires...
             }
-
-            self.imgImage.image = Util.getImage(data64: self.material.image)
+            self.material.getImage(completion: { (img) in
+                self.imgImage.image = img
+            })
             self.lbName.text = self.material.name.uppercased()
             self.lbDate.text = Util.getDate(milisecond: self.material.createdAt, format: Constant.Date_Format)
             self.items.removeAllObjects()
@@ -101,7 +103,7 @@ class MaterialViewController : BaseViewController {
             self.tableView.reloadData()
             self.viewDescription.isHidden = self.items.count > 0
             
-            //self.dismissIndicatorDialog()
+            
         }
     }
     func addGenCodeItem(){
@@ -159,7 +161,7 @@ class MaterialViewController : BaseViewController {
         else if segue.identifier == Segue.task_to_gencode {
             let code = sender as! String
             let VC = segue.destination as! TaskGenCodeViewController
-            VC.initItem(item: code, time: self.material.updatedAt, logo: self.material.getImage())
+            VC.initItem(code: code, time: self.material.updatedAt, logoUrl: self.material.imageUrl)
         }
     }
     

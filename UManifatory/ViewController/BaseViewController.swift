@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
         // self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // self.navigationController?.navigationBar.topItem?.title = " "
         
-        //self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +57,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         self.dismissIndicatorDialog()
-        self.navigationController?.navigationBar.backItem?.title = ""
+        //self.navigationController?.navigationBar.backItem?.title = ""
     }
     func bactToRoot()  {
         self.dismiss(animated: true, completion: {});

@@ -61,8 +61,13 @@ class ItemHistoryViewController: BaseViewController {
         
         self.tableAdapter.onDidSelectRowAt { (item) in
             let itemHistory = item as! ItemHistory
+            // if it has activity then show activity detail
             if let activity = itemHistory.activity {
                 self.performSegue(withIdentifier: Segue.itemhistory_to_activitydetail, sender: activity)
+            }
+            // or show code of history
+            else {
+                self.performSegue(withIdentifier: Segue.itemhistory_to_code, sender: itemHistory)
             }
         }
         self.tableView.delegate = self.tableAdapter
@@ -82,19 +87,22 @@ class ItemHistoryViewController: BaseViewController {
     }
     
     func showAllHistories()  {
-        self.items.removeAllObjects()
-        guard let location = self.item.location else {
-            return
+        self.items.removeAllObjects()        
+        let actions = self.item.section.history.reversed()
+        for (index, history) in actions.enumerated() {
+            if index < actions.count - 1 {
+                let action = ItemHistory(location: history.position.coord, name: "BUY", code: history.code, time: history.time, imageUrl: history.imageUrl,  activity: nil)
+                self.items.add(action)
+            }
         }
-        
-        
-        let packaging = ItemHistory(location: location.coord, name: "Packaging", time: self.item.time, image: self.item.getImage(),  activity: nil)
+        let package = self.item.section.history[0]
+        let packaging = ItemHistory(location: package.position.coord, name: "PACKAGING",code: package.code, time: package.time, imageUrl: self.item.imageUrl,  activity: nil)
         self.items.add(packaging)
         
         let tasks = (self.item.material?.tasks ?? []).reversed().flatMap { (task) -> [ItemHistory] in
             
             let activities = task.getActivities().reversed().map({ (activity) -> ItemHistory in                
-                return ItemHistory(location: activity.coord, name: activity.title, time: activity.time,  image: Util.getImage(data64:  task.image), activity: activity)
+                return ItemHistory(location: activity.coord, name: activity.title, code: "", time: activity.time, imageUrl: task.imageUrl, activity: activity)
             })
             return activities
         }
@@ -143,6 +151,11 @@ class ItemHistoryViewController: BaseViewController {
             let item = sender as! Activity
             let VC = segue.destination as! ActivityDetailViewController
             VC.initItem(item: item)
+        }
+        else if segue.identifier == Segue.itemhistory_to_code {
+            let itemHistory = sender as! ItemHistory
+            let VC = segue.destination as! TaskGenCodeViewController
+            VC.initItem(code: itemHistory.code, time: itemHistory.time, logoUrl: itemHistory.imageUrl ?? "")
         }
     }
     

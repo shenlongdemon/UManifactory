@@ -7,14 +7,16 @@
 //
 
 import UIKit
-
+protocol ChoiceMyMaterialProto {
+    func select(material: Material)
+}
 class MyMaterialsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var progress: UIActivityIndicatorView!
     var items: NSMutableArray = NSMutableArray()
     var tableAdapter:TableAdapter!
-    
+    var choiceMyMaterialProto : ChoiceMyMaterialProto?
     override func viewDidLoad() {
         super.viewDidLoad()
         initTable()
@@ -51,13 +53,22 @@ class MyMaterialsViewController: BaseViewController {
         
         self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : MaterialTableViewCell.height)
         self.tableAdapter.onDidSelectRowAt { (item) in
-            self.performSegue(withIdentifier: Segue.list_to_project, sender: item)
+            let material = item as! Material
+            if let choiceMyMaterialProto = self.choiceMyMaterialProto{
+                choiceMyMaterialProto.select(material: material)
+                self.back()
+            }
+            else {
+                self.performSegue(withIdentifier: Segue.list_to_project, sender: material)
+            }
         }
         self.tableView.delegate = self.tableAdapter
         self.tableView.dataSource = self.tableAdapter
         
     }
-
+    func initItem(choiceMyMaterialProto : ChoiceMyMaterialProto?){
+        self.choiceMyMaterialProto = choiceMyMaterialProto
+    }
     
     // MARK: - Navigation
 

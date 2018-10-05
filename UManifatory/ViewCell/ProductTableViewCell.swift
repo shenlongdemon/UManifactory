@@ -23,6 +23,7 @@ class ProductTableViewCell: TableCell {
     @IBOutlet weak var lbBluetoothName: UILabel!
     @IBOutlet weak var imgBluetooth: UIImageView!
     var item : Item!
+    let user = StoreUtil.getUser()!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,13 +40,20 @@ class ProductTableViewCell: TableCell {
         if (self.item.id.count > 0){
             heightImage.constant = 95
             self.lbName.text = "\(self.item.name)"
-            self.imgImage.image = item.getImage()
+            item.getImage(completion: { (img) in
+                self.imgImage.image = img
+            })
             self.lbCategory.text = self.item.category.value
             
             self.lbPrice.text = "$ \(self.item.price)"
             self.lbStatus.text = ""
             if self.item.buyerCode.count > 0 {
-                self.lbStatus.text = "SOLD by \(self.item.buyer?.firstName ?? "" )"
+                if (self.item.buyer?.id ?? "") == user.id {
+                    self.lbStatus.text = "BOUGHT from \(self.item.owner.firstName)"
+                }
+                else {
+                    self.lbStatus.text = "SOLD to \(self.item.buyer?.firstName ?? "" )"
+                }
                 self.lbStatus.textColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
             }
             else if self.item.sellCode.count > 0 {

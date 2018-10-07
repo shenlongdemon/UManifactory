@@ -125,10 +125,11 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
         self.performSegue(withIdentifier: Segue.additem_to_bluetoottmaterial, sender: nil)
     }
     
+    // select bluetooth for product
     func select(device: BLEDevice) {
         
         self.bluetoothDevice = device
-        // self.tfBluetooth.text = device.getName()
+        self.tfBluetooth.text = device.proximityUUID
         self.lbBluetooth.text = device.id
         
     }
@@ -142,11 +143,19 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
             Util.showOKAlert(VC: self, message: "Please select category")
             return
         }
+        guard (self.tfName.text ?? "").count > 0 else {
+            Util.showOKAlert(VC: self, message: "Please input name of product")
+            return
+        }
+        guard (self.tfPrice.text ?? "").count > 0 else {
+            Util.showOKAlert(VC: self, message: "Please input price")
+            return
+        }
         let imgs : [UIImage] = [self.imgImage.image ?? #imageLiteral(resourceName: "photo")]
         let imgNames : [String] = [("\(NSUUID().uuidString.lowercased().replacingOccurrences(of: "-", with: "")).jpg")]
         self.showIndicatorDialog()
         let device = self.bluetoothDevice?.id ?? ""
-        self.bluetoothDevice?.proximityUUID = (self.tfBluetooth.text ?? "").uppercased()
+        //self.bluetoothDevice?.proximityUUID = (self.tfBluetooth.text ?? "").uppercased()
         let item : Item = Item()
         item.name = tfName.text!
         item.price = tfPrice.text!
@@ -212,6 +221,7 @@ class CreateIProductViewController: BaseQRCodeReaderViewController,UIImagePicker
         }
     }
 }
+// select material from my list
 extension CreateIProductViewController : ChoiceMyMaterialProto {
     func select(material: Material) {
         self.selectMaterial(material: material)

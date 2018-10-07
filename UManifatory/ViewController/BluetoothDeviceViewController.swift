@@ -95,8 +95,31 @@ class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate
         print("scan stopped with \(self.devices.count) devices are founds")
     }
     func loadData() {
-        self.tableView.reloadData()
         self.progress.stopAnimating()
+        guard self.devices.count > 0 else {
+            return
+        }
+        self.showIndicatorDialog()
+        let bluetoothIds = self.devices.map { (bleDevice) -> String in
+            let ble = bleDevice as! BLEDevice
+            return ble.id
+        }
+
+        WebApi.getBeaconsByBluetoothIds(bluetoothIds: bluetoothIds) { (beacons) in
+            
+            for (_, bleDevice) in self.devices.enumerated() {
+                let ble = bleDevice as! BLEDevice
+                let beacon = beacons.first(where: { (bleBeacon) -> Bool in
+                    return bleBeacon.bluetoothId.uppercased() == ble.id.uppercased()
+                })
+                ble.proximityUUID = beacon?.beaconId ?? ""
+            }
+            self.dismissIndicatorDialog()
+            self.tableView.reloadData()
+        }
+        
+        
+        
         
     }
     func initItem(choiceProto : ChoiceProto){

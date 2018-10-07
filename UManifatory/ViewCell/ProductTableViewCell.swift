@@ -40,8 +40,8 @@ class ProductTableViewCell: TableCell {
         if (self.item.id.count > 0){
             heightImage.constant = 95
             self.lbName.text = "\(self.item.name)"
-            item.getImage(completion: { (img) in
-                self.imgImage.image = img
+            self.item.getImage(completion: { (img) in
+                self.imgImage.image = img                
             })
             self.lbCategory.text = self.item.category.value
             
@@ -71,13 +71,10 @@ class ProductTableViewCell: TableCell {
         }
         else{
             heightImage.constant = 0.0
-            
             self.lbName.text = self.item.name
             self.lbCategory.text = self.item.bluetoothCode
             self.lbPrice.text = self.item.price
             self.lbStatus.text = ""
-            
-            
         }
         self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
     }
@@ -91,13 +88,6 @@ class ProductTableViewCell: TableCell {
     override func getFrame() -> CGRect {
         return self.frame
     }
-    
-    //    @IBOutlet weak var lbModel: UILabel!
-    //    @IBOutlet weak var lbManufacture: UILabel!
-    //    @IBOutlet weak var lbLicensePlate: UILabel!
-    
-    
-    
     
     static let nibName = String(describing:  ProductTableViewCell.self)
     static let reuseIdentifier = String(describing: ProductTableViewCell.self)

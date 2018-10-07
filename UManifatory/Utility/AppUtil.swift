@@ -46,13 +46,14 @@ class AppUtil {
                 let u = URL(string:  urlString)
                 let data = try? Data(contentsOf: u!)
                 if let d = data {
-                    DispatchQueue.main.async { () -> Void in
-                        
+                    DispatchQueue.main.async { () -> Void in                        
                         completion(UIImage(data: d))
                     }
                 }
                 else {
-                    completion(nil)
+                    DispatchQueue.main.async { () -> Void in
+                        completion(nil)
+                    }
                 }
             }
         }

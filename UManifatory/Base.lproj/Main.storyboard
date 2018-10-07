@@ -86,7 +86,7 @@
                                 <color key="textColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="( Fill the manufactory bluetooth uuid )" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FsK-wN-Adf">
+                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="( Manufactory bluetooth uuid )" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FsK-wN-Adf">
                                 <rect key="frame" x="10" y="260" width="355" height="30"/>
                                 <color key="backgroundColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -278,7 +278,6 @@
                             <constraint firstItem="V7t-Tv-2Ks" firstAttribute="top" secondItem="LMN-V8-edt" secondAttribute="bottom" id="SbE-Hv-DGb"/>
                             <constraint firstItem="LMN-V8-edt" firstAttribute="top" secondItem="MNO-Hk-gVe" secondAttribute="bottom" constant="10" id="Tjf-8t-bcV"/>
                             <constraint firstAttribute="trailing" secondItem="V7t-Tv-2Ks" secondAttribute="trailing" constant="10" id="UUw-ek-T10"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GBF-CO-Pv5" secondAttribute="trailing" constant="20" symbolic="YES" id="Vee-AV-tBL"/>
                             <constraint firstItem="hiK-xq-zsd" firstAttribute="top" secondItem="c8T-zh-ddd" secondAttribute="bottom" constant="10" id="W93-oc-EyG"/>
                             <constraint firstItem="hfw-ce-5wl" firstAttribute="width" secondItem="hxf-gS-aue" secondAttribute="width" multiplier="1:5" id="WfR-ww-AQD"/>
                             <constraint firstItem="Gc5-5q-pQz" firstAttribute="top" secondItem="hiK-xq-zsd" secondAttribute="bottom" constant="10" id="WgE-HL-3Bi"/>
@@ -660,7 +659,7 @@
             </objects>
             <point key="canvasLocation" x="457" y="949"/>
         </scene>
-        <!--All Products-->
+        <!--All Processes-->
         <scene sceneID="sWS-Z8-9dc">
             <objects>
                 <viewController id="MY5-s0-QOt" customClass="MyMaterialsViewController" customModule="UManifatory" customModuleProvider="target" sceneMemberID="viewController">
@@ -720,7 +719,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ELT-eI-toq"/>
                     </view>
-                    <navigationItem key="navigationItem" title="All Products" id="29N-oy-fbw">
+                    <navigationItem key="navigationItem" title="All Processes" id="29N-oy-fbw">
                         <barButtonItem key="backBarButtonItem" title=" " id="vdU-mQ-t0Q"/>
                     </navigationItem>
                     <connections>
@@ -2692,7 +2691,7 @@
         <segue reference="ZY4-ZV-Jjg"/>
         <segue reference="4lS-Bx-qS9"/>
         <segue reference="77I-67-zHS"/>
-        <segue reference="g7j-6W-wa5"/>
+        <segue reference="Kiv-vu-UhX"/>
         <segue reference="jLc-LS-g6l"/>
         <segue reference="sPP-2h-Qy6"/>
         <segue reference="ahX-vO-9Gp"/>

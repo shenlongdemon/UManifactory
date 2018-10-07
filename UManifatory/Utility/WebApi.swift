@@ -19,7 +19,8 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.13:5000"
+    static let HOST = "http://192.168.1.16:5000"
+    //static let HOST = "http://52.175.200.74" // Azure
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"
@@ -52,7 +53,7 @@ class WebApi{
     static let COMFIRM_RECEIVED = "\(WebApi.HOST)/api/sellrecognizer/confirmReceiveItem"
     static let PAYMENT = "\(WebApi.HOST)/api/sellrecognizer/payment"
     static let GET_DESCRIPTION_BY_QRCODE = "\(WebApi.HOST)/api/sellrecognizer/getDescriptionQRCode"
-
+    static let GET_BEACONS_BY_BLUETOOTH_IDS = "\(WebApi.HOST)/api/manifactory/getBeaconsByBluetoothIds"
     static func manager()-> SessionManager{
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
@@ -453,6 +454,26 @@ class WebApi{
                 }
         }
     }
+    static func getBeaconsByBluetoothIds(bluetoothIds: [String], completion: @escaping (_ bleBeacons: [BLEBeacon] )->Void){
+        let parameters: Parameters = [
+            "bluetoothIds": bluetoothIds
+        ]
+        let url = URL(string: WebApi.GET_BEACONS_BY_BLUETOOTH_IDS)
+        WebApi.manager().request(url!, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { (data) in
+                guard let apiModel = Mapper<ApiModel>().map(JSONObject:data.result.value) else {
+                    completion([])
+                    return
+                }
+                if(apiModel.Status == 1){
+                    let items : [BLEBeacon] = Mapper<BLEBeacon>().mapArray(JSONObject:apiModel.Data) ?? []
+                    completion(items)
+                }
+                else {
+                    completion([])
+                }
+        }
+    }
     static func getMaterialsByBluetooths(bluetooths: [BLEDevice], coord: Coord,myId: String, completion: @escaping (_ materials: [Material] )->Void){
         let parameters: Parameters = [
             "bluetooths": bluetooths.toJSON(),
@@ -497,6 +518,7 @@ class WebApi{
                 
         }
     }
+    
     static func addItem(item: Item, completion: @escaping (_ item: Item? )->Void){
         let json = item.toJSON()
         let url = URL(string: WebApi.ADD_ITEM)

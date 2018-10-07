@@ -37,6 +37,7 @@
 		3B59585F2136FEE800E74838 /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B59585E2136FEE800E74838 /* style.json */; };
 		3B5BEA67213B147000B5140F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA65213B147000B5140F /* BaseButton.swift */; };
 		3B5BEA68213B147000B5140F /* BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BEA66213B147000B5140F /* BaseImage.swift */; };
+		3B8335832169F91C00E3ADE4 /* BLEBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8335822169F91C00E3ADE4 /* BLEBeacon.swift */; };
 		3B922B67212C8994004842A9 /* BaseQRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */; };
 		3B977DAF2163DD1A00834632 /* SearchProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DAE2163DD1A00834632 /* SearchProductViewController.swift */; };
 		3B977DB12163DD4200834632 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B977DB02163DD4200834632 /* ProductListViewController.swift */; };
@@ -132,6 +133,7 @@
 		3B59585E2136FEE800E74838 /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		3B5BEA65213B147000B5140F /* BaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		3B5BEA66213B147000B5140F /* BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseImage.swift; sourceTree = "<group>"; };
+		3B8335822169F91C00E3ADE4 /* BLEBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEBeacon.swift; sourceTree = "<group>"; };
 		3B922B66212C8994004842A9 /* BaseQRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		3B977DAE2163DD1A00834632 /* SearchProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductViewController.swift; sourceTree = "<group>"; };
 		3B977DB02163DD4200834632 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				3BF76FFB21280AB90016BE5F /* Worker.swift */,
 				3B297630215A22F600396243 /* ScanQRItem.swift */,
 				3B297634215B07AE00396243 /* ItemHistory.swift */,
+				3B8335822169F91C00E3ADE4 /* BLEBeacon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				3BF76FE82124786B0016BE5F /* MaterialViewController.swift in Sources */,
 				3B9B4AFD2151BCF300E787C6 /* ItemAttachFilesViewController.swift in Sources */,
 				3BF76FC0212466350016BE5F /* BaseViewController.swift in Sources */,
+				3B8335832169F91C00E3ADE4 /* BLEBeacon.swift in Sources */,
 				3B9B4AEE214EB6B800E787C6 /* TaskDetailViewController.swift in Sources */,
 				3B9B4AF1214ED11700E787C6 /* PDTFilesTableViewCell.swift in Sources */,
 				3BF770082128672E0016BE5F /* ActivityViewController.swift in Sources */,

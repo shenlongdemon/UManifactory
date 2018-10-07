@@ -117,11 +117,12 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
         let title = self.txtTitle.text ?? ""
         let description = self.txtDescription.text ?? ""
         
-        self.showIndicatorDialog()
+        
         Util.getUesrInfo { (ui) in
             guard let userInfo = ui else {
                 return
             }
+            self.showIndicatorDialog()
             WebApi.saveActivity(self.itemId, self.materialId, self.taskId, self.workerId, title, description, names, files, userInfo) { (done) in
                 
                 if done {
@@ -131,9 +132,8 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
                             if self.fileUrls.count > 0 {
                                 WebApi.uploadActivityFiles(taskId: self.taskId, fileUrls: self.fileUrls, names: files, completion: { (fileOK) in
                                     if fileOK {
-                                        Util.showAlert(message: "Done !!!", okHandle: {
-                                            self.back()
-                                        })
+                                        self.dismissIndicatorDialog()
+                                        self.back()
                                     }
                                     else {
                                         Util.showAlert(message: "Error when add activity!!!!!")
@@ -141,9 +141,9 @@ class ActivityViewController: BaseViewController, ImagePickerDelegate, UIDocumen
                                 })
                             }
                             else {
-                                Util.showAlert(message: "Done !!!", okHandle: {
-                                    self.back()
-                                })
+                                self.dismissIndicatorDialog()
+                                self.back()
+                                
                             }
                         }
                         else {

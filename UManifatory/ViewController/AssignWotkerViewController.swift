@@ -82,9 +82,7 @@ class AssignWotkerViewController: BaseViewController, QRCodeReaderViewController
             self.showIndicatorDialog()
             WebApi.assignWorkerToTask(materialId: materialId, taskId: taskId, workerId: workerId, completion: { (wk) in
                 self.dismissIndicatorDialog()
-                if let worker = wk{
-                    let task = self.material.getTask(id: self.taskId)!
-                    task.workers.append(worker)
+                if let _ = wk{                    
                     self.back()
                 }
                 else {

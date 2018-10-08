@@ -19,8 +19,8 @@ import Alamofire
 import ObjectMapper
 class WebApi{
     //static let HOST = "http://96.93.123.233:5000"
-    static let HOST = "http://192.168.1.16:5000"
-    //static let HOST = "http://52.175.200.74" // Azure
+    //static let HOST = "http://192.168.1.16:5000"
+    static let HOST = "http://52.175.200.74" // Azure
      static let GET_CATEGORIES = "\(WebApi.HOST)/api/sellrecognizer/getCategories"
     static let GET_MATERIAL_BY_ID = "\(WebApi.HOST)/api/manifactory/getMaterialById?id={id}"
     static let GET_ITEM_BY_ID = "\(WebApi.HOST)/api/sellrecognizer/getItemById?id={id}"

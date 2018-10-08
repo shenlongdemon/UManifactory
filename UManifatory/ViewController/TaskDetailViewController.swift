@@ -13,7 +13,6 @@ import SafariServices
 class TaskDetailViewController: BaseViewController {
     
     @IBOutlet weak var btnWorkerNo: BaseButton!
-    @IBOutlet weak var imageSlideShow: ImageSlideshow!
     @IBOutlet weak var imgImage: BaseImage!
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var lbDate: UILabel!
@@ -59,17 +58,9 @@ class TaskDetailViewController: BaseViewController {
                 print("Done animating!")
                 // Do anything your heart desires...
             }
-            let imageUrls = self.task.getActivityImageLinks()
-            var images : [InputSource] = []
-            for (_, imageName) in imageUrls.enumerated() {
-                let urlString = "\(WebApi.HOST)/uploads/\(imageName)"
-                let a = AlamofireSource(urlString: urlString)
-                images.append(a!)
-            }
-            self.imageSlideShow.setImageInputs(images)
-            
+            let activities: [Activity] = self.task.getActivities().reversed()
             self.items.removeAllObjects()
-            self.items.addObjects(from: self.task.getPDFFiles())
+            self.items.addObjects(from: activities)
             self.tableView.reloadData()
             
             self.btnWorkerNo.setTitle("\(self.task.workers.count)", for: .normal)
@@ -101,15 +92,16 @@ class TaskDetailViewController: BaseViewController {
         self.task = task
     }
     func initTable() {
-        let cellIdentifier = PDTFilesTableViewCell.reuseIdentifier
+        let cellIdentifier = ActivityTableViewCell.reuseIdentifier
         let cellNib = UINib(nibName: cellIdentifier, bundle: nil)
         self.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
         
-        self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : PDTFilesTableViewCell.height)
+        self.tableAdapter = TableAdapter(items:self.items, cellIdentifier: cellIdentifier, cellHeight : ActivityTableViewCell.height)
         self.tableAdapter.onDidSelectRowAt { (item) in
-            let link = "\(WebApi.HOST)/uploads/\(item.getId())"
-            let svc = SFSafariViewController(url: URL(string: link)!)
-            self.present(svc, animated: true, completion: nil)
+            self.performSegue(withIdentifier: Segue.taskdetail_to_activitydetail, sender: item)
+//            let link = "\(WebApi.HOST)/uploads/\(item.getId())"
+//            let svc = SFSafariViewController(url: URL(string: link)!)
+//            self.present(svc, animated: true, completion: nil)
         }
         self.tableView.delegate = self.tableAdapter
         self.tableView.dataSource = self.tableAdapter
@@ -125,6 +117,11 @@ class TaskDetailViewController: BaseViewController {
         if segue.identifier == Segue.material_to_assignworker {
             let VC = segue.destination as! AssignWotkerViewController
             VC.initData(materialId: self.task.materialId, taskId: self.task.id)
+        }
+        else if segue.identifier == Segue.taskdetail_to_activitydetail {
+            let activity = sender as! Activity
+            let VC = segue.destination as! ActivityDetailViewController
+            VC.initItem(item: activity)
         }
     }
     

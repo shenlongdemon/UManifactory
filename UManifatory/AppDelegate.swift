@@ -182,6 +182,11 @@ extension AppDelegate :CLLocationManagerDelegate {
         for (_, beaconRegion) in self.beaconRegions.enumerated() {
             locationManager.stopMonitoring(for: beaconRegion)
             locationManager.stopRangingBeacons(in: beaconRegion)
+            if let index = self.proximityUUIDs.index(of: beaconRegion.proximityUUID.uuidString) {
+                self.proximityUUIDs.remove(at: index)
+            }
+            
+            
         }
     }
 }

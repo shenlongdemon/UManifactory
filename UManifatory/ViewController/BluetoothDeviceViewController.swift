@@ -36,6 +36,12 @@ class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate
         progress.stopAnimating()
         // Do any additional setup after loading the view.
     }
+    @IBAction func refresh(_ sender: Any) {
+        if !self.progress.isAnimating {
+            self.scanBLEDevice()
+        }
+    }
+    
     func initMap(){
         mapView = GMSMapView(frame: self.mapUIView.bounds)
         mapView.isMyLocationEnabled = false
@@ -91,11 +97,11 @@ class BluetoothDeviceViewController: BaseViewController,CBCentralManagerDelegate
         
     }
     func stopScanForBLEDevice(){
+        self.progress.stopAnimating()
         manager?.stopScan()
         print("scan stopped with \(self.devices.count) devices are founds")
     }
     func loadData() {
-        self.progress.stopAnimating()
         guard self.devices.count > 0 else {
             return
         }

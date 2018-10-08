@@ -47,6 +47,7 @@ class Segue {
     static let itemdetail_to_payment = "itemdetail_to_payment"
     static let itemhistory_to_code = "itemhistory_to_code"
     static let additem_to_mymaterial = "additem_to_mymaterial"
+    static let taskdetail_to_activitydetail = "taskdetail_to_activitydetail"
 }
 
 class Constant {

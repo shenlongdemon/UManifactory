@@ -37,6 +37,13 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func refresh(_ sender: Any) {
+        if !self.progress.isAnimating {
+            self.scanBLEDevice()
+        }
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.isTracking = true
@@ -51,6 +58,11 @@ class BluetoothProductAroundViewController: BaseBluetoothViewController {
         // Dispose of any resources that can be recreated.
     }
     override func onStartScanBluetooths() {
+        self.items.removeAllObjects()
+        self.tableView.reloadData()
+        self.mapView.clear()
+        Util.getAppDelegate()?.stopScanBeacon()
+        self.markerDict.removeAll()
         self.progress.startAnimating()
     }
     override func onReceivedBluetooths() {
